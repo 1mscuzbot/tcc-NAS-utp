@@ -1,0 +1,110 @@
+% Capítulo textual do trabalho.
+
+\chapter{Tabelas e Quadros}
+\label{cap:tabelas}
+
+Este capítulo aborda as técnicas de criação de tabelas e quadros, com a distinção de seus usos e estruturas. A apresentação organizada de dados é fundamental em trabalhos acadêmicos, e tanto as tabelas quanto os quadros desempenham um papel essencial na comunicação clara e precisa das informações. Contudo, eles diferem na natureza e no tipo de dado que apresentam.
+
+\section{Diferença entre Tabelas e Quadros}
+
+Embora os termos ``tabela'' e ``quadro'' sejam muitas vezes usados de forma intercambiável, há distinções claras entre esses elementos no contexto acadêmico. Tabelas são utilizadas principalmente para exibir dados quantitativos de forma estruturada, facilitando comparações entre diferentes valores ou categorias. Por outro lado, quadros organizam informações qualitativas, como definições ou classificações de conceitos, sendo mais descritivos e menos focados em dados numéricos~\cite{abnt2018}.
+
+Assim, enquanto as tabelas proporcionam uma apresentação visual de dados comparativos ou numéricos, os quadros são apropriados para descrever ou categorizar informações qualitativas, o que evidencia a diferença fundamental entre ambos~\cite{chagas2016}.
+
+\section{Tabelas}
+
+As tabelas são criadas utilizando-se os ambientes \texttt{table} e \texttt{tabular}. O primeiro define o posicionamento e a legenda, enquanto o segundo organiza o conteúdo em linhas e colunas. O Código~\ref{cod:tabela} apresenta uma tabela com quatro colunas, com diferentes tipos de alinhamento: fixo com~3cm~(p), à esquerda~(l), centralizado~(c) e à direita~(d). A Tabela~\ref{tab:tabela} apresenta o resultado da tabela descrita no código.
+
+\begin{codigo}[htb]
+\legenda[cod:tabela]{Código para criação de uma tabela}
+\begin{lstlisting}
+\begin{table}[htb]
+    \centering
+    \legenda[tab:tabela]{Exemplo de uma tabela}
+    \begin{tabular}{p{3cm}lcr}
+        \toprule
+        \textbf{Nome} & \textbf{Idade} & \textbf{Prova} & \textbf{Trabalhos} \\
+        \midrule
+        \midrule
+        Joao    & 24 & 8,5 & 4,8 \\
+        Maria   & 20 & 9,0 & 7,1 \\
+        Pedro   & 22 & 4,8 & 9,9 \\
+        \bottomrule
+    \end{tabular}
+    \fonteautor
+\end{table}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\begin{table}[htb]
+    \centering
+    \legenda[tab:tabela]{Exemplo de uma tabela}
+    \begin{tabular}{p{3cm}lcr}
+        \toprule
+        \textbf{Nome} & \textbf{Idade} & \textbf{Prova} & \textbf{Trabalhos} \\
+        \midrule
+        \midrule
+        Joao    & 24 & 8,5 & 4,8 \\
+        Maria   & 20 & 9,0 & 7,1 \\
+        Pedro   & 22 & 4,8 & 9,9 \\
+        \bottomrule
+    \end{tabular}
+    \fonteautor
+\end{table}
+
+\section{Quadros}
+
+Quadros, por sua vez, são mais adequados para a organização de informações qualitativas, sendo amplamente utilizados para categorizações ou descrições. Embora utilizem a mesma estrutura básica de uma tabela, sua função é distinta. O Código~\ref{cod:quadro} mostra um exemplo de quadro no qual são categorizados tipos de pesquisa, e o Quadro~\ref{tab:quadro} mostra o resultado deste código.
+
+\begin{codigo}[htb]
+\legenda[cod:quadro]{Código para criação de um quadro}
+\begin{lstlisting}
+\begin{quadro}[htb]
+    \centering
+    \legenda[tab:quadro]{Exemplo de Quadro com tipos de pesquisa}
+    \begin{tabular}{|l|p{9cm}|}
+        \hline
+        \textbf{Tipo de Pesquisa} & \textbf{Descrição} \\
+        \hline\hline
+        Pesquisa Exploratória & Investigação inicial sobre um fenômeno, sem hipóteses definidas \\ \hline
+        Pesquisa Descritiva   & Caracterização detalhada de um fenômeno, com hipóteses exploradas \\ \hline
+        Pesquisa Explicativa  & Busca identificar as causas de um fenômeno \\         \hline
+    \end{tabular}
+    % Fix para ajustar a distancia da fonte (apenas para quadros)
+    \vspace{0.2cm}
+    \fonteautor
+\end{quadro}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\begin{quadro}[htb]
+    \centering
+    \legenda[tab:quadro]{Exemplo de Quadro com tipos de pesquisa}
+    \begin{tabular}{|l|p{9cm}|}
+        \hline
+        \textbf{Tipo de Pesquisa} & \textbf{Descrição} \\
+        \hline\hline
+        Pesquisa Exploratória & Investigação inicial sobre um fenômeno, sem hipóteses definidas \\ \hline
+        Pesquisa Descritiva   & Caracterização detalhada de um fenômeno, com hipóteses exploradas \\ \hline
+        Pesquisa Explicativa  & Busca identificar as causas de um fenômeno \\ \hline
+    \end{tabular}
+    \vspace{0.2cm} % Fix para ajustar a distância da fonte
+    \fonteautor
+\end{quadro}
+
+O posicionamento de tabelas e quadros é controlado por meio de argumentos opcionais nos ambientes \texttt{table} e \texttt{quadro}. As opções mais comuns incluem:
+
+\begin{alineas}
+    \item \texttt{h} (\textit{here}): posiciona o objeto o mais próximo possível do ponto onde foi inserido no código;
+    \item \texttt{t} (\textit{top}): coloca o objeto no topo da página;
+    \item \texttt{b} (\textit{bottom}): coloca o objeto na parte inferior da página;
+    \item \texttt{p} (\textit{page of floats}): insere o objeto em uma página dedicada apenas a elementos flutuantes, como tabelas e figuras.
+\end{alineas}
+
+Por exemplo, o argumento \texttt{[htb]}, utilizado nos Códigos~\ref{cod:tabela}~e~\ref{cod:quadro}, permite posicionar a tabela ``aqui''~(\textit{here}), mas com a flexibilidade de movê-la para o topo~(\textit{top}) ou parte inferior~(\textit{bottom}) da página, se necessário.
+
+\section{Considerações Finais}
+
+A correta utilização de tabelas e quadros é essencial para a apresentação organizada de dados e informações em trabalhos acadêmicos. Tabelas são mais apropriadas para dados quantitativos, enquanto quadros são utilizados para informações qualitativas e descritivas. A aplicação adequada desses elementos contribui significativamente para a clareza e profissionalismo do trabalho, facilitando a leitura e interpretação dos dados apresentados~\cite{knuth1984texbook}.

@@ -1,0 +1,66 @@
+% Capítulo textual do trabalho.
+
+\chapter{Códigos e Algoritmos}
+\label{cap:codigos}
+
+Este capítulo apresenta o uso de algoritmos e trechos de código, abordando desde a inclusão básica até a personalização de estilos e numeração. A formatação clara e precisa de algoritmos e códigos é fundamental em áreas como ciência da computação, matemática e engenharias, onde a transparência dos métodos e a reprodutibilidade são essenciais para a validade dos resultados apresentados~\cite{knuth1984texbook}.
+
+\section{Inclusão de Códigos}
+
+Para incluir códigos de programação, o pacote mais comum é o \texttt{listings}. Esse pacote suporta várias linguagens de programação e permite a personalização do estilo de exibição, incluindo o realce de sintaxe, a numeração de linhas e a adição de comentários. O ambiente \texttt{codigo} formata a posição do código e localização da legenda e da fonte.
+
+O Código~\ref{cod:codigo} apresenta um exemplo de código para inclusão de códigos-fonte e o Código~\ref{cod:fatorial} mostra o código renderizado.
+Este código implementa uma função recursiva em Python para calcular o fatorial de um número. A sintaxe da linguagem Python é destacada automaticamente e o código é numerado.
+
+\begin{codigo}[htb]
+\legenda[cod:codigo]{Código para inclusão de códigos-fonte}
+\begin{lstlisting}
+\begin{codigo}[htb]
+    \legenda[cod:codigo]{Código para inclusão de códigos-fonte}
+    \begin{lstlisting}[language=Python]
+    def fatorial(n):
+        if n == 0:
+            return 1
+        else:
+            return n * fatorial(n - 1)
+    \end{lstlisting }
+    \fonteautor
+\end{codigo}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\begin{codigo}[htb]
+\legenda[cod:fatorial]{Função recursiva para calcular o fatorial de um número}
+\begin{lstlisting}[language=Python]
+def fatorial(n):
+    if n == 0:
+        return 1
+    else:
+        return n * fatorial(n - 1)
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\section{Inclusão de Algoritmos}
+
+A formatação de algoritmos é realizada de maneira análoga à inclusão de códigos, porém, utiliza o ambiente \texttt{algoritmo}. O Algoritmo~\ref{alg:fatorial} mostra um exemplo de algoritmo para o cálculo do fatorial de maneira recursiva.
+
+\begin{algoritmo}
+\legenda[alg:fatorial]{Algoritmo para o calcular o fatorial de um número}
+\begin{lstlisting}[mathescape]
+ENTRADA: Número inteiro não negativo $n$
+SAÍDA Valor de $n!$
+
+SE $n = 0$
+    RETORNA $1$
+SENÃO
+    RETURNA $n \times \text{fatorial}(n-1)$
+FIM-SE
+\end{lstlisting}
+\fonteautor
+\end{algoritmo}
+
+\section{Considerações Finais}
+
+O uso de algoritmos e códigos é um recurso poderoso para a formatação de trabalhos acadêmicos e científicos, especialmente em áreas técnicas. A personalização oferecida pelo LaTeX permite a adaptação dos estilos de exibição conforme as necessidades específicas do autor ou da instituição.

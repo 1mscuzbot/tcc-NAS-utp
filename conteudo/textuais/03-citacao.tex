@@ -1,0 +1,253 @@
+% Capítulo textual do trabalho.
+
+\chapter{Citação}
+\label{cap:citacao}
+
+Este capítulo apresenta os principais tipos de citação empregados em trabalhos acadêmicos, detalhando suas características e a importância de sua correta aplicação para fundamentar teoricamente a pesquisa. Citações diretas e indiretas são essenciais para a construção de uma argumentação sólida, e o uso de ferramentas como o BibTeX facilita a organização e padronização das referências bibliográficas. Ao final, são discutidas as melhores práticas para citação de livros, artigos, capítulos de livros, teses, dissertações e fontes online, com vistas à preservação da integridade acadêmica.
+
+\section{Tipos de Citações}
+
+As citações são classificadas em dois tipos principais: (1) diretas e (2) indiretas, sendo ambas complementares no desenvolvimento da argumentação e fundamentação teórica de um trabalho.
+
+\subsection{Citação Direta}
+
+A citação direta consiste na reprodução literal das palavras de um autor. Segundo Gil~\cite{gil}, ela é utilizada quando se deseja destacar uma formulação precisa ou quando o uso exato das palavras é fundamental para a compreensão do argumento. No entanto, seu uso deve ser comedido e sempre referenciado adequadamente.
+
+As citações diretas curtas podem ser inseridas com aspas e acompanhadas da devida referência, como demonstrado: ``O conhecimento científico é sistemático e controlado''~\cite{gil}. Quando a citação excede três linhas, deve ser formatada em bloco, sem aspas, como no exemplo a seguir:
+
+\begin{citacao}
+    O conhecimento científico é um conhecimento crítico, que tenta resolver os problemas que surgem em sua busca pela compreensão dos fenômenos, submetendo suas hipóteses e teorias a rigorosos testes de falseabilidade~\cite{gil}.
+\end{citacao}
+
+Por se tratar de uma reprodução exata, a citação direta deve preservar a ortografia, a pontuação e o uso de maiúsculas do texto original. Qualquer alteração ou omissão no texto original deve ser indicada com colchetes. Mesmo os erros presentes no texto original não devem ser corrigidos~\cite{utp_normas2024}. Para isso, algumas convenções são seguidas, como:
+
+\begin{alineas}
+    \item {[...]}: indica a omissão de parte do texto original;
+    \item {[sic]}: sinaliza um erro ou incoerência no texto original, significando "assim mesmo";
+    \item {[grifo meu]}, [grifo nosso], [sem grifo no original]: utilizados quando o autor que cita adiciona ênfase (negrito, sublinhado, etc.) que não estava no texto original;
+    \item {[grifo do autor]}: indica que o grifo já fazia parte do texto original citado;
+    \item Alterações ou comentários feitos na citação direta devem ser incluídos entre colchetes: [ ].
+\end{alineas}
+
+Citações em idiomas estrangeiros devem ser traduzidas, acompanhadas da devida referência. Quando a tradução for feita pelo próprio autor do trabalho, deve-se incluir a nota ``tradução do autor(a)'' e a versão original pode ser inserida como nota de rodapé. No entanto, em textos de caráter literário, é comum manter o idioma original, especialmente quando a tradução poderia comprometer o estilo ou a análise literária~\cite{leite, utp_normas2024}.
+
+\subsection{Citação Indireta}
+
+A citação indireta ocorre quando as ideias de outro autor são parafraseadas ou resumidas. Essa prática permite ao autor integrar diferentes perspectivas em seu próprio raciocínio. Segundo \citeonline{creswell}, a citação indireta é uma ferramenta importante para articular múltiplas fontes e construir uma análise mais crítica. As citações indiretas podem ser feitas de duas maneiras: (1)~explícitas ou (2)~implícitas.
+
+No caso da citação explícita, o nome do autor é mencionado no texto usando o comando \texttt{\textbackslash citeonline}, como no exemplo a seguir. De acordo com~\citeonline{creswell}, a pesquisa qualitativa depende de um processo interpretativo contínuo.
+
+Já na citação indireta implícita, as ideias de um ou mais autores são sintetizadas e as citações são incluídas ao final da frase ou parágrafo usando o comando \texttt{\textbackslash cite}. as referências são inseridas ao final do parágrafo ou frase, sem menção direta ao autor no texto, como a seguir. A pesquisa qualitativa envolve um processo de reflexão constante e interpretação dos dados~\cite{creswell}.
+
+\subsection{Citação de Fonte}
+
+Ao utilizar figuras ou tabelas de outras fontes, ou até mesmo do próprio autor, é fundamental dar o devido crédito à fonte original. Isso garante o reconhecimento adequado do trabalho original e evita problemas de plágio. A citação da fonte de figuras e tabelas pode ser feita de maneira semelhante à citação de textos, usando o comando \texttt{\textbackslash fonte}. A Figura~\ref{fig:fontes} ilustra como as fontes devem ser citadas~\cite{utp_normas2024}.
+
+\begin{figure}[htb]
+    \legenda[fig:fontes]{Exemplo de citação de fontes}
+    \fig{width=0.7\textwidth}{assets/img/fontes}
+    \fonte{\citeauthoronline{utp_normas2024}, \citeyear{utp_normas2024}, p. 23}
+\end{figure}
+
+O Código~\ref{cod:fontes} exemplifica como que os diferentes tipos de fontes devem ser incluídos no código para adequação às normas técnicas.
+
+\begin{codigo}[htb]
+\legenda[cod:fontes]{Diferentes tipos de citação em fontes}
+\begin{lstlisting}
+% Citação de autor
+\fonte{\citeauthoronline{autor}, \citeyear{autor}, p. 99}
+
+% Citação de autor-entidade
+\fonte{\citeauthoronline{entidade}, \citeyear{entidade}, p. 105}
+
+% Citação de site
+\fonte{\citeauthoronline{site}, \citeyear{site}, Disponível em: \url{...}}
+
+% Citação de autoria própria
+\fonteautor     % ou \fonteautora
+\fonteautores   % ou \fonteautoras
+\fonteautoria
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\section{Diferentes Tipos de Referências}
+
+Além de conhecer os tipos de citação, é importante dominar os diversos formatos de referências utilizados em diferentes tipos de publicações. O uso do BibTeX permite automatizar a formatação dessas referências, garantindo padronização. A seguir, são apresentados os formatos para as principais fontes acadêmicas.
+
+\subsection{Livros}
+
+Referências de livros são amplamente utilizadas na fundamentação teórica, pois oferecem uma visão geral e detalhada sobre os conceitos e teorias fundamentais de uma área de estudo. Elas são essenciais para embasar o desenvolvimento dos argumentos do autor. A referência de livro pode ser inserida no arquivo BibTeX conforme apresentado no Código~\ref{cod:bibtex-book}.
+
+\begin{codigo}[htb]
+\legenda[cod:bibtex-book]{Estrutura BibTeX para citação de um livro}
+\begin{lstlisting}
+@book{autor,
+    author    = {Sobrenome, Nome},
+    title     = {Título do Livro},
+    edition   = {Edição},
+    publisher = {Editora},
+    year      = {Ano},
+    pages     = {Número de Paginas}
+    address   = {Local de Publicacao}
+}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\subsection{Artigos de Periódicos}
+
+Artigos científicos publicados em periódicos são uma fonte de informação atualizada e focada em tópicos específicos. Em um trabalho acadêmico, esses artigos são essenciais para manter a pesquisa em sintonia com as discussões mais recentes na área, e, por isso, sua correta citação é de extrema importância. A entrada BibTeX para artigos de periódicos é descrita no Código~\ref{cod:bibtex-article}.
+
+\begin{codigo}[htb]
+\legenda[cod:bibtex-article]{Estrutura BibTeX para citação de um artigo de periódico}
+\begin{lstlisting}
+@article{autor,
+    author  = {Sobrenome, Nome},
+    title   = {Título do Artigo},
+    journal = {Nome do Periódico},
+    volume  = {Volume},
+    number  = {Número},
+    pages   = {Páginas},
+    year    = {Ano}
+}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\subsection{Capítulos de Livros}
+
+Muitas vezes, é necessário citar apenas um capítulo de um livro organizado por diversos autores. Isso ocorre quando o capítulo em questão é escrito por um autor diferente do editor do livro, ou quando se deseja dar destaque a uma seção específica da obra. Isto pode ser feito utilizando a estrutura apresentada no Código~\ref{cod:bibtex-chapter}.
+
+\begin{codigo}[htb]
+\legenda[cod:bibtex-chapter]{Estrutura BibTeX para citação de um capítulo de livro}
+\begin{lstlisting}
+@incollection{autor,
+    author    = {Sobrenome, Nome},
+    title     = {Título do Capítulo},
+    booktitle = {Título do Livro},
+    publisher = {Editora},
+    year      = {Ano},
+    address   = {Local de Publicação},
+    pages     = {Páginas do Capítulo}
+}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\subsection{Tese de Doutorado}
+
+Teses de doutorado são referências relevantes em muitas áreas, especialmente porque contêm contribuições originais de pesquisa. Elas são uma fonte importante de conhecimento atualizado e inédito. A estrutura de citação para uma tese de doutorado em BibTeX pode ser vista no Código~\ref{cod:bibtex-phdthesis}.
+
+\begin{codigo}[htb]
+\legenda[cod:bibtex-phdthesis]{Estrutura BibTeX para citação de uma tese de doutorado}
+\begin{lstlisting}
+@phdthesis{autor,
+    author  = {Sobrenome, Nome},
+    title   = {Título da Tese},
+    school  = {Nome da Universidade},
+    year    = {Ano},
+    address = {Local da Universidade}
+}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\subsection{Dissertação de Mestrado}
+
+As dissertações de mestrado, assim como as teses de doutorado, são fundamentais para a pesquisa científica, por apresentarem investigações originais ou revisões aprofundadas de temas específicos. A estrutura para citar uma dissertação de mestrado é semelhante à de teses, como mostrado no Código~\ref{cod:bibtex-mastersthesis}.
+
+\begin{codigo}[htb]
+\legenda[cod:bibtex-mastersthesis]{Estrutura BibTeX para citação de uma dissertação de mestrado}
+\begin{lstlisting}
+@mastersthesis{autor,
+    author  = {Sobrenome, Nome},
+    title   = {Título da Dissertaçãoo},
+    school  = {Nome da Universidade},
+    year    = {Ano},
+    address = {Local da Universidade},
+    type    = {Dissertação de Mestrado}
+}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\subsection{Monografia de Graduação}
+
+Monografias de graduação são trabalhos acadêmicos exigidos para a conclusão de cursos de graduação e podem ser relevantes como base de estudos introdutórios ou revisões bibliográficas. Para citá-las, o formato é apresentado no Código~\ref{cod:bibtex-monography} e é similar à de dissertações.
+
+\begin{codigo}[htb]
+\legenda[cod:bibtex-monography]{Estrutura BibTeX para citação de uma monografia de graduação}
+\begin{lstlisting}
+@mastersthesis{autor,
+    author  = {Sobrenome, Nome},
+    title   = {Título da Monografia},
+    school  = {Nome da Universidade},
+    year    = {Ano},
+    address = {Local da Universidade},
+    type    = {Monografia de Graduação}
+}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\subsection{Conferências}
+
+Artigos apresentados em conferências acadêmicas também podem ser relevantes para a fundamentação teórica, principalmente em áreas de pesquisa emergentes. Esses artigos são revisados por pares e muitas vezes discutem temas inovadores. O Código~\ref{cod:bibtex-inproceedings} apresenta o formato de citação BibTeX de um artigo de conferência.
+
+\begin{codigo}[htb]
+\legenda[cod:bibtex-inproceedings]{Estrutura BibTeX para citação de um artigo de conferência}
+\begin{lstlisting}
+@inproceedings{autor,
+    author    = {Sobrenome, Nome},
+    title     = {Título do Artigo},
+    booktitle = {Anais da Conferência},
+    year      = {Ano},
+    address   = {Local da Conferência},
+    pages     = {Páginas},
+    volume    = {Volume},
+    number    = {Número}
+}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\subsection{Sites}
+
+Sites também podem ser utilizados como fontes em pesquisas acadêmicas, desde que sejam confiáveis e possuam relevância no contexto da pesquisa. O uso de fontes \textit{online} é comum em pesquisas que abordam temas emergentes ou questões práticas. A citação de sites deve incluir a data de acesso, como mostrado no Código~\ref{cod:bibtex-online}, uma vez que conteúdos online podem ser modificados.
+
+\begin{codigo}[htb]
+\legenda[cod:bibtex-online]{Estrutura BibTeX para citação de um site}
+\begin{lstlisting}
+@online{pagina,
+    author        = {Autor},
+    organization  = {Organização},
+    title         = {Título},
+    year          = {Ano},
+    url           = {URL da página},
+    urlaccessdate = {05 out. 2024}
+}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+A citação de verbetes da Wikipédia devem ser realizados conforme apresentado no Código~{cod:bibtex-wiki}. A citação será referenciada como apresentado em~\citeonline{wikipedia2024}.
+
+\begin{codigo}[htb]
+\legenda[cod:bibtex-wiki]{Estrutura BibTeX para citação de um artigo na Wikipédia}
+\begin{lstlisting}
+@inbook{wikipedia,
+    title          = {Machine Learning},
+    publisher      = {Wikimedia},
+    booktitle      = {Wikip\'edia: a enciclop\'edia livre},
+    year           = {2024},
+    url            = {https://en.wikipedia.org/wiki/Machine_learning},
+    urlaccessdate  = {05 out. 2024}
+}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\section{Considerações Finais}
+
+A fundamentação teórica é a espinha dorsal de qualquer trabalho acadêmico, uma vez que é por meio dela que o autor constrói o suporte necessário para desenvolver suas ideias e hipóteses. O uso correto das citações e a inclusão de fontes confiáveis e pertinentes são fundamentais para assegurar a qualidade e a credibilidade da pesquisa.

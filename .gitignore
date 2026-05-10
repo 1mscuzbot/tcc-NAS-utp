@@ -1,0 +1,33 @@
+# Arquivos de compilação LaTeX
+*.aux
+*.log
+*.out
+*.toc
+*.lof
+*.lot
+*.loq
+*.logr
+*.locod
+*.loalg
+*.bbl
+*.blg
+*.synctex.gz
+*.fdb_latexmk
+*.fls
+*.nav
+*.snm
+*.vrb
+*.xdv
+
+# PDFs e build
+build/
+*.pdf
+
+# Arquivos de sistema operacional
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+
+# Configurações locais
+.vscode/

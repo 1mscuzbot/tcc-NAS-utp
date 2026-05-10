@@ -1,0 +1,75 @@
+% Capítulo textual do trabalho.
+
+\chapter{Equações e Fórmulas}
+\label{cap:equacoes}
+
+Este capítulo apresenta como criar e formatar equações, usar comandos específicos, a numeração e referência de equações, além de explorar exemplos de equações e sistemas de equações. As equações e fórmulas matemáticas desempenham um papel essencial em diversos campos do conhecimento, especialmente nas áreas de ciências exatas, engenharias e tecnologia. Em trabalhos acadêmicos, é fundamental que a apresentação dessas expressões seja clara e bem estruturada, facilitando a comunicação precisa de conceitos matemáticos.
+
+\section{Equações Simples}
+
+Para a inserção de equações matemáticas, utiliza-se o ambiente \texttt{equation}. Por padrão, as equações são centralizadas e numeradas automaticamente, permitindo a referência posterior no corpo do texto. O Código~\ref{cod:eqEinstein} exemplifica a inclusão de uma equação.
+
+\begin{codigo}[htb]
+\legenda[cod:eqEinstein]{Código para inclusão de equações}
+\begin{lstlisting}
+\begin{equation}
+    E = mc^2
+    \label{eq:einstein}
+\end{equation}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+A Equação~\eqref{eq:einstein} exibe a equação de Einstein. A referência a essa equação no texto pode ser realizada com o comando \texttt{\textbackslash ref}, como apresentado na frase ``conforme mostrado na Equação~\ref{eq:einstein}''.
+
+\begin{equation}
+    E = mc^2
+    \label{eq:einstein}
+\end{equation}
+
+\section{Sistemas de Equações}
+
+Para formatar sistemas de equações, utiliza-se o ambiente \texttt{\textbackslash cases}, que insere chaves ao lado do sistema, facilitando a organização de condições ou equações inter-relacionadas. O Código~\ref{cod:sistemas} exemplifica a inclusão de um equações alinhadas.
+
+\begin{codigo}[htb]
+\legenda[cod:sistemas]{Código para inclusão de equações}
+\begin{lstlisting}
+\begin{equation}
+    f(x) =
+    \begin{cases}
+        x^2 & \text{se } x \geq 0 \\
+        -x^2 & \text{se } x < 0
+    \end{cases}
+    \label{eq:sistemas}
+\end{equation}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+A Equação~\eqref{eq:sistemas} mostra um exemplo de sistemas de equações. Neste exemplo, a função \( f(x) \) é definida de acordo com duas condições diferentes, dependendo do valor de \( x \). O uso do ambiente``cases'' formata o sistema de forma clara e visualmente organizada.
+
+\begin{equation}
+    f(x) =
+    \begin{cases}
+        x^2 & \text{se } x \geq 0 \\
+        -x^2 & \text{se } x < 0
+    \end{cases}
+    \label{eq:sistemas}
+\end{equation}
+
+\section{Símbolos e Notações Avançadas}
+
+O \LaTeX\ oferece uma vasta gama de símbolos e notações matemáticas, permitindo a criação de expressões complexas de forma elegante. Entre os exemplos mais comuns, incluem-se:
+
+\begin{alineas}
+    \item Frações: \verb|\frac{a}{b}| para \( \frac{a}{b} \)
+    \item Somatórios: \verb|\sum_{i=1}^{n} i^2| para \( \sum_{i=1}^{n} i^2 \)
+    \item Integrais: \verb|\int_0^1 x^2 \, dx| para \( \int_0^1 x^2 \, dx \)
+    \item Vetores: \verb|\vec{v}| para \( \vec{v} \)
+\end{alineas}
+
+Através desses comandos, é possível construir fórmulas matemáticas de alta complexidade de maneira eficiente e esteticamente agradável.
+
+\section{Considerações Finais}
+
+O LaTeX é uma ferramenta robusta para a formatação de equações e fórmulas matemáticas, oferecendo recursos avançados que garantem precisão e consistência na apresentação de conceitos matemáticos. Com ambientes específicos para equações, sistemas de equações e expressões \textit{inline}, o autor possuis grande flexibilidade para a elaboração de textos acadêmicos de alta qualidade, facilitando a leitura e a compreensão dos leitores.

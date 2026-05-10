@@ -1,0 +1,56 @@
+% Arquivo principal do projeto.
+% Ajuste aqui os metadados do trabalho e a ordem de inclusão dos arquivos.
+
+\documentclass[
+    12pt,
+    oneside,
+    a4paper,
+    chapter=TITLE,
+    section=TITLE,
+    sumario=abnt-6027-2012
+]{abntex2}
+
+% Carrega o estilo institucional do projeto.
+\usepackage{packages/abnt-UTP}
+
+% Metadados da capa e da folha de rosto.
+\titulo{Análise da viabilidade técnica de um servidor NAS doméstico de baixo custo baseado em single board computer, openmediavault, nextcloud e acesso remoto seguro}
+\autor{Davi Emannoel Lopes de Souza \\ Lucas Müller Scuzziato}
+\orientador{Prof. Luiz Altamir Correa Junior}
+\preambulo{Trabalho de Conclusão de Curso apresentado ao curso de Bacharelado em Ciência da
+Computação da Faculdade de Ciências Exatas e de Tecnologia da Universidade Tuiuti do Paraná,
+como requisito à obtenção ao grau de Bacharel.}
+\instituicao{Universidade Tuiuti do Paraná}
+\local{Curitiba}
+\data{\the\year}
+
+\begin{document}
+
+% Elementos pré-textuais.
+\imprimircapa
+\imprimirfolhaderosto{}
+\input{conteudo/pre-textuais/resumo}
+\input{conteudo/pre-textuais/listas}
+\input{conteudo/pre-textuais/siglas}
+\input{conteudo/pre-textuais/simbolos}
+\input{conteudo/pre-textuais/sumario}
+
+% Elementos textuais.
+\textual
+\input{conteudo/textuais/01-introducao}
+\input{conteudo/textuais/02-organizacao-do-trabalho}
+\input{conteudo/textuais/03-citacao}
+\input{conteudo/textuais/04-ilustracoes-e-graficos}
+\input{conteudo/textuais/05-tabelas-e-quadros}
+\input{conteudo/textuais/06-codigos-e-algoritmos}
+\input{conteudo/textuais/07-equacoes-e-formulas}
+\input{conteudo/textuais/08-alineas}
+\input{conteudo/textuais/09-cronograma}
+\input{conteudo/textuais/10-conclusao}
+
+% Elementos pós-textuais.
+\input{conteudo/pos-textuais/referencias}
+\input{conteudo/pos-textuais/apendices}
+\input{conteudo/pos-textuais/anexos}
+
+\end{document}

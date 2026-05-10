@@ -1,0 +1,122 @@
+% Capítulo textual do trabalho.
+
+\chapter{Ilustrações e Gráficos}
+\label{cap:ilustracoes}
+
+Este capítulo aborda o uso adequado de figuras e subfiguras em trabalhos acadêmicos, além de orientações sobre a inserção e formatação de gráficos. O uso de elementos visuais, como figuras e gráficos, é essencial para a clareza da apresentação de dados e conceitos. Em pesquisas que demandam a comunicação visual de resultados, esses elementos complementam a argumentação textual e auxiliam na compreensão do conteúdo~\cite{tufte1990envisioning}.
+
+\section{Figuras}
+\label{sec:figuras}
+
+A inserção de figuras é feita utilizando o ambiente \texttt{figure}, que, em conjunto com o comando \texttt{\textbackslash fig}, permite a incorporação de imagens no documento. Cada figura deve ser acompanhada de uma legenda explicativa e, preferencialmente, ser referenciada no corpo do texto para que o leitor possa localizá-la facilmente~\cite{knuth1984texbook}. O Código~\ref{cod:figura} apresenta o exemplo de inserção de uma figura.
+
+\begin{codigo}[htb]
+\legenda[cod:figura]{Código para inclusão de uma figura no texto}
+\begin{lstlisting}
+\begin{figure}[htb]
+    \legenda[fig:figura]{Legenda da figura}
+    \fig{width=0.7\textwidth}{imagens/exemplo.png}
+    \fonteautor
+\end{figure}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+A Figura~\ref{fig:exemplo-fig} mostra um exemplo de figura usando os comandos do  Código~\ref{cod:figura}.
+
+\begin{figure}[htb]
+    \legenda[fig:exemplo-fig]{Exemplo de figura}
+    \fig{width=0.65\textwidth}{assets/img/figura}
+    \fonte{\citeauthoronline{xkcd-conclusion}, \citeyear{xkcd-conclusion}, Disponível em: \url{https://xkcd.com/1403/}}
+\end{figure}
+
+No Código~\ref{cod:figura}, a imagem é centralizada e redimensionada para 70\% da largura do texto. A legenda da figura é definida pelo comando \texttt{\textbackslash legenda}, e o rótulo é definido pelo parâmetro opcional (definido pelos colchetes). O rótulo permite que a figura seja referenciada no texto, como em ``veja a Figura~\ref{fig:exemplo-fig}''.
+
+O parâmetro ``[htb]'' indica as preferências de posicionamento da figura: ``h'' para o local exato do código, ``t'' para o topo da página, e ``b'' para a parte inferior~\cite{goossens1997latex}.
+
+\section{Subfiguras}
+\label{sec:subfiguras}
+
+As subfiguras são recomendadas em situações onde é necessário inserir múltiplas imagens agrupadas. Elas permitem organizar várias imagens em uma única figura, cada uma com sua legenda individual. Os comandos \texttt{\textbackslash sfig} e \texttt{\textbackslash lfig} podem ser utilizados para facilitar esse processo. O exemplo de código para inserção de subfiguras é apresentado no Código~\ref{cod:subfiguras}.
+
+\begin{codigo}[htb]
+\legenda[cod:subfiguras]{Código para inclusão de três subfiguras no texto}
+\begin{lstlisting}
+\begin{figure}[htb]
+    \legenda[fig:subfigura]{Exemplo de varias subfiguras}
+    % Linha 1: Figuras simples com label
+    \sfig[sfig:fig1]{scale=0.3}{imagens/fig1}\hfil
+    \sfig[sfig:fig2]{scale=0.3}{imagens/fig2}
+    % Linha em branco move as próximas subfiguras para a linha seguinte
+
+    % Linha 2: Figuras simples sem label
+    \sfig{scale=0.3}{imagens/fig1}\hfil
+    \sfig{scale=0.3}{imagens/fig2}
+
+    % Linha 3: Figuras com legenda e com label
+    \lfig[lfig:fig1]{scale=0.3}{imagens/fig1}{legenda 1}\hfil
+    \lfig[lfig:fig2]{scale=0.3}{imagens/fig2}{legenda 2}
+
+    % Linha 3: Figuras com legenda e sem label
+    \lfig{scale=0.3}{imagens/fig1}{legenda 1}\hfil
+    \lfig{scale=0.3}{imagens/fig2}{legenda 2}
+    \fonteautor
+\end{figure}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+No Código~\ref{cod:subfiguras}, três subfiguras são organizadas em uma linha, com espaçamento entre elas proporcionado pelo comando \textit{\textbackslash hfill}. As subfiguras podem ser referenciadas individualmente, como ``veja a Subfigura~\ref{sfig:fig1}'', ou em conjunto, como na ``veja a Figura~\ref{fig:subfigura1}''. Esse recurso é útil quando se deseja comparar diferentes imagens de maneira simultânea~\cite{goossens1997latex}.
+
+A Figura~\ref{fig:subfigura1} apresenta um exemplo composição de subfiguras usando o comando \texttt{\textbackslash sfig}. Neste exemplo, todas as subfiguras foram organizadas em apenas uma linha.
+
+\begin{figure}[htb]
+    \legenda[fig:subfigura1]{Exemplo de subfiguras simples}
+    \sfig[sfig:fig1]{scale=0.2}{assets/img/fig1}\hfil
+    \sfig{scale=0.2}{assets/img/fig2}\hfil
+    \sfig{scale=0.2}{assets/img/fig3}\hfil
+    \sfig{scale=0.2}{assets/img/fig4}
+    \fonte{\citeauthoronline{nintendo}, \citeyear{nintendo}, Disponível em: \url{https://www.nintendo.com}}
+\end{figure}
+
+O comando \texttt{\textbackslash lfig} deve ser utilizado quando for necessária a inclusão de legendas explicativas para cada uma das subfiguras. Este comando recebe um terceiro parâmetro que é a legenda referente a subfigura. A Figura~\ref{fig:subfigura2} mostra um exemplo usando este comando. Ambos os comandos podem ser combinados em uma mesma composição dentro do ambiente \texttt{figure}.
+
+\begin{figure}[htb]
+    \legenda[fig:subfigura2]{Exemplo de subfiguras com legendas individuais}
+    \lfig[sfig:mario]{scale=0.35}{assets/img/fig1}{Mário}\hfil
+    \lfig[sfig:luigi]{scale=0.35}{assets/img/fig2}{Mário Verde}\hfil
+    \lfig[sfig:peach]{scale=0.35}{assets/img/fig3}{Princesa Peach}
+
+    \lfig{scale=0.35}{assets/img/fig4}{Cogumelo Toad}\hfil
+    \lfig{scale=0.35}{assets/img/fig5}{Rei Koopa}\hfil
+    \lfig{scale=0.35}{assets/img/fig6}{Yoshi}
+    \fonte{\citeauthoronline{nintendo}, \citeyear{nintendo}, Disponível em: \url{https://www.nintendo.com}}
+\end{figure}
+
+\section{Gráficos}
+
+A inserção de gráficos segue os mesmos princípios da inserção de figuras. O ambiente \texttt{grafico} é utilizado para acomodar gráficos gerados a partir de softwares de plotagem de dados ou imagens externas~\cite{mittelbach2004latex}. O Código~\ref{cod:grafico} apresenta um exemplo de inserção de gráfico e o Gráfico~\ref{fig:grafico} mostra o resultado do código.
+
+\begin{codigo}[htb]
+\legenda[cod:grafico]{Código para inclusão de um gráfico no texto}
+\begin{lstlisting}
+\begin{grafico}[htb]
+    \legenda[fig:grafico]{Legenda do grafico}
+    \fig{width=0.7\textwidth}{imagens/exemplo.png}
+    \fonteautor
+\end{grafico}
+\end{lstlisting}
+\fonteautor
+\end{codigo}
+
+\begin{grafico}[htb]
+    \legenda[fig:grafico]{Exemplo de gráfico}
+    \fig{width=0.7\textwidth}{assets/img/grafico}
+    \fonte{\citeauthor{xkcd-graph}, \citeyear{xkcd-graph}, Disponível em: \url{https://xkcd.com/1945/}}
+\end{grafico}
+
+Gráficos são recursos visuais valiosos para a representação de dados quantitativos e a comunicação clara de tendências ou padrões observados durante a pesquisa. Assim como nas figuras, é importante que os gráficos sejam acompanhados de legendas claras e referenciados no corpo do texto~\cite{tufte1990envisioning}.
+
+\section{Considerações Finais}
+
+O uso adequado de figuras, subfiguras e gráficos em trabalhos acadêmicos é fundamental para uma comunicação visual eficiente. Esses elementos não apenas ilustram os conceitos discutidos, mas também ajudam a sintetizar e evidenciar os resultados da pesquisa. Quando bem utilizados, eles aumentam a clareza e a coesão do trabalho, facilitando a compreensão pelo leitor~\cite{tufte1990envisioning, knuth1984texbook}.

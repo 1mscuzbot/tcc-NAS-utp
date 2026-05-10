@@ -1,0 +1,13 @@
+# Arquivos LaTeX são texto (mostra diferenças de forma legível)
+*.tex text diff=latex
+*.sty text diff=latex
+*.bib text diff=bibtex
+
+# Padroniza fim de linha (evita problemas Windows vs Mac)
+*.tex text eol=lf
+*.md text eol=lf
+
+# Imagens são binárias (não tenta mostrar diff)
+*.png binary
+*.jpg binary
+EOF
