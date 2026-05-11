@@ -1,31 +1,57 @@
+## 🔄 Rotina de Trabalho em Dupla
 
-# :clock: Rotinas:
-# 1. ATUALIZAR (pegar mudanças da dupla)
+Para manter o projeto organizado, siga este fluxo sempre que for trabalhar:
+
+### 📥 1. Atualizar (pegar mudanças da dupla)
+```bash
 git pull origin main
+```
 
-# 2. TRABALHAR (editar arquivos no VS Code)
-# ... edita os capítulos, adiciona figuras, etc ...
+### ✏️ 2. Trabalhar
+Edite os arquivos no VS Code:
+- Capítulos em `conteudo/textuais/`
+- Referências em `referencias/referencias.bib`
+- Imagens em `assets/img/`
 
-# 3. VERIFICAR (o que mudou?)
+### 🔍 3. Verificar o que mudou
+```bash
 git status
-git diff  # Mostra exatamente o que foi alterado
+git diff
+```
 
-# 4. PREPARAR (adicionar mudanças)
-git add .  # ou git add arquivo_especifico.tex
+### 📦 4. Preparar as mudanças
+```bash
+git add .
+```
+Ou adicione apenas arquivos específicos:
+```bash
+git add conteudo/textuais/01-introducao.tex
+```
 
-# 5. SALVAR (commit)
-git commit -m "📝 Adiciona introdução e objetivos"
+### 💾 5. Salvar (commit)
+```bash
+git commit -m "📝 Mensagem descritiva do que mudou"
+```
 
-# 6. ENVIAR (compartilhar)
+### 🚀 6. Enviar para o GitHub
+```bash
 git push origin main
+```
 
-git status              # Ver situação atual
-git log --oneline       # Ver histórico resumido
-git diff                # Ver mudanças ainda não adicionadas
-git pull origin main    # Atualizar seu PC
-git push origin main    # Enviar suas mudanças
-git stash               # Guardar temporariamente mudanças
-git stash pop           # Recuperar mudanças guardadas
+---
+
+## 📋 Resumo dos Comandos
+
+| Comando | O que faz |
+|---------|-----------|
+| `git status` | Mostra arquivos modificados |
+| `git log --oneline` | Histórico de commits |
+| `git diff` | Mostra alterações linha por linha |
+| `git pull origin main` | Baixa mudanças da dupla |
+| `git push origin main` | Envia suas mudanças |
+| `git stash` | Guarda temporariamente alterações |
+| `git stash pop` | Recupera alterações guardadas |
+
 
 # :pencil: Projeto LaTeX - Trabalho Acadêmico UTP
 
