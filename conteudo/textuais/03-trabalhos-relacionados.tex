@@ -1,0 +1,36 @@
+% Capítulo 3 - Trabalhos Relacionados
+
+\chapter{Trabalhos Relacionados}
+\label{cap:trabalhos-relacionados}
+
+Os trabalhos relacionados ajudam a posicionar o projeto dentro de estudos anteriores sobre NAS com Single Board Computers e avaliação de desempenho. A seleção foi reduzida para manter apenas referências diretamente úteis ao recorte do pré-projeto.
+
+\section{Enhancing Data Storage and Access in CSN Labs with Raspberry Pi 3B+ and Open Media Vault NAS}
+
+Ritzkal et al. \citeonline{ritzkal2023} apresentam a implementação de um NAS em ambiente acadêmico utilizando Raspberry Pi 3B+ e OpenMediaVault. O estudo de \citeonline{ritzkal2023} é relevante porque combina SBC e OMV em uma implementação prática de armazenamento em rede, ainda que seu contexto seja laboratorial e não doméstico.
+
+\section{Using a Raspberry Pi as a Network-Attached Storage Device: Performance and Limitations}
+
+Gamess e Hester \citeonline{gamess2025} investigam o uso de Raspberry Pi como dispositivo NAS, avaliando desempenho e limitações. Por estar associado à ACM Southeast Regional Conference e possuir DOI, trata-se de uma referência forte para sustentar academicamente a análise de desempenho e limites de SBCs em cenários de armazenamento em rede.
+
+\section{Comparação entre os Trabalhos}
+
+\begin{quadro}[htb]
+    \centering
+    \legenda[quad:comparacao]{Comparação entre trabalhos relacionados e o projeto proposto}
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+        \hline
+        \textbf{Trabalho} & \textbf{Hardware} & \textbf{Camada NAS} & \textbf{Nuvem Privada} & \textbf{Acesso Remoto} & \textbf{Contexto} \\
+        \hline
+        Ritzkal et al. \citeonline{ritzkal2023} & Raspberry Pi 3B+ & OpenMediaVault & Não & Não especificado & Laboratório acadêmico \\
+        \hline
+        Gamess; Hester \citeonline{gamess2025} & Raspberry Pi & Protocolos NAS & Não & Não & Avaliação de desempenho \\
+        \hline
+        \textbf{Projeto proposto} & Radxa ROCK 4B+ e 3 SSDs & OpenMediaVault & Nextcloud & Tailscale & NAS doméstico completo \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \fonteautoria
+\end{quadro}
+
+A comparação mostra que os trabalhos existentes tratam de partes da solução, como NAS com SBC e avaliação de desempenho. O diferencial deste pré-projeto está na integração de armazenamento local, administração via OpenMediaVault, nuvem privada via Nextcloud, acesso remoto seguro via Tailscale e comparação econômica com NAS comerciais de entrada.

@@ -1,6 +1,16 @@
 % Arquivo principal do projeto.
 % Ajuste aqui os metadados do trabalho e a ordem de inclusão dos arquivos.
 
+% Compatibilidade com versões recentes do memoir
+\makeatletter
+\@ifundefined{settocpreprocessor}{
+  \newcommand{\settocpreprocessor}[2]{}
+}{}
+\@ifundefined{cftinsertcode}{
+  \newcommand{\cftinsertcode}[2]{}
+}{}
+\makeatother
+
 \documentclass[
     12pt,
     oneside,
@@ -12,6 +22,9 @@
 
 % Carrega o estilo institucional do projeto.
 \usepackage{packages/abnt-UTP}
+
+% Pacote adicional para tabelas comparativas
+\usepackage{tabularx}
 
 % Metadados da capa e da folha de rosto.
 \titulo{Análise da viabilidade técnica de um servidor NAS doméstico de baixo custo baseado em single board computer, openmediavault, nextcloud e acesso remoto seguro}
@@ -32,25 +45,28 @@ como requisito à obtenção ao grau de Bacharel.}
 \input{conteudo/pre-textuais/resumo}
 \input{conteudo/pre-textuais/listas}
 \input{conteudo/pre-textuais/siglas}
-\input{conteudo/pre-textuais/simbolos}
+% \input{conteudo/pre-textuais/simbolos}  % Comente se não tiver símbolos
 \input{conteudo/pre-textuais/sumario}
 
 % Elementos textuais.
 \textual
 \input{conteudo/textuais/01-introducao}
-\input{conteudo/textuais/02-organizacao-do-trabalho}
-\input{conteudo/textuais/03-citacao}
-\input{conteudo/textuais/04-ilustracoes-e-graficos}
-\input{conteudo/textuais/05-tabelas-e-quadros}
-\input{conteudo/textuais/06-codigos-e-algoritmos}
-\input{conteudo/textuais/07-equacoes-e-formulas}
-\input{conteudo/textuais/08-alineas}
-\input{conteudo/textuais/09-cronograma}
-\input{conteudo/textuais/10-conclusao}
+\input{conteudo/textuais/02-fundamentacao}
+\input{conteudo/textuais/03-trabalhos-relacionados}
+% Os capítulos abaixo são do template original. Remova ou comente:
+% \input{conteudo/textuais/02-organizacao-do-trabalho}
+% \input{conteudo/textuais/03-citacao}
+% \input{conteudo/textuais/04-ilustracoes-e-graficos}
+% \input{conteudo/textuais/05-tabelas-e-quadros}
+% \input{conteudo/textuais/06-codigos-e-algoritmos}
+% \input{conteudo/textuais/07-equacoes-e-formulas}
+% \input{conteudo/textuais/08-alineas}
+% \input{conteudo/textuais/09-cronograma}
+% \input{conteudo/textuais/10-conclusao}
 
 % Elementos pós-textuais.
 \input{conteudo/pos-textuais/referencias}
-\input{conteudo/pos-textuais/apendices}
-\input{conteudo/pos-textuais/anexos}
+% \input{conteudo/pos-textuais/apendices}    % Comente se não tiver
+% \input{conteudo/pos-textuais/anexos}       % Comente se não tiver
 
 \end{document}

@@ -1,26 +1,54 @@
-% Capítulo textual do trabalho.
+% Capítulo 1 - Introdução
 
 \chapter{Introdução}
 \label{cap:introducao}
 
-A introdução é uma seção fundamental em qualquer trabalho acadêmico, pois estabelece as bases para a pesquisa a ser realizada. Nela, o autor deve apresentar o tema que será investigado, situando-o no contexto atual e destacando sua relevância para o campo de estudo. Conforme destacado por \citeonline{severino}, a introdução deve fornecer uma visão geral clara e concisa, permitindo ao leitor compreender as motivações e os objetivos da pesquisa.
+A quantidade de dados produzidos em ambientes domésticos cresce continuamente. Computadores pessoais, celulares, câmeras, aplicativos de mensagens, consoles, bibliotecas 
+multimídia e rotinas de backup geram um volume cada vez maior de fotografias, vídeos, documentos e arquivos pessoais. Nesse cenário, o armazenamento deixa de ser apenas 
+um recurso auxiliar e passa a ocupar papel estrutural na vida digital cotidiana.
 
-A primeira etapa na elaboração da introdução é a contextualização do tema. É necessário que o autor apresente uma descrição detalhada do cenário em que o problema de pesquisa está inserido, evidenciando a importância do assunto em questão. De acordo com \citeonline{lakatos}, essa contextualização é essencial para que o leitor perceba a pertinência da investigação, além de indicar as lacunas existentes na literatura que o trabalho busca preencher.
+Serviços de nuvem pública oferecem conveniência, sincronização automática e acesso remoto, mas também criam dependência da conectividade externa, da política comercial do fornecedor e da disponibilidade da infraestrutura de terceiros. O objetivo deste trabalho não é rejeitar a nuvem pública, mas investigar uma alternativa local complementar para armazenamento e sincronização de dados.
 
-Em seguida, a introdução deve incluir a formulação do problema de pesquisa. Esta etapa é crucial, uma vez que a clareza e especificidade da pergunta norteadora influenciam diretamente o desenvolvimento do trabalho. Como mencionado por \citeonline{creswell}, a formulação adequada do problema estabelece os limites da pesquisa e direciona as investigações subsequentes. Portanto, é imperativo que o problema seja apresentado de maneira explícita e compreensível.
+O projeto propõe a construção e análise de um servidor NAS doméstico baseado em uma Radxa ROCK 4B+, três SSDs conectados por adaptador externo USB-SATA, OpenMediaVault, Nextcloud e Tailscale. O OpenMediaVault será utilizado como camada de administração do armazenamento em rede; o Nextcloud fornecerá recursos de nuvem privada; e o Tailscale permitirá acesso remoto seguro por meio de uma rede privada autenticada.
 
-Outro aspecto relevante da introdução é a definição dos objetivos da pesquisa. Os objetivos devem ser claramente enunciados, subdividindo-se em um objetivo geral e objetivos específicos. O objetivo geral reflete a meta maior do estudo, enquanto os objetivos específicos detalham as etapas necessárias para alcançar esse propósito. Essa estrutura ajuda a guiar o leitor ao longo da pesquisa, fornecendo um panorama sobre o que se pretende investigar~\cite{gil}.
+\begin{figure}[htb]
+    \legenda[fig:arquitetura]{Arquitetura lógica da solução proposta}
+    \fig{width=0.9\textwidth}{assets/img/arquitetura}
+    \fonteautoria
+\end{figure}
 
-Adicionalmente, a introdução deve abordar de forma breve a metodologia que será utilizada ao longo do trabalho. Embora a descrição completa da metodologia seja mais adequada em uma seção específica, oferecer uma visão geral na introdução ajuda o leitor a compreender como o autor planeja abordar o problema de pesquisa. Segundo \citeonline{koche}, a metodologia é a estratégia que o pesquisador utiliza para alcançar os objetivos e responder ao problema formulado.
+\section{Problema de Pesquisa}
 
-A introdução de um trabalho acadêmico deve ser redigida com clareza e objetividade, abordando os elementos centrais da pesquisa, como a contextualização do tema, a formulação do problema, a justificativa, os objetivos e a metodologia. Além disso, a introdução pode fazer uso de elementos não textuais, como ilustrações e tabelas, para facilitar a compreensão da metodologia que será desenvolvida. No entanto, a introdução deve ser linear e não subdividida, ou seja, a divisão em subseções sugere detalhamento, o que deve ser reservado para as seções específicas.
+É tecnicamente viável implementar um servidor NAS doméstico de baixo custo baseado em Single Board Computer, administrado por OpenMediaVault, complementado por Nextcloud e acessado remotamente via Tailscale, mantendo desempenho, acessibilidade e usabilidade adequados ao contexto doméstico?
 
-Finalmente, a introdução deve concluir com uma breve descrição da estrutura do trabalho, indicando como os capítulos estão organizados. Essa abordagem permite ao leitor ter uma compreensão clara do fluxo do texto e dos tópicos que serão discutidos ao longo da pesquisa. A seguir, apresenta-se a estrutura do trabalho.
+\section{Hipótese}
 
-Este trabalho está organizado como segue.
-O Capítulo~\ref{cap:organizacao} descreve a estrutura típica de trabalhos acadêmicos de graduação.
-O Capítulo~\ref{cap:citacao} aborda as normas para formatação e uso de citações, distinguindo entre citação direta, indireta e de fontes.
-O Capítulo~\ref{cap:ilustracoes} orienta sobre a inserção de ilustrações e gráficos, enquanto o Capítulo~\ref{cap:tabelas} esclarece a diferença entre tabelas e quadros, com exemplos práticos.
-O Capítulo~\ref{cap:codigos} trata da apresentação de códigos e algoritmos.
-O Capítulo~\ref{cap:equacoes} explora o uso de equações, e o Capítulo~\ref{cap:alineas} discute as regras para o uso de alíneas.
-Por fim, o Capítulo~\ref{cap:cronograma} trata da formatação de cronogramas, e o Capítulo~\ref{cap:conclusao} apresenta as considerações finais.
+Um servidor NAS doméstico baseado em SBC, com OpenMediaVault como camada de administração, Nextcloud como camada de nuvem privada e Tailscale como mecanismo de acesso remoto seguro, pode atender de forma satisfatória cenários domésticos de armazenamento, sincronização e compartilhamento, com custo inferior ao de NAS comerciais de entrada.
+
+\section{Objetivo Geral}
+
+Analisar a viabilidade técnica de um servidor NAS doméstico de baixo custo baseado em Single Board Computer, OpenMediaVault, Nextcloud e acesso remoto seguro.
+
+\section{Objetivos Específicos}
+
+\begin{alineas}
+    \item Montar a infraestrutura física utilizando Radxa ROCK 4B+, fonte adequada, rede cabeada e três SSDs de 2,5 polegadas conectados por adaptador externo USB-SATA;
+    \item Instalar e configurar Armbian/Debian minimal compatível com a plataforma escolhida;
+    \item Instalar e configurar o OpenMediaVault como camada central de gerenciamento do NAS;
+    \item Integrar os três SSDs, padronizando nomenclatura, montagem e organização lógica;
+    \item Implantar compartilhamento local por SMB/CIFS para acesso em rede cabeada;
+    \item Implantar o Nextcloud como camada de nuvem privada para sincronização e acesso web;
+    \item Implantar o Tailscale via Compose para acesso remoto seguro ao ambiente doméstico;
+    \item Executar testes locais e remotos de desempenho, estabilidade e usabilidade;
+    \item Comparar o custo estimado da solução com modelos comerciais de NAS doméstico.
+\end{alineas}
+
+\section{Justificativa}
+
+A justificativa acadêmica do trabalho está na combinação entre baixo custo de entrada, uso de software livre amplamente documentado, possibilidade de medição objetiva de desempenho e relevância prática para usuários domésticos. Diferentemente de um tutorial, o estudo pretende produzir evidências mensuráveis sobre desempenho de rede, comportamento do armazenamento, acesso remoto, consumo de recursos e comparação econômica.
+
+\begin{figure}[htb]
+    \legenda[fig:fluxos]{Fluxos de acesso local, remoto e administrativo}
+    \fig{width=0.9\textwidth}{assets/img/fluxos}
+    \fonteautoria
+\end{figure}
