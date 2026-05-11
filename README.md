@@ -1,3 +1,32 @@
+
+# :clock: Rotinas:
+# 1. ATUALIZAR (pegar mudanças da dupla)
+git pull origin main
+
+# 2. TRABALHAR (editar arquivos no VS Code)
+# ... edita os capítulos, adiciona figuras, etc ...
+
+# 3. VERIFICAR (o que mudou?)
+git status
+git diff  # Mostra exatamente o que foi alterado
+
+# 4. PREPARAR (adicionar mudanças)
+git add .  # ou git add arquivo_especifico.tex
+
+# 5. SALVAR (commit)
+git commit -m "📝 Adiciona introdução e objetivos"
+
+# 6. ENVIAR (compartilhar)
+git push origin main
+
+git status              # Ver situação atual
+git log --oneline       # Ver histórico resumido
+git diff                # Ver mudanças ainda não adicionadas
+git pull origin main    # Atualizar seu PC
+git push origin main    # Enviar suas mudanças
+git stash               # Guardar temporariamente mudanças
+git stash pop           # Recuperar mudanças guardadas
+
 # :pencil: Projeto LaTeX - Trabalho Acadêmico UTP
 
 Bem-vindo ao repositório do **Trabalho Acadêmico UTP**! :mortar_board:
