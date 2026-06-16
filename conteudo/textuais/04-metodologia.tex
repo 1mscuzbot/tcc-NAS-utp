@@ -24,6 +24,8 @@ A ordem de montagem segue o fluxo: conexão dos adaptadores USB-SATA ao \textit{
 
 \section{INSTALAÇÃO E CONFIGURAÇÃO DO SOFTWARE}
 
+A implementação prática deste projeto consiste na construção dos \textit{scripts} de automação, na elaboração dos arquivos de orquestração (\textit{Docker Compose YML}) e na configuração avançada via terminal de cada componente da solução. Essa etapa constitui o código e a aplicação prática gerados pelo projeto, conforme exigido pelo regulamento do curso.
+
 O processo de instalação segue as etapas descritas no Quadro~\ref{quad:instalacao}.
 
 \begin{quadro}[!h]
@@ -125,9 +127,11 @@ O Quadro~\ref{quad:cenarios} resume os cenários de teste previstos.
     \fonteautoria
 \end{quadro}
 
-\section{FERRAMENTAS UTILIZADAS}
+\section{FERRAMENTAS DE IMPLEMENTAÇÃO E TESTES}
 
-O Quadro~\ref{quad:ferramentas} lista as ferramentas que serão empregadas nos testes e suas respectivas finalidades.
+As ferramentas de implementação compreendem os \textit{softwares} base que compõem a infraestrutura da solução: \textit{Armbian} (sistema operacional de base), \textit{OpenMediaVault} (administração do NAS), \textit{Docker} e \textit{Docker Compose} (orquestração de contêineres), \textit{Nextcloud} (nuvem privada) e \textit{Tailscale} (acesso remoto seguro). A configuração desses componentes é realizada por meio de \textit{scripts} de automação, arquivos \textit{YML} de orquestração e comandos no terminal, constituindo a aplicação prática deste projeto.
+
+O Quadro~\ref{quad:ferramentas} lista as ferramentas de teste e monitoramento que serão empregadas na fase experimental e suas respectivas finalidades.
 
 \begin{quadro}[!h]
     \centering

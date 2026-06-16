@@ -112,9 +112,9 @@ O fluxograma da Figura~\ref{fig:fluxo-avaliacao} ilustra o processo de avaliaç�
 \begin{figure}[!h]
     \centering
     \legenda[fig:fluxo-avaliacao]{FLUXOGRAMA DO PROCESSO DE AVALIAÇÃO}
-    \begin{tikzpicture}[node distance=2.2cm, auto, every node/.style={font=\small}]
+    \begin{tikzpicture}[node distance=2.5cm, auto, every node/.style={font=\small}]
         \tikzstyle{block} = [rectangle, draw, fill=blue!10, text width=5cm, text centered, rounded corners, minimum height=0.8cm]
-        \tikzstyle{decision} = [diamond, draw, fill=green!10, text width=4cm, text centered, aspect=1.2]
+        \tikzstyle{decision} = [diamond, draw, fill=green!10, text width=5cm, text centered, aspect=2]
         \tikzstyle{arrow} = [thick, ->, >=stealth]
 
         \node [block] (montagem) {Montagem física\\SBC + 3 SSDs + Rede};
@@ -123,7 +123,7 @@ O fluxograma da Figura~\ref{fig:fluxo-avaliacao} ilustra o processo de avaliaç�
         \node [block, below of=omv] (nextcloud) {Implantação \textit{Nextcloud}\\\textit{Docker} + banco de dados};
         \node [block, below of=nextcloud] (tailscale) {Configuração \textit{Tailscale}\\\textit{Mesh VPN} + autenticação};
 
-        \node [decision, below of=tailscale] (testes) {Testes locais\\e remotos};
+        \node [decision, below of=tailscale] (testes) {Testes locais e remotos};
         \node [block, below of=testes] (analise) {Análise dos resultados\\Métricas vs critérios};
         \node [decision, below of=analise] (conclusao) {Conclusão\\Viável ou não?};
 

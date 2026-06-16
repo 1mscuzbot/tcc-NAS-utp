@@ -1,0 +1,12 @@
+% Capítulo 6 - Considerações Finais
+
+\chapter{CONSIDERAÇÕES FINAIS}
+
+Este projeto de graduação estruturou a análise de viabilidade técnica de um servidor NAS doméstico de baixo custo baseado em \textit{Single Board Computer}, integrando \textit{OpenMediaVault}, \textit{Nextcloud} e \textit{Tailscale}. Ao longo dos capítulos anteriores, foram definidos o problema de pesquisa, os objetivos, a fundamentação teórica, os trabalhos relacionados e a metodologia de avaliação.
+
+A expectativa é que a solução proposta, centrada na \textit{Radxa ROCK 4B+} com três SSDs conectados por adaptador USB-SATA, atinja desempenho satisfatório para cenários domésticos de armazenamento, sincronização e compartilhamento de arquivos, com custo significativamente inferior ao de NAS comerciais de entrada. A combinação de \textit{OpenMediaVault} para administração local, \textit{Nextcloud} para nuvem privada e \textit{Tailscale} para acesso remoto seguro forma uma arquitetura coerente e alinhada com as necessidades do usuário doméstico.
+
+As limitações identificadas -- gargalos no barramento USB, aquecimento da SBC e variação de qualidade dos adaptadores -- não invalidam a proposta, mas definem os pontos críticos que deverão ser mensurados na fase experimental. Os critérios e métricas estabelecidos no Capítulo~2 fornecem a base objetiva para essa avaliação.
+
+O desenvolvimento prático, incluindo a montagem da infraestrutura, a configuração dos \textit{scripts} de automação e dos arquivos de orquestração (\textit{Docker Compose}), bem como a execução dos testes de desempenho locais e remotos, constitui a etapa central do próximo semestre (PG~II). Os resultados experimentais permitirão confirmar ou refutar a hipótese de que a arquitetura proposta é financeiramente vantajosa e tecnicamente viável para o contexto doméstico.
+\endinput
