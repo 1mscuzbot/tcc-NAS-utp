@@ -15,7 +15,41 @@ A Figura~\ref{fig:arquitetura} apresenta a arquitetura lógica da solução prop
 
 \begin{figure}[!h]
     \legenda[fig:arquitetura]{ARQUITETURA LÓGICA DA SOLUÇÃO PROPOSTA}
-    \fig{width=0.85\textwidth}{assets/img/arquitetura}
+    \centering
+    \begin{tikzpicture}[
+        every node/.style={font=\footnotesize},
+        layer/.style={rectangle, draw, rounded corners, text centered, text width=8cm, minimum height=0.9cm, inner sep=3pt},
+        comp/.style={rectangle, draw, rounded corners, text centered, text width=3cm, minimum height=0.7cm, inner sep=2pt},
+        arrow/.style={thick, ->, >=stealth},
+        darrow/.style={thick, <->, >=stealth}
+    ]
+        % Layers
+        \node[layer, fill=orange!10]   (hw)     at (0,0)      {\textbf{Hardware} --- \textit{ROCK 4B+}, 3 \textit{SSDs} \textit{USB-SATA}};
+        \node[layer, fill=blue!5]      (os)     at (0,-1.5)   {Sistema --- \textit{Armbian/Debian}};
+        \node[layer, fill=green!10]    (nas)    at (0,-3.0)   {Administração \textit{NAS} --- \textit{OpenMediaVault}};
+        \node[layer, fill=cyan!10]     (cloud)  at (0,-4.5)   {Nuvem Privada --- \textit{Nextcloud} (\textit{Docker})};
+        \node[layer, fill=purple!10]   (vpn)    at (0,-6.0)   {Acesso Remoto --- \textit{Tailscale}};
+
+        % Arrows between layers
+        \draw[arrow] (hw)    -- node[right, font=\tiny] {\textit{USB}, rede} (os);
+        \draw[arrow] (os)    -- node[right, font=\tiny] {\textit{ext4}} (nas);
+        \draw[arrow] (nas)   -- node[right, font=\tiny] {pastas} (cloud);
+        \draw[arrow] (cloud) -- node[right, font=\tiny] {\textit{HTTPS}} (vpn);
+
+        % Right side: access protocols
+        \node[comp, fill=yellow!15]  (local)  at (6.5,-1.5)  {\textit{SMB/CIFS}};
+        \node[comp, fill=red!10]     (remote) at (6.5,-5.0)  {\textit{HTTPS}, \textit{WireGuard}};
+
+        \draw[darrow] (local)  -- node[above, font=\tiny] {LAN} (os.east);
+        \draw[darrow] (remote) -- node[above, font=\tiny] {Internet} (vpn.east);
+
+        % Left side: client devices
+        \node[comp, fill=gray!10] (cliente) at (-6.5,-1.5) {Dispositivos locais};
+        \node[comp, fill=gray!10] (remoto)  at (-6.5,-5.0) {Dispositivos remotos};
+
+        \draw[darrow] (cliente) -- node[above, font=\tiny] {Ethernet} (hw.west);
+        \draw[darrow] (remoto)  -- node[above, font=\tiny] {\textit{Tailscale}} (vpn.west);
+    \end{tikzpicture}
     \fonteautoria
 \end{figure}
 
