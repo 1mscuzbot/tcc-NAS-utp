@@ -38,14 +38,14 @@ A Figura~\ref{fig:arquitetura} apresenta a arquitetura lógica da solução prop
 
         % Right side: access protocols
         \node[comp, fill=yellow!15]  (local)  at (6.5,-1.5)  {\textit{SMB/CIFS}};
-        \node[comp, fill=red!10]     (remote) at (6.5,-5.0)  {\textit{HTTPS}, \textit{WireGuard}};
+        \node[comp, fill=red!10]     (remote) at (6.5,-4.5)  {\textit{HTTPS}, \textit{WireGuard}};
 
         \draw[darrow] (local)  -- node[above, font=\tiny] {LAN} (os.east);
         \draw[darrow] (remote) -- node[above, font=\tiny] {Internet} (vpn.east);
 
         % Left side: client devices
         \node[comp, fill=gray!10] (cliente) at (-6.5,-1.5) {Dispositivos locais};
-        \node[comp, fill=gray!10] (remoto)  at (-6.5,-5.0) {Dispositivos remotos};
+        \node[comp, fill=gray!10] (remoto)  at (-6.5,-4.5) {Dispositivos remotos};
 
         \draw[darrow] (cliente) -- node[above, font=\tiny] {Ethernet} (hw.west);
         \draw[darrow] (remoto)  -- node[above, font=\tiny] {\textit{Tailscale}} (vpn.west);
