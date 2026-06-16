@@ -3,13 +3,13 @@
 \chapter{FUNDAMENTAÇÃO TEÓRICA}
 \label{cap:fundamentacao}
 
-Este capítulo fundamenta teoricamente o trabalho, abordando os conceitos de NAS doméstico, armazenamento local e nuvem, Single Board Computers, OpenMediaVault, Nextcloud, Tailscale, além de apresentar os pontos de medição, limitações esperadas e critérios de análise da solução proposta.
+Este capítulo fundamenta teoricamente o trabalho, abordando os conceitos de NAS doméstico, armazenamento local e nuvem, \textit{Single Board Computers}, \textit{OpenMediaVault}, \textit{Nextcloud}, \textit{Tailscale}, além de apresentar os pontos de medição, limitações esperadas e critérios de análise da solução proposta.
 
 \section{CONCEITO E FUNÇÃO DE UM NAS DOMÉSTICO}
 
 NAS é a sigla para \textit{Network Attached Storage}, isto é, armazenamento conectado à rede. Em termos práticos, um NAS é um servidor dedicado a centralizar arquivos e disponibilizá-los por protocolos de rede \cite{stallings2018}. Em vez de conectar um disco diretamente a um único computador, o NAS permite que diferentes dispositivos da residência acessem os mesmos dados pela rede local.
 
-Em ambientes domésticos, o NAS pode funcionar como repositório central de documentos, destino de backup, armazenamento de fotos e vídeos, compartilhamento local e base para serviços complementares. Para fins acadêmicos, o NAS é um objeto adequado porque permite medições de \textit{throughput}, taxa de leitura e escrita, custo por capacidade, consumo energético e comportamento sob carga \cite{tanenbaum2021}.
+Em ambientes domésticos, o NAS pode funcionar como repositório central de documentos, destino de \textit{backup}, armazenamento de fotos e vídeos, compartilhamento local e base para serviços complementares. Para fins acadêmicos, o NAS é um objeto adequado porque permite medições de \textit{throughput}, taxa de leitura e escrita, custo por capacidade, consumo energético e comportamento sob carga \cite{tanenbaum2021}.
 
 \section{ARMAZENAMENTO LOCAL, NUVEM PÚBLICA E NUVEM PRIVADA}
 
@@ -23,15 +23,15 @@ A Radxa ROCK 4B+ será utilizada como plataforma de bancada para avaliar a viabi
 
 \section{OPENMEDIAVAULT}
 
-O OpenMediaVault é apresentado em sua documentação oficial como uma solução completa de NAS baseada em Debian Linux, com interface web de administração e suporte a protocolos como FTP, SMB/CIFS e NFS \cite{openmediavault2026}. No projeto, ele atua como camada de gerenciamento do NAS, centralizando montagem de discos, criação de pastas compartilhadas, usuários, permissões e serviços de arquivo.
+O \textit{OpenMediaVault} é apresentado em sua documentação oficial como uma solução completa de NAS baseada em \textit{Debian Linux}, com interface \textit{web} de administração e suporte a protocolos como FTP, SMB/CIFS e NFS \cite{openmediavault2026}. No projeto, ele atua como camada de gerenciamento do NAS, centralizando montagem de discos, criação de pastas compartilhadas, usuários, permissões e serviços de arquivo.
 
 \section{NEXTCLOUD}
 
-De acordo com a documentação oficial do Nextcloud~\cite{nextcloud2026}, é uma plataforma \textit{open source} de sincronização, compartilhamento de arquivos e colaboração \textit{self-hosted}. No contexto do projeto, ele não substitui o NAS; ele opera sobre o armazenamento administrado pelo sistema, oferecendo experiência de nuvem privada com interface web, clientes desktop e móveis, \textit{upload}, \textit{download}, compartilhamento e sincronização.
+De acordo com a documentação oficial do \textit{Nextcloud}~\cite{nextcloud2026}, é uma plataforma \textit{open source} de sincronização, compartilhamento de arquivos e colaboração \textit{self-hosted}. No contexto do projeto, ele não substitui o NAS; ele opera sobre o armazenamento administrado pelo sistema, oferecendo experiência de nuvem privada com interface \textit{web}, clientes \textit{desktop} e móveis, \textit{upload}, \textit{download}, compartilhamento e sincronização.
 
 \section{TAILSCALE E ACESSO REMOTO SEGURO}
 
-A exposição direta de serviços domésticos à internet aumenta a superfície de ataque. O Tailscale oferece uma alternativa prática ao criar uma \textit{mesh VPN} baseada em WireGuard~\cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao Nextcloud e, quando adequado, aos serviços administrativos. Diferentemente de abertura de portas, DDNS ou VPN tradicional, o Tailscale simplifica a configuração ao não exigir infraestrutura de servidor VPN dedicada e gerencia chaves automaticamente \cite{donahue2022}.
+A exposição direta de serviços domésticos à internet aumenta a superfície de ataque. O \textit{Tailscale} oferece uma alternativa prática ao criar uma \textit{mesh VPN} baseada em \textit{WireGuard}~\cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao \textit{Nextcloud} e, quando adequado, aos serviços administrativos. Diferentemente de abertura de portas, DDNS ou VPN tradicional, o \textit{Tailscale} simplifica a configuração ao não exigir infraestrutura de servidor VPN dedicada e gerencia chaves automaticamente \cite{donahue2022}.
 
 \section{PONTOS DE MEDIÇÃO E LIMITAÇÕES ESPERADAS}
 
@@ -56,7 +56,7 @@ Para mitigar os riscos identificados, o Quadro~\ref{quad:riscos} relaciona cada 
         \textbf{Limitação} & \textbf{Impacto potencial} & \textbf{Mitigação} \\
         \hline
         \hline
-        Gargalo USB 3.0 & Throughput limitado pelo barramento compartilhado & Medir taxa por disco individualmente e agregada \\
+        Gargalo USB 3.0 & \textit{Throughput} limitado pelo barramento compartilhado & Medir taxa por disco individualmente e agregada \\
         \hline
         Qualidade do adaptador USB-SATA & Instabilidade ou desconexão & Testar com diferentes adaptadores; documentar falhas \\
         \hline
@@ -66,7 +66,7 @@ Para mitigar os riscos identificados, o Quadro~\ref{quad:riscos} relaciona cada 
         \hline
         Estabilidade sob carga & Queda de serviço ou corrupção de dados & Testes de estresse com \textit{stress-ng} por 24h \\
         \hline
-        Desempenho remoto via Tailscale & Latência adicional e menor throughput & Comparar iperf local vs remoto; medir overhead \\
+        Desempenho remoto via \textit{Tailscale} & Latência adicional e menor \textit{throughput} & Comparar \textit{iperf} local vs remoto; medir \textit{overhead} \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
@@ -86,17 +86,17 @@ Para que a viabilidade técnica seja avaliada de forma objetiva, é necessário 
         \textbf{Critério} & \textbf{Métrica} & \textbf{Ferramenta} & \textbf{Referência} \\
         \hline
         \hline
-        Throughput de leitura local & MB/s (sequencial) & \texttt{dd}, \texttt{hdparm} & $>$ 50 MB/s (SMB) \\
+        \textit{Throughput} de leitura local & MB/s (sequencial) & \texttt{dd}, \texttt{hdparm} & $>$ 50 MB/s (SMB) \\
         \hline
-        Throughput de escrita local & MB/s (sequencial) & \texttt{dd}, \texttt{rsync} & $>$ 30 MB/s (SMB) \\
+        \textit{Throughput} de escrita local & MB/s (sequencial) & \texttt{dd}, \texttt{rsync} & $>$ 30 MB/s (SMB) \\
         \hline
-        Throughput de acesso remoto & MB/s & \texttt{iperf3}, Nextcloud & $>$ 5 MB/s (Tailscale) \\
+        \textit{Throughput} de acesso remoto & MB/s & \texttt{iperf3}, \textit{Nextcloud} & $>$ 5 MB/s (\textit{Tailscale}) \\
         \hline
-        Estabilidade sob carga &         Temperatura (\%), quedas & \texttt{sensors}, \texttt{stress-ng} & $<$ 80\,\textdegree C, sem quedas \\
+        Estabilidade sob carga & Temperatura (\%), quedas & \texttt{sensors}, \texttt{stress-ng} & $<$ 80\,\textdegree C, sem quedas \\
         \hline
-        Consumo energético & Watts (idle/carga) & Medidor USB kill-a-watt & $<$ 15 W médio \\
+        Consumo energético & Watts (\textit{idle}/carga) & Medidor USB \textit{kill-a-watt} & $<$ 15 W médio \\
         \hline
-        Latência de acesso remoto & ms (ping) & \texttt{ping}, \texttt{mtr} & $<$ 50 ms (Tailscale) \\
+        Latência de acesso remoto & ms (\textit{ping}) & \texttt{ping}, \texttt{mtr} & $<$ 50 ms (\textit{Tailscale}) \\
         \hline
         Custo total & R\$ & Planilha de custos & $<$ R\$ 800 \\
         \hline
@@ -120,8 +120,8 @@ O fluxograma da Figura~\ref{fig:fluxo-avaliacao} ilustra o processo de avaliaç�
         \node [block] (montagem) {Montagem física\\SBC + 3 SSDs + Rede};
         \node [block, below of=montagem] (os) {Instalação do SO\\Armbian/Debian minimal};
         \node [block, below of=os] (omv) {Configuração OMV\\Discos, pastas, SMB};
-        \node [block, below of=omv] (nextcloud) {Implantação Nextcloud\\Docker + banco de dados};
-        \node [block, below of=nextcloud] (tailscale) {Configuração Tailscale\\Mesh VPN + autenticação};
+        \node [block, below of=omv] (nextcloud) {Implantação \textit{Nextcloud}\\\textit{Docker} + banco de dados};
+        \node [block, below of=nextcloud] (tailscale) {Configuração \textit{Tailscale}\\\textit{Mesh VPN} + autenticação};
 
         \node [decision, below of=tailscale, yshift=-0.5cm] (testes) {Testes locais\\e remotos};
         \node [block, below of=testes, yshift=-0.5cm] (analise) {Análise dos resultados\\Métricas vs critérios};

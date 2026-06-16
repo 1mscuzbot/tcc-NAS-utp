@@ -12,7 +12,7 @@ A montagem física compreende os seguintes componentes:
 \begin{alineas}
     \item Radxa ROCK 4B+ como placa principal;
     \item Fonte de alimentação USB-C 5V/3A compatível;
-    \item Cabo de rede Gigabit Ethernet;
+    \item Cabo de rede \textit{Gigabit Ethernet};
     \item Três SSDs SATA de 2,5 polegadas (480 GB cada);
     \item Três adaptadores USB 3.0 para SATA;
     \item \textit{Hub} USB 3.0 com alimentação externa;
@@ -35,23 +35,23 @@ O processo de instalação segue as etapas descritas no Quadro~\ref{quad:instala
         \textbf{Etapa} & \textbf{Descrição} \\
         \hline
         \hline
-        1 & Gravação da imagem Armbian minimal no cartão microSD com Raspberry Pi Imager \\
+        1 & Gravação da imagem Armbian minimal no cartão microSD com \textit{Raspberry Pi Imager} \\
         \hline
         2 & Inicialização da ROCK 4B+ e configuração de rede (IP fixo) \\
         \hline
         3 & Atualização do sistema com \texttt{apt update \&\& apt upgrade} \\
         \hline
-        4 & Instalação do OpenMediaVault via script oficial \\
+        4 & Instalação do \textit{OpenMediaVault} via script oficial \\
         \hline
         5 & Configuração dos discos: formatação ext4, montagem, pastas compartilhadas \\
         \hline
-        6 & Instalação do Docker e Docker Compose \\
+        6 & Instalação do \textit{Docker} e \textit{Docker Compose} \\
         \hline
-        7 & Implantação do Nextcloud via Compose (PHP, MariaDB, Redis) \\
+        7 & Implantação do \textit{Nextcloud} via \textit{Compose} (PHP, MariaDB, Redis) \\
         \hline
-        8 & Configuração do Tailscale via Compose ou pacote oficial \\
+        8 & Configuração do \textit{Tailscale} via \textit{Compose} ou pacote oficial \\
         \hline
-        9 & Criação de usuários e permissões no OMV e Nextcloud \\
+        9 & Criação de usuários e permissões no OMV e \textit{Nextcloud} \\
         \hline
         10 & Configuração de compartilhamento SMB/CIFS para rede local \\
         \hline
@@ -62,22 +62,22 @@ O processo de instalação segue as etapas descritas no Quadro~\ref{quad:instala
 
 \section{PROCEDIMENTOS DE TESTE}
 
-Os testes serão conduzidos em dois cenários: rede local (Gigabit Ethernet cabeada) e acesso remoto (via Tailscale). Cada teste será executado três vezes para garantir reprodutibilidade, e o valor médio será registrado.
+Os testes serão conduzidos em dois cenários: rede local (\textit{Gigabit Ethernet} cabeada) e acesso remoto (via \textit{Tailscale}). Cada teste será executado três vezes para garantir reprodutibilidade, e o valor médio será registrado.
 
-\subsection{Teste de Throughput Local}
+\subsection{Teste de \textit{Throughput} Local}
 
-O throughput de leitura e escrita será medido com as seguintes ferramentas e comandos:
+O \textit{throughput} de leitura e escrita será medido com as seguintes ferramentas e comandos:
 
 \begin{itemize}
     \item \textbf{dd}: Escrita sequencial (\texttt{dd if=/dev/zero of=/mnt/teste/test.img bs=1M count=1024}) e leitura (\texttt{dd if=/mnt/teste/test.img of=/dev/null bs=1M});
-    \item \textbf{iperf3}: Medição de throughput de rede (\texttt{iperf3 -c <ip> -t 30});
+    \item \textbf{iperf3}: Medição de \textit{throughput} de rede (\texttt{iperf3 -c <ip> -t 30});
     \item \textbf{rsync}: Transferência de arquivos grandes (1 GB) entre máquina cliente e NAS;
-    \item \textbf{hdparm}: Leitura de cache e buffer do disco (\texttt{hdparm -Tt /dev/sda}).
+    \item \textbf{hdparm}: Leitura de \textit{cache} e \textit{buffer} do disco (\texttt{hdparm -Tt /dev/sda}).
 \end{itemize}
 
-\subsection{Teste de Throughput Remoto}
+\subsection{Teste de \textit{Throughput} Remoto}
 
-O acesso remoto será testado através do Tailscale, com os mesmos procedimentos do teste local, porém utilizando o endereço IP atribuído pela malha VPN. A latência será medida com \texttt{ping} e \texttt{mtr}.
+O acesso remoto será testado através do \textit{Tailscale}, com os mesmos procedimentos do teste local, porém utilizando o endereço IP atribuído pela malha \textit{VPN}. A latência será medida com \texttt{ping} e \texttt{mtr}.
 
 \subsection{Teste de Estabilidade}
 
@@ -108,15 +108,15 @@ O Quadro~\ref{quad:cenarios} resume os cenários de teste previstos.
         \hline
         C4 & Escrita simultânea (3 SSDs) & Local & SMB \\
         \hline
-        C5 & Upload Nextcloud (100 MB) & Local & HTTPS \\
+        C5 & \textit{Upload Nextcloud} (100 MB) & Local & HTTPS \\
         \hline
-        C6 & Download Nextcloud (100 MB) & Local & HTTPS \\
+        C6 & \textit{Download Nextcloud} (100 MB) & Local & HTTPS \\
         \hline
-        C7 & Leitura sequencial remota & Tailscale & SMB \\
+        C7 & Leitura sequencial remota & \textit{Tailscale} & SMB \\
         \hline
-        C8 & Escrita sequencial remota & Tailscale & SMB \\
+        C8 & Escrita sequencial remota & \textit{Tailscale} & SMB \\
         \hline
-        C9 & Upload Nextcloud remoto & Tailscale + HTTPS & HTTPS \\
+        C9 & \textit{Upload Nextcloud} remoto & \textit{Tailscale} + HTTPS & HTTPS \\
         \hline
         C10 & Estresse 24h (CPU + disco + rede) & Local & Misto \\
         \hline
@@ -138,11 +138,11 @@ O Quadro~\ref{quad:ferramentas} lista as ferramentas que serão empregadas nos t
         \textbf{Ferramenta} & \textbf{Finalidade} \\
         \hline
         \hline
-        \texttt{dd} & Medição de throughput de leitura/escrita sequencial em disco \\
+        \texttt{dd} & Medição de \textit{throughput} de leitura/escrita sequencial em disco \\
         \hline
-        \texttt{hdparm} & Medição de velocidade de cache e buffer do disco \\
+        \texttt{hdparm} & Medição de velocidade de \textit{cache} e \textit{buffer} do disco \\
         \hline
-        \texttt{iperf3} & Medição de throughput de rede TCP/UDP \\
+        \texttt{iperf3} & Medição de \textit{throughput} de rede TCP/UDP \\
         \hline
         \texttt{rsync} & Transferência de arquivos com medição de taxa \\
         \hline
