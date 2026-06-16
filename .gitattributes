@@ -10,4 +10,3 @@
 # Imagens são binárias (não tenta mostrar diff)
 *.png binary
 *.jpg binary
-EOF

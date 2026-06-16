@@ -11,7 +11,7 @@ all:
 	pdflatex -interaction=nonstopmode $(MAIN).tex
 
 clean:
-	rm -f *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.idx *.ilg *.ind *.lof *.log *.lot *.out *.toc *.acn *.acr *.alg *.glg *.glo *.gls *.ist *.lol *.loa *.loc *.los *.synctex.gz *.nav *.snm *.vrb
+	rm -f *.aux *.bbl *.bcf *.blg *.fdb_latexmk *.fls *.idx *.ilg *.ind *.lof *.log *.lot *.out *.toc *.acn *.acr *.alg *.glg *.glo *.gls *.ist *.lol *.loa *.loc *.los *.loq *.logr *.locod *.loalg *.synctex.gz *.nav *.snm *.vrb
 
 
 distclean: clean
