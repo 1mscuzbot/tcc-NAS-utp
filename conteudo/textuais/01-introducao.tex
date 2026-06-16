@@ -5,11 +5,11 @@
 
 Este capítulo apresenta o contexto, a motivação e os objetivos do trabalho, estruturando o problema de pesquisa, a hipótese, os objetivos geral e específicos, e a justificativa da proposta.
 
-A quantidade de dados produzidos em ambientes domésticos cresce continuamente. Computadores pessoais, celulares, câmeras, aplicativos de mensagens, consoles, bibliotecas multimídia e rotinas de \textit{backup} geram um volume cada vez maior de fotografias, vídeos, documentos e arquivos pessoais. De acordo com projeções da IDC, estima-se que o volume global de dados atinja 175 \textit{zettabytes} até 2025 \cite{mell2011}. Nesse cenário, o armazenamento deixa de ser apenas um recurso auxiliar e passa a ocupar papel estrutural nas rotinas domésticas de armazenamento, \textit{backup}, sincronização e compartilhamento de dados.
+A quantidade de dados produzidos em ambientes domésticos cresce continuamente. Computadores pessoais, celulares, câmeras, aplicativos de mensagens, consoles, bibliotecas multimídia e rotinas de \textit{backup} geram um volume cada vez maior de fotografias, vídeos, documentos e arquivos pessoais. De acordo com projeções da \textit{IDC}, estima-se que o volume global de dados atinja 175 \textit{zettabytes} até 2025 \cite{mell2011}. Nesse cenário, o armazenamento deixa de ser apenas um recurso auxiliar e passa a ocupar papel estrutural nas rotinas domésticas de armazenamento, \textit{backup}, sincronização e compartilhamento de dados.
 
 Serviços de nuvem pública oferecem conveniência, sincronização automática e acesso remoto, mas também criam dependência da conectividade externa, da política comercial do fornecedor e da disponibilidade da infraestrutura de terceiros. O objetivo deste trabalho não é rejeitar a nuvem pública, mas investigar uma alternativa local complementar para armazenamento e sincronização de dados.
 
-O projeto propõe a construção e análise de um servidor \textit{Network Attached Storage} (NAS) doméstico baseado em uma \textit{Radxa ROCK 4B+}, três SSDs conectados por adaptador externo USB-SATA, \textit{OpenMediaVault}, \textit{Nextcloud} e \textit{Tailscale}. O \textit{OpenMediaVault} será utilizado como camada de administração do armazenamento em rede; o \textit{Nextcloud} fornecerá recursos de nuvem privada; e o \textit{Tailscale} permitirá acesso remoto seguro por meio de uma rede privada autenticada.
+O projeto propõe a construção e análise de um servidor \textit{Network Attached Storage} (\textit{NAS}) doméstico baseado em uma \textit{Radxa ROCK 4B+}, três \textit{SSDs} conectados por adaptador externo \textit{USB-SATA}, \textit{OpenMediaVault}, \textit{Nextcloud} e \textit{Tailscale}. O \textit{OpenMediaVault} será utilizado como camada de administração do armazenamento em rede; o \textit{Nextcloud} fornecerá recursos de nuvem privada; e o \textit{Tailscale} permitirá acesso remoto seguro por meio de uma rede privada autenticada.
 
 A Figura~\ref{fig:arquitetura} apresenta a arquitetura lógica da solução proposta.
 
@@ -21,35 +21,35 @@ A Figura~\ref{fig:arquitetura} apresenta a arquitetura lógica da solução prop
 
 \section{PROBLEMA DE PESQUISA}
 
-É tecnicamente viável implementar um servidor NAS doméstico de baixo custo baseado em \textit{Single Board Computer}, administrado por \textit{OpenMediaVault}, complementado por \textit{Nextcloud} e acessado remotamente via \textit{Tailscale}, mantendo desempenho, acessibilidade e usabilidade adequados ao contexto doméstico?
+É tecnicamente viável implementar um servidor \textit{NAS} doméstico de baixo custo baseado em \textit{Single Board Computer}, administrado por \textit{OpenMediaVault}, complementado por \textit{Nextcloud} e acessado remotamente via \textit{Tailscale}, mantendo desempenho, acessibilidade e usabilidade adequados ao contexto doméstico?
 
 \section{HIPÓTESE}
 
-Um servidor NAS doméstico baseado em SBC, com \textit{OpenMediaVault} como camada de administração, \textit{Nextcloud} como camada de nuvem privada e \textit{Tailscale} como mecanismo de acesso remoto seguro, pode atender de forma satisfatória cenários domésticos de armazenamento, sincronização e compartilhamento, com custo inferior ao de NAS comerciais de entrada.
+Um servidor \textit{NAS} doméstico baseado em \textit{SBC}, com \textit{OpenMediaVault} como camada de administração, \textit{Nextcloud} como camada de nuvem privada e \textit{Tailscale} como mecanismo de acesso remoto seguro, pode atender de forma satisfatória cenários domésticos de armazenamento, sincronização e compartilhamento, com custo inferior ao de \textit{NAS} comerciais de entrada.
 
 \section{OBJETIVO GERAL}
 
-Analisar a viabilidade técnica de um servidor NAS doméstico de baixo custo baseado em \textit{Single Board Computer}, \textit{OpenMediaVault}, \textit{Nextcloud} e acesso remoto seguro.
+Analisar a viabilidade técnica de um servidor \textit{NAS} doméstico de baixo custo baseado em \textit{Single Board Computer}, \textit{OpenMediaVault}, \textit{Nextcloud} e acesso remoto seguro.
 
 \section{OBJETIVOS ESPECÍFICOS}
 
 \begin{alineas}
-    \item Montar a infraestrutura física utilizando \textit{Radxa ROCK 4B+}, fonte adequada, rede cabeada e três SSDs de 2,5 polegadas conectados por adaptador externo USB-SATA;
+    \item Montar a infraestrutura física utilizando \textit{Radxa ROCK 4B+}, fonte adequada, rede cabeada e três \textit{SSDs} de 2,5 polegadas conectados por adaptador externo \textit{USB-SATA};
     \item Instalar e configurar \textit{Armbian}/\textit{Debian} \textit{minimal} compatível com a plataforma escolhida;
-    \item Instalar e configurar o \textit{OpenMediaVault} como camada central de gerenciamento do NAS;
-    \item Integrar os três SSDs, padronizando nomenclatura, montagem e organização lógica;
-    \item Implantar compartilhamento local por SMB/CIFS para acesso em rede cabeada;
+    \item Instalar e configurar o \textit{OpenMediaVault} como camada central de gerenciamento do \textit{NAS};
+    \item Integrar os três \textit{SSDs}, padronizando nomenclatura, montagem e organização lógica;
+    \item Implantar compartilhamento local por \textit{SMB/CIFS} para acesso em rede cabeada;
     \item Implantar o \textit{Nextcloud} como camada de nuvem privada para sincronização e acesso \textit{web};
     \item Implantar o \textit{Tailscale} via \textit{Compose} para acesso remoto seguro ao ambiente doméstico;
     \item Executar testes locais e remotos de desempenho, estabilidade e usabilidade;
-    \item Comparar o custo estimado da solução com modelos comerciais de NAS doméstico.
+    \item Comparar o custo estimado da solução com modelos comerciais de \textit{NAS} doméstico.
 \end{alineas}
 
 \section{JUSTIFICATIVA}
 
-A justificativa acadêmica do trabalho está na combinação entre baixo custo de entrada, uso de software livre amplamente documentado, possibilidade de medição objetiva de desempenho e relevância prática para usuários domésticos. Diferentemente de um \textit{tutorial}, o estudo pretende produzir evidências mensuráveis sobre desempenho de rede, comportamento do armazenamento, acesso remoto, consumo de recursos e comparação econômica.
+A justificativa acadêmica do trabalho está na combinação entre baixo custo de entrada, uso de \textit{software} livre amplamente documentado, possibilidade de medição objetiva de desempenho e relevância prática para usuários domésticos. Diferentemente de um \textit{tutorial}, o estudo pretende produzir evidências mensuráveis sobre desempenho de rede, comportamento do armazenamento, acesso remoto, consumo de recursos e comparação econômica.
 
-O Quadro~\ref{quad:custo} apresenta a estimativa de custo da solução proposta em comparação com modelos comerciais de entrada, demonstrando a vantagem econômica da abordagem \textit{DIY} com SBC.
+O Quadro~\ref{quad:custo} apresenta a estimativa de custo da solução proposta em comparação com modelos comerciais de entrada, demonstrando a vantagem econômica da abordagem \textit{DIY} com \textit{SBC}.
 
 \begin{quadro}[!h]
     \centering
@@ -57,35 +57,35 @@ O Quadro~\ref{quad:custo} apresenta a estimativa de custo da solução proposta 
     \small
     \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
         \hline
-        \textbf{Componente} & \textbf{Solução Proposta} & \textbf{Synology DS220j} & \textbf{QNAP TS-230} \\
+        \textbf{Componente} & \textbf{Solução Proposta} & \textbf{\textit{Synology DS220j}} & \textbf{\textit{QNAP TS-230}} \\
         \hline
         \hline
         \textit{Hardware} & \textit{Radxa ROCK 4B+} & \textit{Bay} 1 (integrado) & \textit{Bay} 1 (integrado) \\
         \hline
-        Processador & Rockchip RK3399 (6 núcleos) & Realtek RTD1296 (4 núcleos) & Realtek RTD1295 (4 núcleos) \\
+        Processador & \textit{Rockchip RK3399} (6 núcleos) & \textit{Realtek RTD1296} (4 núcleos) & \textit{Realtek RTD1295} (4 núcleos) \\
         \hline
-        Memória RAM & 4 GB LPDDR4 & 512 MB DDR4 & 2 GB DDR4 \\
+        Memória \textit{RAM} & \textit{4 GB LPDDR4} & \textit{512 MB DDR4} & \textit{2 GB DDR4} \\
         \hline
-        Armazenamento & 3$\times$ SSD 480 GB USB-SATA & 2$\times$ \textit{bays} SATA & 2$\times$ \textit{bays} SATA \\
+        Armazenamento & 3$\times$ \textit{SSD} \textit{480 GB USB-SATA} & 2$\times$ \textit{bays SATA} & 2$\times$ \textit{bays SATA} \\
         \hline
-        Capacidade total & 1,44 TB & 2$\times$ HDD (escolha do usuário) & 2$\times$ HDD (escolha do usuário) \\
+        Capacidade total & 1,44 \textit{TB} & 2$\times$ \textit{HDD} (escolha do usuário) & 2$\times$ \textit{HDD} (escolha do usuário) \\
         \hline
-        Custo estimado & R\$ 650 & R\$ 1.599 (sem discos) & R\$ 1.399 (sem discos) \\
+        Custo estimado & \textit{R\$ 650} & \textit{R\$ 1.599} (sem discos) & \textit{R\$ 1.399} (sem discos) \\
         \hline
-        Sistema & OMV + \textit{Nextcloud} + \textit{Tailscale} & DSM (Synology) & QTS (QNAP) \\
+        Sistema & \textit{OMV} + \textit{Nextcloud} + \textit{Tailscale} & \textit{DSM} (Synology) & \textit{QTS} (QNAP) \\
         \hline
         Nuvem privada & Incluso (\textit{Nextcloud}) & Não incluso & Não incluso \\
         \hline
-        Acesso remoto & Incluso (\textit{Tailscale}) & QuickConnect & myQNAPcloud \\
+        Acesso remoto & Incluso (\textit{Tailscale}) & \textit{QuickConnect} & \textit{myQNAPcloud} \\
         \hline
-        Consumo estimado & $\sim$10 W & $\sim$12 W & $\sim$15 W \\
+        Consumo estimado & $\sim$10 \textit{W} & $\sim$12 \textit{W} & $\sim$15 \textit{W} \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
     \fonteautoria
 \end{quadro}
 
-A Figura~\ref{fig:custo} ilustra graficamente a diferença de custo entre as soluções, evidenciando que a solução proposta representa aproximadamente 40\% do custo de um NAS comercial de entrada.
+A Figura~\ref{fig:custo} ilustra graficamente a diferença de custo entre as soluções, evidenciando que a solução proposta representa aproximadamente 40\% do custo de um \textit{NAS} comercial de entrada.
 
 \begin{figure}[!h]
     \centering
@@ -94,7 +94,7 @@ A Figura~\ref{fig:custo} ilustra graficamente a diferença de custo entre as sol
         \begin{axis}[
             ybar,
             xtick={1,2,3},
-            xticklabels={Solu\c{c}\~ao Proposta,Synology DS220j,QNAP TS-230},
+             xticklabels={\textit{Solu\c{c}\~ao Proposta},\textit{Synology DS220j},\textit{QNAP TS-230}},
             ylabel={Custo estimado (R\$)},
             nodes near coords,
             nodes near coords align={vertical},

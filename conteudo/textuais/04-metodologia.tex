@@ -11,16 +11,16 @@ A montagem física compreende os seguintes componentes:
 
 \begin{alineas}
     \item \textit{Radxa ROCK 4B+} como placa principal;
-    \item Fonte de alimentação USB-C 5V/3A compatível;
+    \item Fonte de alimentação \textit{USB-C} 5V/3A compatível;
     \item Cabo de rede \textit{Gigabit Ethernet};
-    \item Três SSDs SATA de 2,5 polegadas (480 GB cada);
-    \item Três adaptadores USB 3.0 para SATA;
-    \item \textit{Hub} USB 3.0 com alimentação externa;
-    \item Cartão microSD (32 GB, Classe 10) para sistema operacional;
+    \item Três \textit{SSDs SATA} de 2,5 polegadas (480 \textit{GB} cada);
+    \item Três adaptadores \textit{USB 3.0} para \textit{SATA};
+    \item \textit{Hub USB 3.0} com alimentação externa;
+    \item Cartão \textit{microSD} (32 \textit{GB}, Classe 10) para sistema operacional;
     \item Dissipador passivo e ventilação para refrigeração.
 \end{alineas}
 
-A ordem de montagem segue o fluxo: conexão dos adaptadores USB-SATA ao \textit{hub} USB, conexão do \textit{hub} à \textit{ROCK 4B+}, inserção dos SSDs nos adaptadores, conexão do cabo de rede e da fonte de alimentação.
+A ordem de montagem segue o fluxo: conexão dos adaptadores \textit{USB-SATA} ao \textit{hub USB}, conexão do \textit{hub} à \textit{ROCK 4B+}, inserção dos \textit{SSDs} nos adaptadores, conexão do cabo de rede e da fonte de alimentação.
 
 \section{INSTALAÇÃO E CONFIGURAÇÃO DO SOFTWARE}
 
@@ -39,23 +39,23 @@ O processo de instalação segue as etapas descritas no Quadro~\ref{quad:instala
         \hline
         1 & Gravação da imagem \textit{Armbian} \textit{minimal} no cartão microSD com \textit{Raspberry Pi Imager} \\
         \hline
-        2 & Inicialização da \textit{ROCK 4B+} e configuração de rede (IP fixo) \\
+         2 & Inicialização da \textit{ROCK 4B+} e configuração de rede (\textit{IP} fixo) \\
         \hline
-        3 & Atualização do sistema com \texttt{apt update \&\& apt upgrade} \\
+         3 & Atualização do sistema com \texttt{apt update \&\& apt upgrade} \\
         \hline
-        4 & Instalação do \textit{OpenMediaVault} via script oficial \\
+         4 & Instalação do \textit{OpenMediaVault} via \textit{script} oficial \\
         \hline
-        5 & Configuração dos discos: formatação ext4, montagem, pastas compartilhadas \\
+         5 & Configuração dos discos: formatação \textit{ext4}, montagem, pastas compartilhadas \\
         \hline
-        6 & Instalação do \textit{Docker} e \textit{Docker Compose} \\
+         6 & Instalação do \textit{Docker} e \textit{Docker Compose} \\
         \hline
-        7 & Implantação do \textit{Nextcloud} via \textit{Compose} (PHP, MariaDB, Redis) \\
+         7 & Implantação do \textit{Nextcloud} via \textit{Compose} (\textit{PHP}, \textit{MariaDB}, \textit{Redis}) \\
         \hline
-        8 & Configuração do \textit{Tailscale} via \textit{Compose} ou pacote oficial \\
+         8 & Configuração do \textit{Tailscale} via \textit{Compose} ou pacote oficial \\
         \hline
-        9 & Criação de usuários e permissões no OMV e \textit{Nextcloud} \\
+         9 & Criação de usuários e permissões no \textit{OMV} e \textit{Nextcloud} \\
         \hline
-        10 & Configuração de compartilhamento SMB/CIFS para rede local \\
+        10 & Configuração de compartilhamento \textit{SMB/CIFS} para rede local \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
@@ -73,21 +73,21 @@ O \textit{throughput} de leitura e escrita será medido com as seguintes ferrame
 \begin{itemize}
     \item \textbf{dd}: Escrita sequencial (\texttt{dd if=/dev/zero of=/mnt/teste/test.img bs=1M count=1024}) e leitura (\texttt{dd if=/mnt/teste/test.img of=/dev/null bs=1M});
     \item \textbf{iperf3}: Medição de \textit{throughput} de rede (\texttt{iperf3 -c <ip> -t 30});
-    \item \textbf{rsync}: Transferência de arquivos grandes (1 GB) entre máquina cliente e NAS;
+    \item \textbf{rsync}: Transferência de arquivos grandes (1 \textit{GB}) entre máquina cliente e \textit{NAS};
     \item \textbf{hdparm}: Leitura de \textit{cache} e \textit{buffer} do disco (\texttt{hdparm -Tt /dev/sda}).
 \end{itemize}
 
 \subsection{Teste de \textit{Throughput} Remoto}
 
-O acesso remoto será testado através do \textit{Tailscale}, com os mesmos procedimentos do teste local, porém utilizando o endereço IP atribuído pela malha \textit{VPN}. A latência será medida com \texttt{ping} e \texttt{mtr}.
+O acesso remoto será testado através do \textit{Tailscale}, com os mesmos procedimentos do teste local, porém utilizando o endereço \textit{IP} atribuído pela malha \textit{VPN}. A latência será medida com \texttt{ping} e \texttt{mtr}.
 
 \subsection{Teste de Estabilidade}
 
-A estabilidade será avaliada submetendo o sistema a carga contínua com \texttt{stress-ng} por 24 horas, monitorando temperatura (\texttt{sensors}), uso de CPU e RAM (\texttt{htop}), e verificação de quedas de serviço.
+A estabilidade será avaliada submetendo o sistema a carga contínua com \texttt{stress-ng} por 24 horas, monitorando temperatura (\texttt{sensors}), uso de \textit{CPU} e \textit{RAM} (\texttt{htop}), e verificação de quedas de serviço.
 
 \subsection{Monitoramento Térmico}
 
-A temperatura da SBC será registrada a cada 5 minutos durante os testes de estresse, utilizando \texttt{watch -n 300 sensors >> termal.log}. O limite de segurança adotado é 80\,\textdegree C.
+A temperatura da \textit{SBC} será registrada a cada 5 minutos durante os testes de estresse, utilizando \texttt{watch -n 300 sensors >> termal.log}. O limite de segurança adotado é 80\,\textdegree C.
 
 \section{CENÁRIOS DE TESTE}
 
@@ -102,25 +102,25 @@ O Quadro~\ref{quad:cenarios} resume os cenários de teste previstos.
         \textbf{Cenário} & \textbf{Descrição} & \textbf{Acesso} & \textbf{Protocolo} \\
         \hline
         \hline
-        C1 & Leitura sequencial local (1 SSD) & Local & SMB \\
+        C1 & Leitura sequencial local (1 \textit{SSD}) & Local & \textit{SMB} \\
         \hline
-        C2 & Escrita sequencial local (1 SSD) & Local & SMB \\
+        C2 & Escrita sequencial local (1 \textit{SSD}) & Local & \textit{SMB} \\
         \hline
-        C3 & Leitura simultânea (3 SSDs) & Local & SMB \\
+        C3 & Leitura simultânea (3 \textit{SSDs}) & Local & \textit{SMB} \\
         \hline
-        C4 & Escrita simultânea (3 SSDs) & Local & SMB \\
+        C4 & Escrita simultânea (3 \textit{SSDs}) & Local & \textit{SMB} \\
         \hline
-        C5 & \textit{Upload Nextcloud} (100 MB) & Local & HTTPS \\
+        C5 & \textit{Upload Nextcloud} (100 \textit{MB}) & Local & \textit{HTTPS} \\
         \hline
-        C6 & \textit{Download Nextcloud} (100 MB) & Local & HTTPS \\
+        C6 & \textit{Download Nextcloud} (100 \textit{MB}) & Local & \textit{HTTPS} \\
         \hline
-        C7 & Leitura sequencial remota & \textit{Tailscale} & SMB \\
+        C7 & Leitura sequencial remota & \textit{Tailscale} & \textit{SMB} \\
         \hline
-        C8 & Escrita sequencial remota & \textit{Tailscale} & SMB \\
+        C8 & Escrita sequencial remota & \textit{Tailscale} & \textit{SMB} \\
         \hline
-        C9 & \textit{Upload Nextcloud} remoto & \textit{Tailscale} + HTTPS & HTTPS \\
+        C9 & \textit{Upload Nextcloud} remoto & \textit{Tailscale} + \textit{HTTPS} & \textit{HTTPS} \\
         \hline
-        C10 & Estresse 24h (CPU + disco + rede) & Local & Misto \\
+        C10 & Estresse 24h (\textit{CPU} + disco + rede) & Local & Misto \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
@@ -129,7 +129,7 @@ O Quadro~\ref{quad:cenarios} resume os cenários de teste previstos.
 
 \section{FERRAMENTAS DE IMPLEMENTAÇÃO E TESTES}
 
-As ferramentas de implementação compreendem os \textit{softwares} base que compõem a infraestrutura da solução: \textit{Armbian} (sistema operacional de base), \textit{OpenMediaVault} (administração do NAS), \textit{Docker} e \textit{Docker Compose} (orquestração de contêineres), \textit{Nextcloud} (nuvem privada) e \textit{Tailscale} (acesso remoto seguro). A configuração desses componentes é realizada por meio de \textit{scripts} de automação, arquivos \textit{YML} de orquestração e comandos no terminal, constituindo a aplicação prática deste projeto.
+As ferramentas de implementação compreendem os \textit{softwares} base que compõem a infraestrutura da solução: \textit{Armbian} (sistema operacional de base), \textit{OpenMediaVault} (administração do \textit{NAS}), \textit{Docker} e \textit{Docker Compose} (orquestração de contêineres), \textit{Nextcloud} (nuvem privada) e \textit{Tailscale} (acesso remoto seguro). A configuração desses componentes é realizada por meio de \textit{scripts} de automação, arquivos \textit{YML} de orquestração e comandos no terminal, constituindo a aplicação prática deste projeto.
 
 O Quadro~\ref{quad:ferramentas} lista as ferramentas de teste e monitoramento que serão empregadas na fase experimental e suas respectivas finalidades.
 
@@ -146,19 +146,19 @@ O Quadro~\ref{quad:ferramentas} lista as ferramentas de teste e monitoramento qu
         \hline
         \texttt{hdparm} & Medição de velocidade de \textit{cache} e \textit{buffer} do disco \\
         \hline
-        \texttt{iperf3} & Medição de \textit{throughput} de rede TCP/UDP \\
+        \texttt{iperf3} & Medição de \textit{throughput} de rede \textit{TCP/UDP} \\
         \hline
         \texttt{rsync} & Transferência de arquivos com medição de taxa \\
         \hline
         \texttt{stress-ng} & Geração de carga computacional para testes de estresse \\
         \hline
-        \texttt{sensors} & Monitoramento de temperatura da SBC \\
+        \texttt{sensors} & Monitoramento de temperatura da \textit{SBC} \\
         \hline
-        \texttt{htop} & Monitoramento de CPU, RAM e processos em tempo real \\
+        \texttt{htop} & Monitoramento de \textit{CPU}, \textit{RAM} e processos em tempo real \\
         \hline
         \texttt{ping} / \texttt{mtr} & Medição de latência e perda de pacotes \\
         \hline
-        Medidor de energia & Consumo elétrico (idle e sob carga) \\
+        Medidor de energia & Consumo elétrico (\textit{idle} e sob carga) \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}

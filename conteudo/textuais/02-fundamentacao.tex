@@ -3,39 +3,39 @@
 \chapter{FUNDAMENTAÇÃO TEÓRICA}
 \label{cap:fundamentacao}
 
-Este capítulo fundamenta teoricamente o trabalho, abordando os conceitos de NAS doméstico, armazenamento local e nuvem, \textit{Single Board Computers}, \textit{OpenMediaVault}, \textit{Nextcloud}, \textit{Tailscale}, além de apresentar os pontos de medição, limitações esperadas e critérios de análise da solução proposta.
+Este capítulo fundamenta teoricamente o trabalho, abordando os conceitos de \textit{NAS} doméstico, armazenamento local e nuvem, \textit{Single Board Computers}, \textit{OpenMediaVault}, \textit{Nextcloud}, \textit{Tailscale}, além de apresentar os pontos de medição, limitações esperadas e critérios de análise da solução proposta.
 
-\section{CONCEITO E FUNÇÃO DE UM NAS DOMÉSTICO}
+\section{CONCEITO E FUNÇÃO DE UM \textit{NAS} DOMÉSTICO}
 
-NAS é a sigla para \textit{Network Attached Storage}, isto é, armazenamento conectado à rede. Em termos práticos, um NAS é um servidor dedicado a centralizar arquivos e disponibilizá-los por protocolos de rede \cite{stallings2018}. Em vez de conectar um disco diretamente a um único computador, o NAS permite que diferentes dispositivos da residência acessem os mesmos dados pela rede local.
+\textit{NAS} é a sigla para \textit{Network Attached Storage}, isto é, armazenamento conectado à rede. Em termos práticos, um \textit{NAS} é um servidor dedicado a centralizar arquivos e disponibilizá-los por protocolos de rede \cite{stallings2018}. Em vez de conectar um disco diretamente a um único computador, o \textit{NAS} permite que diferentes dispositivos da residência acessem os mesmos dados pela rede local.
 
-Em ambientes domésticos, o NAS pode funcionar como repositório central de documentos, destino de \textit{backup}, armazenamento de fotos e vídeos, compartilhamento local e base para serviços complementares. Para fins acadêmicos, o NAS é um objeto adequado porque permite medições de \textit{throughput}, taxa de leitura e escrita, custo por capacidade, consumo energético e comportamento sob carga \cite{tanenbaum2021}.
+Em ambientes domésticos, o \textit{NAS} pode funcionar como repositório central de documentos, destino de \textit{backup}, armazenamento de fotos e vídeos, compartilhamento local e base para serviços complementares. Para fins acadêmicos, o \textit{NAS} é um objeto adequado porque permite medições de \textit{throughput}, taxa de leitura e escrita, custo por capacidade, consumo energético e comportamento sob carga \cite{tanenbaum2021}.
 
 \section{ARMAZENAMENTO LOCAL, NUVEM PÚBLICA E NUVEM PRIVADA}
 
-Armazenamento local e nuvem pública não devem ser tratados como categorias excludentes. O armazenamento local privilegia autonomia, proximidade física dos dados e menor dependência de terceiros \cite{mell2011}. A nuvem pública privilegia conveniência, escalabilidade e integração entre dispositivos. A nuvem privada ocupa uma posição intermediária: os dados permanecem sob controle do usuário, mas são acessados por uma camada de serviços web, sincronização e colaboração \cite{marinescu2018}.
+Armazenamento local e nuvem pública não devem ser tratados como categorias excludentes. O armazenamento local privilegia autonomia, proximidade física dos dados e menor dependência de terceiros \cite{mell2011}. A nuvem pública privilegia conveniência, escalabilidade e integração entre dispositivos. A nuvem privada ocupa uma posição intermediária: os dados permanecem sob controle do usuário, mas são acessados por uma camada de serviços \textit{web}, sincronização e colaboração \cite{marinescu2018}.
 
-\section{SINGLE BOARD COMPUTERS COMO BASE DE INFRAESTRUTURA DOMÉSTICA}
+\section{\textit{SINGLE BOARD COMPUTERS} COMO BASE DE INFRAESTRUTURA DOMÉSTICA}
 
-Single Board Computers são computadores completos concentrados em uma única placa, geralmente com CPU, memória, interfaces USB, rede e armazenamento de \textit{boot} \cite{upton2016}. Plataformas ARM de baixo custo são utilizadas em ensino, automação, IoT, prototipagem e servidores leves. Suas vantagens incluem baixo consumo energético, formato compacto e compatibilidade com Linux \cite{halder2020}.
+\textit{Single Board Computers} são computadores completos concentrados em uma única placa, geralmente com \textit{CPU}, memória, interfaces \textit{USB}, rede e armazenamento de \textit{boot} \cite{upton2016}. Plataformas \textit{ARM} de baixo custo são utilizadas em ensino, automação, \textit{IoT}, prototipagem e servidores leves. Suas vantagens incluem baixo consumo energético, formato compacto e compatibilidade com \textit{Linux} \cite{halder2020}.
 
-A \textit{Radxa ROCK 4B+} será utilizada como plataforma de bancada para avaliar a viabilidade de um NAS doméstico com três SSDs externos. A escolha por SSDs conectados por adaptador externo USB-SATA reduz custo e simplifica a montagem, mas também cria pontos de atenção relacionados a energia, barramento USB, aquecimento e estabilidade \cite{radxa2024}.
+A \textit{Radxa ROCK 4B+} será utilizada como plataforma de bancada para avaliar a viabilidade de um \textit{NAS} doméstico com três \textit{SSDs} externos. A escolha por \textit{SSDs} conectados por adaptador externo \textit{USB-SATA} reduz custo e simplifica a montagem, mas também cria pontos de atenção relacionados a energia, barramento \textit{USB}, aquecimento e estabilidade \cite{radxa2024}.
 
-\section{OPENMEDIAVAULT}
+\section{\textit{OPENMEDIAVAULT}}
 
-O \textit{OpenMediaVault} é apresentado em sua documentação oficial como uma solução completa de NAS baseada em \textit{Debian Linux}, com interface \textit{web} de administração e suporte a protocolos como FTP, SMB/CIFS e NFS \cite{openmediavault2026}. No projeto, ele atua como camada de gerenciamento do NAS, centralizando montagem de discos, criação de pastas compartilhadas, usuários, permissões e serviços de arquivo.
+O \textit{OpenMediaVault} é apresentado em sua documentação oficial como uma solução completa de \textit{NAS} baseada em \textit{Debian Linux}, com interface \textit{web} de administração e suporte a protocolos como \textit{FTP}, \textit{SMB/CIFS} e \textit{NFS} \cite{openmediavault2026}. No projeto, ele atua como camada de gerenciamento do \textit{NAS}, centralizando montagem de discos, criação de pastas compartilhadas, usuários, permissões e serviços de arquivo.
 
-\section{NEXTCLOUD}
+\section{\textit{NEXTCLOUD}}
 
-De acordo com a documentação oficial do \textit{Nextcloud}~\cite{nextcloud2026}, é uma plataforma \textit{open source} de sincronização, compartilhamento de arquivos e colaboração \textit{self-hosted}. No contexto do projeto, ele não substitui o NAS; ele opera sobre o armazenamento administrado pelo sistema, oferecendo experiência de nuvem privada com interface \textit{web}, clientes \textit{desktop} e móveis, \textit{upload}, \textit{download}, compartilhamento e sincronização.
+De acordo com a documentação oficial do \textit{Nextcloud}~\cite{nextcloud2026}, é uma plataforma \textit{open source} de sincronização, compartilhamento de arquivos e colaboração \textit{self-hosted}. No contexto do projeto, ele não substitui o \textit{NAS}; ele opera sobre o armazenamento administrado pelo sistema, oferecendo experiência de nuvem privada com interface \textit{web}, clientes \textit{desktop} e móveis, \textit{upload}, \textit{download}, compartilhamento e sincronização.
 
-\section{TAILSCALE E ACESSO REMOTO SEGURO}
+\section{\textit{TAILSCALE} E ACESSO REMOTO SEGURO}
 
-A exposição direta de serviços domésticos à internet aumenta a superfície de ataque. O \textit{Tailscale} oferece uma alternativa prática ao criar uma \textit{mesh VPN} baseada em \textit{WireGuard}~\cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao \textit{Nextcloud} e, quando adequado, aos serviços administrativos. Diferentemente de abertura de portas, DDNS ou \textit{VPN} tradicional, o \textit{Tailscale} simplifica a configuração ao não exigir infraestrutura de servidor \textit{VPN} dedicada e gerencia chaves automaticamente \cite{donahue2022}.
+A exposição direta de serviços domésticos à \textit{internet} aumenta a superfície de ataque. O \textit{Tailscale} oferece uma alternativa prática ao criar uma \textit{mesh VPN} baseada em \textit{WireGuard}~\cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao \textit{Nextcloud} e, quando adequado, aos serviços administrativos. Diferentemente de abertura de portas, \textit{DDNS} ou \textit{VPN} tradicional, o \textit{Tailscale} simplifica a configuração ao não exigir infraestrutura de servidor \textit{VPN} dedicada e gerencia chaves automaticamente \cite{donahue2022}.
 
 \section{PONTOS DE MEDIÇÃO E LIMITAÇÕES ESPERADAS}
 
-A adoção de uma SBC com SSDs conectados por adaptador externo USB-SATA impõe limitações que devem ser observadas. Entre elas estão possíveis gargalos no barramento USB, variação de qualidade dos adaptadores, demanda elétrica dos SSDs, aquecimento, estabilidade sob carga e desempenho inferior ao de NAS comerciais com controladores SATA dedicados \cite{gamess2025}. Essas limitações não invalidam o projeto; elas definem justamente o que precisa ser medido.
+A adoção de uma \textit{SBC} com \textit{SSDs} conectados por adaptador externo \textit{USB-SATA} impõe limitações que devem ser observadas. Entre elas estão possíveis gargalos no barramento \textit{USB}, variação de qualidade dos adaptadores, demanda elétrica dos \textit{SSDs}, aquecimento, estabilidade sob carga e desempenho inferior ao de \textit{NAS} comerciais com controladores \textit{SATA} dedicados \cite{gamess2025}. Essas limitações não invalidam o projeto; elas definem justamente o que precisa ser medido.
 
 A Figura~\ref{fig:gargalos} apresenta os pontos de medição e possíveis gargalos da arquitetura.
 
@@ -56,13 +56,13 @@ Para mitigar os riscos identificados, o Quadro~\ref{quad:riscos} relaciona cada 
         \textbf{Limitação} & \textbf{Impacto potencial} & \textbf{Mitigação} \\
         \hline
         \hline
-        Gargalo USB 3.0 & \textit{Throughput} limitado pelo barramento compartilhado & Medir taxa por disco individualmente e agregada \\
+        Gargalo \textit{USB 3.0} & \textit{Throughput} limitado pelo barramento compartilhado & Medir taxa por disco individualmente e agregada \\
         \hline
-        Qualidade do adaptador USB-SATA & Instabilidade ou desconexão & Testar com diferentes adaptadores; documentar falhas \\
+        Qualidade do adaptador \textit{USB-SATA} & Instabilidade ou desconexão & Testar com diferentes adaptadores; documentar falhas \\
         \hline
-        Demanda elétrica dos SSDs & Queda de tensão na porta USB & Usar hub USB com alimentação externa \\
+        Demanda elétrica dos \textit{SSDs} & Queda de tensão na porta \textit{USB} & Usar \textit{hub} \textit{USB} com alimentação externa \\
         \hline
-        Aquecimento da SBC & Throttling térmico e queda de desempenho & Monitorar temperatura com \textit{sensors}; usar dissipador \\
+        Aquecimento da \textit{SBC} & \textit{Throttling} térmico e queda de desempenho & Monitorar temperatura com \textit{sensors}; usar dissipador \\
         \hline
         Estabilidade sob carga & Queda de serviço ou corrupção de dados & Testes de estresse com \textit{stress-ng} por 24h \\
         \hline
@@ -86,15 +86,15 @@ Para que a viabilidade técnica seja avaliada de forma objetiva, é necessário 
         \textbf{Critério} & \textbf{Métrica} & \textbf{Ferramenta} & \textbf{Referência} \\
         \hline
         \hline
-        \textit{Throughput} de leitura local & MB/s (sequencial) & \texttt{dd}, \texttt{hdparm} & $>$ 50 MB/s (SMB) \\
+        \textit{Throughput} de leitura local & MB/s (sequencial) & \texttt{dd}, \texttt{hdparm} & $>$ 50 MB/s (\textit{SMB}) \\
         \hline
-        \textit{Throughput} de escrita local & MB/s (sequencial) & \texttt{dd}, \texttt{rsync} & $>$ 30 MB/s (SMB) \\
+        \textit{Throughput} de escrita local & MB/s (sequencial) & \texttt{dd}, \texttt{rsync} & $>$ 30 MB/s (\textit{SMB}) \\
         \hline
         \textit{Throughput} de acesso remoto & MB/s & \texttt{iperf3}, \textit{Nextcloud} & $>$ 5 MB/s (\textit{Tailscale}) \\
         \hline
         Estabilidade sob carga & Temperatura (\%), quedas & \texttt{sensors}, \texttt{stress-ng} & $<$ 80\,\textdegree C, sem quedas \\
         \hline
-        Consumo energético & Watts (\textit{idle}/carga) & Medidor USB \textit{kill-a-watt} & $<$ 15 W médio \\
+        Consumo energético & Watts (\textit{idle}/carga) & Medidor \textit{USB kill-a-watt} & $<$ 15 W médio \\
         \hline
         Latência de acesso remoto & ms (\textit{ping}) & \texttt{ping}, \texttt{mtr} & $<$ 50 ms (\textit{Tailscale}) \\
         \hline
@@ -112,14 +112,14 @@ O fluxograma da Figura~\ref{fig:fluxo-avaliacao} ilustra o processo de avaliaç�
 \begin{figure}[!h]
     \centering
     \legenda[fig:fluxo-avaliacao]{FLUXOGRAMA DO PROCESSO DE AVALIAÇÃO}
-    \begin{tikzpicture}[node distance=2.5cm, auto, every node/.style={font=\small}]
-        \tikzstyle{block} = [rectangle, draw, fill=blue!10, text width=5cm, text centered, rounded corners, minimum height=0.8cm]
+    \begin{tikzpicture}[node distance=3cm, auto, every node/.style={font=\small}]
+        \tikzstyle{block} = [rectangle, draw, fill=blue!10, text width=5cm, text centered, rounded corners, minimum height=1.5cm]
         \tikzstyle{decision} = [diamond, draw, fill=green!10, text width=5cm, text centered, aspect=2]
         \tikzstyle{arrow} = [thick, ->, >=stealth]
 
-        \node [block] (montagem) {Montagem física\\SBC + 3 SSDs + Rede};
-        \node [block, below of=montagem] (os) {Instalação do SO\\Armbian/Debian minimal};
-        \node [block, below of=os] (omv) {Configuração OMV\\Discos, pastas, SMB};
+        \node [block] (montagem) {Montagem física\\\textit{SBC} + 3 \textit{SSDs} + Rede};
+        \node [block, below of=montagem] (os) {Instalação do SO\\\textit{Armbian/Debian minimal}};
+        \node [block, below of=os] (omv) {Configuração \textit{OMV}\\Discos, pastas, \textit{SMB}};
         \node [block, below of=omv] (nextcloud) {Implantação \textit{Nextcloud}\\\textit{Docker} + banco de dados};
         \node [block, below of=nextcloud] (tailscale) {Configuração \textit{Tailscale}\\\textit{Mesh VPN} + autenticação};
 
