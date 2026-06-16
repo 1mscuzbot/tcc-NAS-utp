@@ -15,11 +15,11 @@ Este capítulo apresenta uma análise de trabalhos relacionados que fundamentam 
 
 \section{BUILDING A LOW-COST NAS WITH ROCK64 AND OPENMEDIAVAULT}
 
-\citeonline{kumar2022} descrevem a construção de um NAS de baixo custo utilizando a placa Rock64 e \textit{OpenMediaVault}, com foco em armazenamento doméstico. O trabalho aborda configuração de RAID via software, compartilhamento SMB e métricas de \textit{throughput} em rede \textit{Gigabit Ethernet}, sendo relevante para comparar plataformas ARM alternativas ao Raspberry Pi.
+\citeonline{kumar2022} descrevem a construção de um NAS de baixo custo utilizando a placa \textit{Rock64} e \textit{OpenMediaVault}, com foco em armazenamento doméstico. O trabalho aborda configuração de \textit{RAID} via software, compartilhamento SMB e métricas de \textit{throughput} em rede \textit{Gigabit Ethernet}, sendo relevante para comparar plataformas ARM alternativas ao Raspberry Pi.
 
 \section{NEXTCLOUD ON ARM: PERFORMANCE ANALYSIS FOR PERSONAL CLOUD STORAGE}
 
-\citeonline{silva2024} avaliam o desempenho do \textit{Nextcloud} em arquitetura ARM (Raspberry Pi 4 e Rock Pi 4), medindo tempo de sincronização, uso de CPU e RAM, e latência de \textit{upload}/\textit{download}. O estudo demonstra a viabilidade de nuvem privada \textit{self-hosted} em SBCs, com gargalos identificados em criptografia \textit{SSL} e indexação de arquivos.
+\citeonline{silva2024} avaliam o desempenho do \textit{Nextcloud} em arquitetura ARM (Raspberry Pi 4 e \textit{Rock Pi 4}), medindo tempo de sincronização, uso de CPU e RAM, e latência de \textit{upload}/\textit{download}. O estudo demonstra a viabilidade de nuvem privada \textit{self-hosted} em SBCs, com gargalos identificados em criptografia \textit{SSL} e indexação de arquivos.
 
 \section{WIREGUARD VS. TAILSCALE: COMPARATIVE ANALYSIS FOR HOME NETWORK REMOTE ACCESS}
 
@@ -29,7 +29,7 @@ Este capítulo apresenta uma análise de trabalhos relacionados que fundamentam 
 
 O Quadro~\ref{quad:comparacao} apresenta comparação detalhada entre os trabalhos analisados e o projeto proposto, incluindo tipo de armazenamento, protocolos avaliados, métricas de desempenho, limitações identificadas e contribuição para o projeto atual.
 
-\begin{quadro}[htb]
+\begin{quadro}[!h]
     \centering
     \legenda[quad:comparacao]{COMPARAÇÃO ENTRE TRABALHOS RELACIONADOS E O PROJETO PROPOSTO}
     \tiny
@@ -42,13 +42,13 @@ O Quadro~\ref{quad:comparacao} apresenta comparação detalhada entre os trabalh
         \hline
         Gamess e Hester & RPi 4B & 1× SSD USB & Nativo & Não & Não & \textit{Throughput}, latência \\
         \hline
-        Kumar et al. & Rock64 & 2× HDD SATA & OMV & Não & Não & \textit{Throughput} SMB, RAID \\
+        Kumar et al. & \textit{Rock64} & 2× HDD SATA & OMV & Não & Não & \textit{Throughput} SMB, \textit{RAID} \\
         \hline
-        Silva e Santos & RPi 4B, Rock Pi 4 & 1× SSD USB & Não & \textit{Nextcloud} & Não & \textit{Sync time}, CPU, RAM, \textit{SSL} \\
+        Silva e Santos & RPi 4B, \textit{Rock Pi 4} & 1× SSD USB & Não & \textit{Nextcloud} & Não & \textit{Sync time}, CPU, RAM, \textit{SSL} \\
         \hline
         Chen et al. & x86 & N/A & Não & Não & \textit{WireGuard}, \textit{Tailscale} & Latência, \textit{setup time}, \textit{NAT} \\
         \hline
-        \textbf{Proposto} & ROCK 4B+ & 3× SSD USB & OMV & \textit{Nextcloud} & \textit{Tailscale} & \textit{Throughput}, estab., custo \\
+        \textbf{Proposto} & \textit{ROCK 4B+} & 3× SSD USB & OMV & \textit{Nextcloud} & \textit{Tailscale} & \textit{Throughput}, estab., custo \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}

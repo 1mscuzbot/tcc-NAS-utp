@@ -5,17 +5,17 @@
 
 Este capítulo apresenta o contexto, a motivação e os objetivos do trabalho, estruturando o problema de pesquisa, a hipótese, os objetivos geral e específicos, e a justificativa da proposta.
 
-A quantidade de dados produzidos em ambientes domésticos cresce continuamente. Computadores pessoais, celulares, câmeras, aplicativos de mensagens, consoles, bibliotecas multimídia e rotinas de \textit{backup} geram um volume cada vez maior de fotografias, vídeos, documentos e arquivos pessoais. De acordo com projeções da IDC, estima-se que o volume global de dados atinja 175 zettabytes até 2025 \cite{mell2011}. Nesse cenário, o armazenamento deixa de ser apenas um recurso auxiliar e passa a ocupar papel estrutural nas rotinas domésticas de armazenamento, \textit{backup}, sincronização e compartilhamento de dados.
+A quantidade de dados produzidos em ambientes domésticos cresce continuamente. Computadores pessoais, celulares, câmeras, aplicativos de mensagens, consoles, bibliotecas multimídia e rotinas de \textit{backup} geram um volume cada vez maior de fotografias, vídeos, documentos e arquivos pessoais. De acordo com projeções da IDC, estima-se que o volume global de dados atinja 175 \textit{zettabytes} até 2025 \cite{mell2011}. Nesse cenário, o armazenamento deixa de ser apenas um recurso auxiliar e passa a ocupar papel estrutural nas rotinas domésticas de armazenamento, \textit{backup}, sincronização e compartilhamento de dados.
 
 Serviços de nuvem pública oferecem conveniência, sincronização automática e acesso remoto, mas também criam dependência da conectividade externa, da política comercial do fornecedor e da disponibilidade da infraestrutura de terceiros. O objetivo deste trabalho não é rejeitar a nuvem pública, mas investigar uma alternativa local complementar para armazenamento e sincronização de dados.
 
-O projeto propõe a construção e análise de um servidor \textit{Network Attached Storage} (NAS) doméstico baseado em uma Radxa ROCK 4B+, três SSDs conectados por adaptador externo USB-SATA, \textit{OpenMediaVault}, \textit{Nextcloud} e \textit{Tailscale}. O \textit{OpenMediaVault} será utilizado como camada de administração do armazenamento em rede; o \textit{Nextcloud} fornecerá recursos de nuvem privada; e o \textit{Tailscale} permitirá acesso remoto seguro por meio de uma rede privada autenticada.
+O projeto propõe a construção e análise de um servidor \textit{Network Attached Storage} (NAS) doméstico baseado em uma \textit{Radxa ROCK 4B+}, três SSDs conectados por adaptador externo USB-SATA, \textit{OpenMediaVault}, \textit{Nextcloud} e \textit{Tailscale}. O \textit{OpenMediaVault} será utilizado como camada de administração do armazenamento em rede; o \textit{Nextcloud} fornecerá recursos de nuvem privada; e o \textit{Tailscale} permitirá acesso remoto seguro por meio de uma rede privada autenticada.
 
 A Figura~\ref{fig:arquitetura} apresenta a arquitetura lógica da solução proposta.
 
-\begin{figure}[htb]
+\begin{figure}[!h]
     \legenda[fig:arquitetura]{ARQUITETURA LÓGICA DA SOLUÇÃO PROPOSTA}
-    \fig{width=0.9\textwidth}{assets/img/arquitetura}
+    \fig{width=0.85\textwidth}{assets/img/arquitetura}
     \fonteautoria
 \end{figure}
 
@@ -34,8 +34,8 @@ Analisar a viabilidade técnica de um servidor NAS doméstico de baixo custo bas
 \section{OBJETIVOS ESPECÍFICOS}
 
 \begin{alineas}
-    \item Montar a infraestrutura física utilizando Radxa ROCK 4B+, fonte adequada, rede cabeada e três SSDs de 2,5 polegadas conectados por adaptador externo USB-SATA;
-    \item Instalar e configurar Armbian/Debian minimal compatível com a plataforma escolhida;
+    \item Montar a infraestrutura física utilizando \textit{Radxa ROCK 4B+}, fonte adequada, rede cabeada e três SSDs de 2,5 polegadas conectados por adaptador externo USB-SATA;
+    \item Instalar e configurar \textit{Armbian}/\textit{Debian} \textit{minimal} compatível com a plataforma escolhida;
     \item Instalar e configurar o \textit{OpenMediaVault} como camada central de gerenciamento do NAS;
     \item Integrar os três SSDs, padronizando nomenclatura, montagem e organização lógica;
     \item Implantar compartilhamento local por SMB/CIFS para acesso em rede cabeada;
@@ -51,7 +51,7 @@ A justificativa acadêmica do trabalho está na combinação entre baixo custo d
 
 O Quadro~\ref{quad:custo} apresenta a estimativa de custo da solução proposta em comparação com modelos comerciais de entrada, demonstrando a vantagem econômica da abordagem \textit{DIY} com SBC.
 
-\begin{quadro}[htb]
+\begin{quadro}[!h]
     \centering
     \legenda[quad:custo]{COMPARAÇÃO DE CUSTO ENTRE A SOLUÇÃO PROPOSTA E NAS COMERCIAIS DE ENTRADA}
     \small
@@ -60,7 +60,7 @@ O Quadro~\ref{quad:custo} apresenta a estimativa de custo da solução proposta 
         \textbf{Componente} & \textbf{Solução Proposta} & \textbf{Synology DS220j} & \textbf{QNAP TS-230} \\
         \hline
         \hline
-        \textit{Hardware} & Radxa ROCK 4B+ & \textit{Bay} 1 (integrado) & \textit{Bay} 1 (integrado) \\
+        \textit{Hardware} & \textit{Radxa ROCK 4B+} & \textit{Bay} 1 (integrado) & \textit{Bay} 1 (integrado) \\
         \hline
         Processador & Rockchip RK3399 (6 núcleos) & Realtek RTD1296 (4 núcleos) & Realtek RTD1295 (4 núcleos) \\
         \hline
@@ -87,7 +87,7 @@ O Quadro~\ref{quad:custo} apresenta a estimativa de custo da solução proposta 
 
 A Figura~\ref{fig:custo} ilustra graficamente a diferença de custo entre as soluções, evidenciando que a solução proposta representa aproximadamente 40\% do custo de um NAS comercial de entrada.
 
-\begin{figure}[htb]
+\begin{figure}[!h]
     \centering
     \legenda[fig:custo]{COMPARAÇÃO GRÁFICA DE CUSTO ENTRE SOLUÇÕES (EM REAIS)}
     \begin{tikzpicture}
@@ -101,8 +101,8 @@ A Figura~\ref{fig:custo} ilustra graficamente a diferença de custo entre as sol
             ymin=0,
             ymax=2000,
             bar width=0.4,
-            width=0.9\textwidth,
-            height=0.4\textwidth,
+            width=0.85\textwidth,
+            height=0.35\textwidth,
             enlarge x limits=0.4,
             legend style={at={(0.5,-0.15)},anchor=north},
             legend columns=3,
@@ -117,8 +117,8 @@ A Figura~\ref{fig:custo} ilustra graficamente a diferença de custo entre as sol
 
 A Figura~\ref{fig:fluxos} ilustra os fluxos de acesso local, remoto e administrativo da solução.
 
-\begin{figure}[htb]
+\begin{figure}[!h]
     \legenda[fig:fluxos]{FLUXOS DE ACESSO LOCAL, REMOTO E ADMINISTRATIVO}
-    \fig{width=0.9\textwidth}{assets/img/fluxos}
+    \fig{width=0.85\textwidth}{assets/img/fluxos}
     \fonteautoria
 \end{figure}

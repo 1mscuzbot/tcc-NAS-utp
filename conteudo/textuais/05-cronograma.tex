@@ -7,7 +7,7 @@ Este capítulo apresenta o cronograma previsto para a execução do projeto, dis
 
 O Quadro~\ref{quad:cronograma} detalha as atividades previstas para cada semana.
 
-\begin{quadro}[htb]
+\begin{quadro}[!h]
     \centering
     \legenda[quad:cronograma]{CRONOGRAMA DE EXECUÇÃO DO PROJETO}
     \small
@@ -43,12 +43,11 @@ O Quadro~\ref{quad:cronograma} detalha as atividades previstas para cada semana.
     \fonteautoria
 \end{quadro}
 
-\begin{figure}[htb]
+\begin{figure}[!h]
     \centering
     \legenda[fig:cronograma]{DIAGRAMA DE GANTT DO CRONOGRAMA}
-    \begin{tikzpicture}[x=1.2cm]
-        \tikzstyle{task} = [rectangle, draw, minimum height=0.5cm]
-
+    \small
+    \begin{tikzpicture}[x=1.4cm, y=0.65cm]
         \foreach \i/\nome in {
             0/{Aquisição de componentes},
             1/{Montagem física},
@@ -62,23 +61,23 @@ O Quadro~\ref{quad:cronograma} detalha as atividades previstas para cada semana.
             9/{Análise e conclusão},
             10/{Redação do TCC}
         } {
-            \node[anchor=west] at (0, -\i*0.6) {\small \nome};
+            \node[anchor=west] at (0, -\i*0.65) {\nome};
         }
 
-        \draw[fill=blue!40] (2.5, -0*0.6-0.25) rectangle (3.5, -0*0.6+0.25);
-        \draw[fill=blue!40] (2.5, -1*0.6-0.25) rectangle (4.5, -1*0.6+0.25);
-        \draw[fill=blue!40] (3.5, -2*0.6-0.25) rectangle (5.5, -2*0.6+0.25);
-        \draw[fill=blue!40] (4.5, -3*0.6-0.25) rectangle (6.5, -3*0.6+0.25);
-        \draw[fill=blue!40] (5.5, -4*0.6-0.25) rectangle (7.5, -4*0.6+0.25);
-        \draw[fill=blue!40] (6.5, -5*0.6-0.25) rectangle (7.5, -5*0.6+0.25);
-        \draw[fill=blue!40] (6.5, -6*0.6-0.25) rectangle (8.5, -6*0.6+0.25);
-        \draw[fill=blue!40] (7.5, -7*0.6-0.25) rectangle (9.5, -7*0.6+0.25);
-        \draw[fill=blue!40] (8.5, -8*0.6-0.25) rectangle (9.5, -8*0.6+0.25);
-        \draw[fill=blue!40] (8.5, -9*0.6-0.25) rectangle (10.5, -9*0.6+0.25);
-        \draw[fill=blue!40] (2.5, -10*0.6-0.25) rectangle (10.5, -10*0.6+0.25);
+        \draw[fill=blue!40] (2.5, -0*0.65-0.22) rectangle (3.5, -0*0.65+0.22);
+        \draw[fill=blue!40] (2.5, -1*0.65-0.22) rectangle (4.5, -1*0.65+0.22);
+        \draw[fill=blue!40] (3.5, -2*0.65-0.22) rectangle (5.5, -2*0.65+0.22);
+        \draw[fill=blue!40] (4.5, -3*0.65-0.22) rectangle (6.5, -3*0.65+0.22);
+        \draw[fill=blue!40] (5.5, -4*0.65-0.22) rectangle (7.5, -4*0.65+0.22);
+        \draw[fill=blue!40] (6.5, -5*0.65-0.22) rectangle (7.5, -5*0.65+0.22);
+        \draw[fill=blue!40] (6.5, -6*0.65-0.22) rectangle (8.5, -6*0.65+0.22);
+        \draw[fill=blue!40] (7.5, -7*0.65-0.22) rectangle (9.5, -7*0.65+0.22);
+        \draw[fill=blue!40] (8.5, -8*0.65-0.22) rectangle (9.5, -8*0.65+0.22);
+        \draw[fill=blue!40] (8.5, -9*0.65-0.22) rectangle (10.5, -9*0.65+0.22);
+        \draw[fill=blue!40] (2.5, -10*0.65-0.22) rectangle (10.5, -10*0.65+0.22);
 
         \foreach \s in {1,...,8} {
-            \node at (\s*1+1.5, 0.5) {\footnotesize S\s};
+            \node at (\s*1+1.5, 0.5) {\textbf{S\s}};
         }
     \end{tikzpicture}
     \fonteautoria

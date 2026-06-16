@@ -38,7 +38,7 @@
 \usepackage{multirow}
 \usepackage{multicol}
 
-\usepackage{indentfirst}		% Indenta o primeiro parágrafo de cada seção.
+\usepackage{indentfirst}
 \usepackage{xcolor}			% Controle das cores
 \usepackage{setspace}
 \usepackage{etoolbox}
@@ -64,6 +64,14 @@
 \makeatletter
 \setlength{\@fptop}{5pt} % Set distance from top of page to first float
 \makeatother
+
+\renewcommand{\textfraction}{0.01}
+\renewcommand{\topfraction}{0.99}
+\renewcommand{\bottomfraction}{0.99}
+\renewcommand{\floatpagefraction}{0.99}
+\setcounter{topnumber}{9}
+\setcounter{bottomnumber}{9}
+\setcounter{totalnumber}{20}
 
 % Definição da capa.
 \renewcommand{\imprimircapa}{%

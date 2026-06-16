@@ -19,7 +19,7 @@ Armazenamento local e nuvem pública não devem ser tratados como categorias exc
 
 Single Board Computers são computadores completos concentrados em uma única placa, geralmente com CPU, memória, interfaces USB, rede e armazenamento de \textit{boot} \cite{upton2016}. Plataformas ARM de baixo custo são utilizadas em ensino, automação, IoT, prototipagem e servidores leves. Suas vantagens incluem baixo consumo energético, formato compacto e compatibilidade com Linux \cite{halder2020}.
 
-A Radxa ROCK 4B+ será utilizada como plataforma de bancada para avaliar a viabilidade de um NAS doméstico com três SSDs externos. A escolha por SSDs conectados por adaptador externo USB-SATA reduz custo e simplifica a montagem, mas também cria pontos de atenção relacionados a energia, barramento USB, aquecimento e estabilidade \cite{radxa2024}.
+A \textit{Radxa ROCK 4B+} será utilizada como plataforma de bancada para avaliar a viabilidade de um NAS doméstico com três SSDs externos. A escolha por SSDs conectados por adaptador externo USB-SATA reduz custo e simplifica a montagem, mas também cria pontos de atenção relacionados a energia, barramento USB, aquecimento e estabilidade \cite{radxa2024}.
 
 \section{OPENMEDIAVAULT}
 
@@ -31,7 +31,7 @@ De acordo com a documentação oficial do \textit{Nextcloud}~\cite{nextcloud2026
 
 \section{TAILSCALE E ACESSO REMOTO SEGURO}
 
-A exposição direta de serviços domésticos à internet aumenta a superfície de ataque. O \textit{Tailscale} oferece uma alternativa prática ao criar uma \textit{mesh VPN} baseada em \textit{WireGuard}~\cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao \textit{Nextcloud} e, quando adequado, aos serviços administrativos. Diferentemente de abertura de portas, DDNS ou VPN tradicional, o \textit{Tailscale} simplifica a configuração ao não exigir infraestrutura de servidor VPN dedicada e gerencia chaves automaticamente \cite{donahue2022}.
+A exposição direta de serviços domésticos à internet aumenta a superfície de ataque. O \textit{Tailscale} oferece uma alternativa prática ao criar uma \textit{mesh VPN} baseada em \textit{WireGuard}~\cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao \textit{Nextcloud} e, quando adequado, aos serviços administrativos. Diferentemente de abertura de portas, DDNS ou \textit{VPN} tradicional, o \textit{Tailscale} simplifica a configuração ao não exigir infraestrutura de servidor \textit{VPN} dedicada e gerencia chaves automaticamente \cite{donahue2022}.
 
 \section{PONTOS DE MEDIÇÃO E LIMITAÇÕES ESPERADAS}
 
@@ -39,15 +39,15 @@ A adoção de uma SBC com SSDs conectados por adaptador externo USB-SATA impõe 
 
 A Figura~\ref{fig:gargalos} apresenta os pontos de medição e possíveis gargalos da arquitetura.
 
-\begin{figure}[htb]
+\begin{figure}[!h]
     \legenda[fig:gargalos]{PONTOS DE MEDIÇÃO E POSSÍVEIS GARGALOS}
-    \fig{width=0.9\textwidth}{assets/img/gargalos}
+    \fig{width=0.85\textwidth}{assets/img/gargalos}
     \fonteautoria
 \end{figure}
 
 Para mitigar os riscos identificados, o Quadro~\ref{quad:riscos} relaciona cada limitação, seu impacto potencial e a estratégia de mitigação prevista.
 
-\begin{quadro}[htb]
+\begin{quadro}[!h]
     \centering
     \legenda[quad:riscos]{LIMITAÇÕES, IMPACTOS E MITIGAÇÕES}
     \small
@@ -77,7 +77,7 @@ Para mitigar os riscos identificados, o Quadro~\ref{quad:riscos} relaciona cada 
 
 Para que a viabilidade técnica seja avaliada de forma objetiva, é necessário definir critérios mensuráveis que permitam concluir se a solução atende ou não aos requisitos domésticos. O Quadro~\ref{quad:criterios} estabelece as métricas, ferramentas e valores de referência que serão adotados.
 
-\begin{quadro}[htb]
+\begin{quadro}[!h]
     \centering
     \legenda[quad:criterios]{CRITÉRIOS DE ANÁLISE E MÉTRICAS DE AVALIAÇÃO}
     \small
@@ -109,12 +109,12 @@ Para que a viabilidade técnica seja avaliada de forma objetiva, é necessário 
 
 O fluxograma da Figura~\ref{fig:fluxo-avaliacao} ilustra o processo de avaliação, desde a montagem até a conclusão.
 
-\begin{figure}[htb]
+\begin{figure}[!h]
     \centering
     \legenda[fig:fluxo-avaliacao]{FLUXOGRAMA DO PROCESSO DE AVALIAÇÃO}
-    \begin{tikzpicture}[node distance=1.2cm, auto]
-        \tikzstyle{block} = [rectangle, draw, fill=blue!10, text width=5cm, text centered, rounded corners, minimum height=1cm]
-        \tikzstyle{decision} = [diamond, draw, fill=green!10, text width=4cm, text centered, aspect=2]
+    \begin{tikzpicture}[node distance=2.2cm, auto, every node/.style={font=\small}]
+        \tikzstyle{block} = [rectangle, draw, fill=blue!10, text width=5cm, text centered, rounded corners, minimum height=0.8cm]
+        \tikzstyle{decision} = [diamond, draw, fill=green!10, text width=4cm, text centered, aspect=1.2]
         \tikzstyle{arrow} = [thick, ->, >=stealth]
 
         \node [block] (montagem) {Montagem física\\SBC + 3 SSDs + Rede};
@@ -123,9 +123,9 @@ O fluxograma da Figura~\ref{fig:fluxo-avaliacao} ilustra o processo de avaliaç�
         \node [block, below of=omv] (nextcloud) {Implantação \textit{Nextcloud}\\\textit{Docker} + banco de dados};
         \node [block, below of=nextcloud] (tailscale) {Configuração \textit{Tailscale}\\\textit{Mesh VPN} + autenticação};
 
-        \node [decision, below of=tailscale, yshift=-0.5cm] (testes) {Testes locais\\e remotos};
-        \node [block, below of=testes, yshift=-0.5cm] (analise) {Análise dos resultados\\Métricas vs critérios};
-        \node [decision, below of=analise, yshift=-0.5cm] (conclusao) {Conclusão\\Viável ou não?};
+        \node [decision, below of=tailscale] (testes) {Testes locais\\e remotos};
+        \node [block, below of=testes] (analise) {Análise dos resultados\\Métricas vs critérios};
+        \node [decision, below of=analise] (conclusao) {Conclusão\\Viável ou não?};
 
         \draw [arrow] (montagem) -- (os);
         \draw [arrow] (os) -- (omv);

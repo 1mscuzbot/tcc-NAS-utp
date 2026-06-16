@@ -10,7 +10,7 @@ Este capítulo descreve a metodologia adotada para a montagem, configuração e 
 A montagem física compreende os seguintes componentes:
 
 \begin{alineas}
-    \item Radxa ROCK 4B+ como placa principal;
+    \item \textit{Radxa ROCK 4B+} como placa principal;
     \item Fonte de alimentação USB-C 5V/3A compatível;
     \item Cabo de rede \textit{Gigabit Ethernet};
     \item Três SSDs SATA de 2,5 polegadas (480 GB cada);
@@ -20,13 +20,13 @@ A montagem física compreende os seguintes componentes:
     \item Dissipador passivo e ventilação para refrigeração.
 \end{alineas}
 
-A ordem de montagem segue o fluxo: conexão dos adaptadores USB-SATA ao \textit{hub} USB, conexão do \textit{hub} à ROCK 4B+, inserção dos SSDs nos adaptadores, conexão do cabo de rede e da fonte de alimentação.
+A ordem de montagem segue o fluxo: conexão dos adaptadores USB-SATA ao \textit{hub} USB, conexão do \textit{hub} à \textit{ROCK 4B+}, inserção dos SSDs nos adaptadores, conexão do cabo de rede e da fonte de alimentação.
 
 \section{INSTALAÇÃO E CONFIGURAÇÃO DO SOFTWARE}
 
 O processo de instalação segue as etapas descritas no Quadro~\ref{quad:instalacao}.
 
-\begin{quadro}[htb]
+\begin{quadro}[!h]
     \centering
     \legenda[quad:instalacao]{ETAPAS DE INSTALAÇÃO E CONFIGURAÇÃO}
     \small
@@ -35,9 +35,9 @@ O processo de instalação segue as etapas descritas no Quadro~\ref{quad:instala
         \textbf{Etapa} & \textbf{Descrição} \\
         \hline
         \hline
-        1 & Gravação da imagem Armbian minimal no cartão microSD com \textit{Raspberry Pi Imager} \\
+        1 & Gravação da imagem \textit{Armbian} \textit{minimal} no cartão microSD com \textit{Raspberry Pi Imager} \\
         \hline
-        2 & Inicialização da ROCK 4B+ e configuração de rede (IP fixo) \\
+        2 & Inicialização da \textit{ROCK 4B+} e configuração de rede (IP fixo) \\
         \hline
         3 & Atualização do sistema com \texttt{apt update \&\& apt upgrade} \\
         \hline
@@ -91,7 +91,7 @@ A temperatura da SBC será registrada a cada 5 minutos durante os testes de estr
 
 O Quadro~\ref{quad:cenarios} resume os cenários de teste previstos.
 
-\begin{quadro}[htb]
+\begin{quadro}[!h]
     \centering
     \legenda[quad:cenarios]{CENÁRIOS DE TESTE}
     \small
@@ -129,7 +129,7 @@ O Quadro~\ref{quad:cenarios} resume os cenários de teste previstos.
 
 O Quadro~\ref{quad:ferramentas} lista as ferramentas que serão empregadas nos testes e suas respectivas finalidades.
 
-\begin{quadro}[htb]
+\begin{quadro}[!h]
     \centering
     \legenda[quad:ferramentas]{FERRAMENTAS DE TESTE E MONITORAMENTO}
     \small
