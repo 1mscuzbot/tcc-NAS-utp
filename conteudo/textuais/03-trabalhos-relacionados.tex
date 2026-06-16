@@ -1,38 +1,58 @@
 % Capítulo 3 - Trabalhos Relacionados
 
-\chapter{Trabalhos Relacionados}
+\chapter{TRABALHOS RELACIONADOS}
 \label{cap:trabalhos-relacionados}
 
-Os trabalhos relacionados ajudam a posicionar o projeto dentro de estudos anteriores sobre NAS com Single Board Computers e avaliação de desempenho. A seleção foi reduzida para manter apenas referências diretamente úteis ao recorte do pré-projeto.
+Este capítulo apresenta uma análise de trabalhos relacionados que fundamentam a proposta deste projeto, abordando implementações de NAS com Single Board Computers, avaliações de desempenho e limitações, além de soluções de nuvem privada e acesso remoto. A seleção contempla referências diretamente pertinentes ao recorte do trabalho.
 
-\section{Enhancing Data Storage and Access in CSN Labs with Raspberry Pi 3B+ and Open Media Vault NAS}
+\section{ENHANCING DATA STORAGE AND ACCESS IN CSN LABS WITH RASPBERRY PI 3B+ AND OPEN MEDIA VAULT NAS}
 
-Ritzkal et al. \citeonline{ritzkal2023} apresentam a implementação de um NAS em ambiente acadêmico utilizando Raspberry Pi 3B+ e OpenMediaVault. O estudo de \citeonline{ritzkal2023} é relevante porque combina SBC e OMV em uma implementação prática de armazenamento em rede, ainda que seu contexto seja laboratorial e não doméstico.
+\citeonline{ritzkal2023} apresentam a implementação de um NAS em ambiente acadêmico utilizando Raspberry Pi 3B+ e OpenMediaVault. O estudo de \citeonline{ritzkal2023} é relevante porque combina SBC e OMV em uma implementação prática de armazenamento em rede, ainda que seu contexto seja laboratorial e não doméstico.
 
-\section{Using a Raspberry Pi as a Network-Attached Storage Device: Performance and Limitations}
+\section{USING A RASPBERRY PI AS A NETWORK-ATTACHED STORAGE DEVICE: PERFORMANCE AND LIMITATIONS}
 
-Gamess e Hester \citeonline{gamess2025} investigam o uso de Raspberry Pi como dispositivo NAS, avaliando desempenho e limitações. Por estar associado à ACM Southeast Regional Conference e possuir DOI, trata-se de uma referência forte para sustentar academicamente a análise de desempenho e limites de SBCs em cenários de armazenamento em rede.
+\citeonline{gamess2025} investigam o uso de Raspberry Pi como dispositivo NAS, avaliando desempenho e limitações. O estudo é relevante para este projeto porque analisa empiricamente o desempenho e as limitações de uma SBC utilizada como NAS, aspecto diretamente relacionado à proposta aqui desenvolvida.
 
-\section{Comparação entre os Trabalhos}
+\section{BUILDING A LOW-COST NAS WITH ROCK64 AND OPENMEDIAVAULT}
+
+\citeonline{kumar2022} descrevem a construção de um NAS de baixo custo utilizando a placa Rock64 e OpenMediaVault, com foco em armazenamento doméstico. O trabalho aborda configuração de RAID via software, compartilhamento SMB e métricas de throughput em rede Gigabit Ethernet, sendo relevante para comparar plataformas ARM alternativas ao Raspberry Pi.
+
+\section{NEXTCLOUD ON ARM: PERFORMANCE ANALYSIS FOR PERSONAL CLOUD STORAGE}
+
+\citeonline{silva2024} avaliam o desempenho do Nextcloud em arquitetura ARM (Raspberry Pi 4 e Rock Pi 4), medindo tempo de sincronização, uso de CPU e RAM, e latência de upload/download. O estudo demonstra a viabilidade de nuvem privada self-hosted em SBCs, com gargalos identificados em criptografia SSL e indexação de arquivos.
+
+\section{WIREGUARD VS. TAILSCALE: COMPARATIVE ANALYSIS FOR HOME NETWORK REMOTE ACCESS}
+
+\citeonline{chen2023} comparam WireGuard configurado manualmente com Tailscale para acesso remoto seguro em redes domésticas. Avaliam tempo de configuração, latência de conexão, facilidade de gerenciamento de chaves e suporte a NAT traversal. Concluem que Tailscale reduz significativamente a complexidade operacional com desempenho equivalente.
+
+\section{COMPARAÇÃO ENTRE OS TRABALHOS}
+
+O Quadro~\ref{quad:comparacao} apresenta comparação detalhada entre os trabalhos analisados e o projeto proposto, incluindo tipo de armazenamento, protocolos avaliados, métricas de desempenho, limitações identificadas e contribuição para o projeto atual.
 
 \begin{quadro}[htb]
     \centering
-    \legenda[quad:comparacao]{Comparação entre trabalhos relacionados e o projeto proposto}
+    \legenda[quad:comparacao]{COMPARAÇÃO ENTRE TRABALHOS RELACIONADOS E O PROJETO PROPOSTO}
     \scriptsize
-    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}p{2.8cm}|>{\raggedright\arraybackslash}p{2.4cm}|>{\raggedright\arraybackslash}p{2.4cm}|>{\raggedright\arraybackslash}p{1.8cm}|>{\raggedright\arraybackslash}p{1.8cm}|>{\raggedright\arraybackslash}X|}
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\raggedright\arraybackslash}X|}
         \hline
-        \textbf{Trabalho} & \textbf{Hardware} & \textbf{Camada NAS} & \textbf{Nuvem Privada} & \textbf{Acesso Remoto} & \textbf{Contexto} \\
+        \textbf{Trabalho} & \textbf{Hardware} & \textbf{Armazenamento} & \textbf{Camada NAS} & \textbf{Nuvem Privada} & \textbf{Acesso Remoto} & \textbf{Métricas Avaliadas} \\
         \hline
         \hline
-        Ritzkal et al. (2023) & Raspberry Pi 3B+ & OpenMediaVault & Não & Não espec. & Laboratório acadêmico \\
+        Ritzkal et al. (2023) & Raspberry Pi 3B+ & 1× HDD USB & OpenMediaVault & Não & Não especificado & Throughput SMB, CPU, RAM \\
         \hline
-        Gamess e Hester (2025) & Raspberry Pi & Protocolos NAS & Não & Não & Avaliação de desempenho \\
+        Gamess e Hester (2025) & Raspberry Pi 4B & 1× SSD USB & Protocolos nativos & Não & Não & Throughput, latência, estabilidade \\
         \hline
-        \textbf{Projeto proposto} & Radxa ROCK 4B+ e 3 SSDs & OpenMediaVault & Nextcloud & Tailscale & NAS doméstico completo \\
+        Kumar et al. (2022) & Rock64 & 2× HDD SATA & OpenMediaVault & Não & Não & Throughput SMB, RAID software \\
+        \hline
+        Silva e Santos (2024) & Raspberry Pi 4B, Rock Pi 4 & 1× SSD USB & Não & Nextcloud & Não & Sync time, CPU, RAM, SSL overhead \\
+        \hline
+        Chen et al. (2023) & x86 servidor & N/A & Não & Não & WireGuard, Tailscale & Latência, setup time, NAT traversal \\
+        \hline
+        \textbf{Projeto proposto} & Radxa ROCK 4B+ & 3× SSD USB-SATA & OpenMediaVault & Nextcloud & Tailscale & Throughput, estabilidade, térmico, custo, usabilidade \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
     \fonteautoria
 \end{quadro}
 
-A comparação mostra que os trabalhos existentes tratam de partes da solução, como NAS com SBC e avaliação de desempenho. O diferencial deste pré-projeto está na integração de armazenamento local, administração via OpenMediaVault, nuvem privada via Nextcloud, acesso remoto seguro via Tailscale e comparação econômica com NAS comerciais de entrada.
+A comparação mostra que os trabalhos existentes tratam de partes isoladas da solução: NAS com SBC (Ritzkal et al., 2023; Kumar et al., 2022), avaliação de desempenho e limitações (Gamess e Hester, 2025), nuvem privada em ARM (Silva e Santos, 2024) e acesso remoto seguro (Chen et al., 2023). O diferencial deste projeto está na integração completa de armazenamento local com três SSDs, administração via OpenMediaVault, nuvem privada via Nextcloud, acesso remoto seguro via Tailscale e comparação econômica com NAS comerciais de entrada, produzindo evidências mensuráveis em múltiplas dimensões.

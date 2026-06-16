@@ -1,42 +1,46 @@
 % Capítulo 2 - Fundamentação Teórica
 
-\chapter{Fundamentação Teórica}
+\chapter{FUNDAMENTAÇÃO TEÓRICA}
 \label{cap:fundamentacao}
 
-\section{Conceito e Função de um NAS Doméstico}
+Este capítulo fundamenta teoricamente o trabalho, abordando os conceitos de NAS doméstico, armazenamento local e nuvem, Single Board Computers, OpenMediaVault, Nextcloud, Tailscale, além de apresentar os pontos de medição e limitações esperadas da solução proposta.
 
-NAS é a sigla para \textit{Network Attached Storage}, isto é, armazenamento conectado à rede. Em termos práticos, um NAS é um servidor dedicado a centralizar arquivos e disponibilizá-los por protocolos de rede. Em vez de conectar um disco diretamente a um único computador, o NAS permite que diferentes dispositivos da residência acessem os mesmos dados pela rede local.
+\section{CONCEITO E FUNÇÃO DE UM NAS DOMÉSTICO}
 
-Em ambientes domésticos, o NAS pode funcionar como repositório central de documentos, destino de backup, armazenamento de fotos e vídeos, compartilhamento local e base para serviços complementares. Para fins acadêmicos, o NAS é um objeto adequado porque permite medições de \textit{throughput}, taxa de leitura e escrita, custo por capacidade, consumo energético e comportamento sob carga.
+NAS é a sigla para \textit{Network Attached Storage}, isto é, armazenamento conectado à rede. Em termos práticos, um NAS é um servidor dedicado a centralizar arquivos e disponibilizá-los por protocolos de rede \cite{stallings2018}. Em vez de conectar um disco diretamente a um único computador, o NAS permite que diferentes dispositivos da residência acessem os mesmos dados pela rede local.
 
-\section{Armazenamento Local, Nuvem Pública e Nuvem Privada}
+Em ambientes domésticos, o NAS pode funcionar como repositório central de documentos, destino de backup, armazenamento de fotos e vídeos, compartilhamento local e base para serviços complementares. Para fins acadêmicos, o NAS é um objeto adequado porque permite medições de \textit{throughput}, taxa de leitura e escrita, custo por capacidade, consumo energético e comportamento sob carga \cite{tanenbaum2021}.
 
-Armazenamento local e nuvem pública não devem ser tratados como categorias excludentes. O armazenamento local privilegia autonomia, proximidade física dos dados e menor dependência de terceiros. A nuvem pública privilegia conveniência, escalabilidade e integração entre dispositivos. A nuvem privada ocupa uma posição intermediária: os dados permanecem sob controle do usuário, mas são acessados por uma camada de serviços web, sincronização e colaboração.
+\section{ARMAZENAMENTO LOCAL, NUVEM PÚBLICA E NUVEM PRIVADA}
 
-\section{Single Board Computers como Base de Infraestrutura Doméstica}
+Armazenamento local e nuvem pública não devem ser tratados como categorias excludentes. O armazenamento local privilegia autonomia, proximidade física dos dados e menor dependência de terceiros \cite{mell2011}. A nuvem pública privilegia conveniência, escalabilidade e integração entre dispositivos. A nuvem privada ocupa uma posição intermediária: os dados permanecem sob controle do usuário, mas são acessados por uma camada de serviços web, sincronização e colaboração \cite{marinescu2018}.
 
-Single Board Computers são computadores completos concentrados em uma única placa, geralmente com CPU, memória, interfaces USB, rede e armazenamento de \textit{boot}. Plataformas ARM de baixo custo são utilizadas em ensino, automação, IoT, prototipagem e servidores leves. Suas vantagens incluem baixo consumo energético, formato compacto e compatibilidade com Linux.
+\section{SINGLE BOARD COMPUTERS COMO BASE DE INFRAESTRUTURA DOMÉSTICA}
 
-A Radxa ROCK 4B+ será utilizada como plataforma de bancada para avaliar a viabilidade de um NAS doméstico com três SSDs externos. A escolha por SSDs conectados por adaptador externo USB-SATA reduz custo e simplifica a montagem, mas também cria pontos de atenção relacionados a energia, barramento USB, aquecimento e estabilidade.
+Single Board Computers são computadores completos concentrados em uma única placa, geralmente com CPU, memória, interfaces USB, rede e armazenamento de \textit{boot} \cite{upton2016}. Plataformas ARM de baixo custo são utilizadas em ensino, automação, IoT, prototipagem e servidores leves. Suas vantagens incluem baixo consumo energético, formato compacto e compatibilidade com Linux \cite{halder2020}.
 
-\section{OpenMediaVault}
+A Radxa ROCK 4B+ será utilizada como plataforma de bancada para avaliar a viabilidade de um NAS doméstico com três SSDs externos. A escolha por SSDs conectados por adaptador externo USB-SATA reduz custo e simplifica a montagem, mas também cria pontos de atenção relacionados a energia, barramento USB, aquecimento e estabilidade \cite{radxa2024}.
 
-O OpenMediaVault é apresentado em sua documentação oficial como uma solução completa de NAS baseada em Debian Linux, com interface web de administração e suporte a protocolos como FTP, SMB/CIFS e NFS. No projeto, ele atua como camada de gerenciamento do NAS, centralizando montagem de discos, criação de pastas compartilhadas, usuários, permissões e serviços de arquivo.
+\section{OPENMEDIAVAULT}
 
-\section{Nextcloud}
+O OpenMediaVault é apresentado em sua documentação oficial como uma solução completa de NAS baseada em Debian Linux, com interface web de administração e suporte a protocolos como FTP, SMB/CIFS e NFS \cite{openmediavault2026}. No projeto, ele atua como camada de gerenciamento do NAS, centralizando montagem de discos, criação de pastas compartilhadas, usuários, permissões e serviços de arquivo.
+
+\section{NEXTCLOUD}
 
 De acordo com a documentação oficial do Nextcloud~\cite{nextcloud2026}, é uma plataforma \textit{open source} de sincronização, compartilhamento de arquivos e colaboração \textit{self-hosted}. No contexto do projeto, ele não substitui o NAS; ele opera sobre o armazenamento administrado pelo sistema, oferecendo experiência de nuvem privada com interface web, clientes desktop e móveis, \textit{upload}, \textit{download}, compartilhamento e sincronização.
 
-\section{Tailscale e Acesso Remoto Seguro}
+\section{TAILSCALE E ACESSO REMOTO SEGURO}
 
-A exposição direta de serviços domésticos à internet aumenta a superfície de ataque. O Tailscale oferece uma alternativa prática ao criar uma \textit{mesh VPN} baseada em WireGuard~\cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao Nextcloud e, quando adequado, aos serviços administrativos.
+A exposição direta de serviços domésticos à internet aumenta a superfície de ataque. O Tailscale oferece uma alternativa prática ao criar uma \textit{mesh VPN} baseada em WireGuard~\cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao Nextcloud e, quando adequado, aos serviços administrativos. Diferentemente de abertura de portas, DDNS ou VPN tradicional, o Tailscale simplifica a configuração ao não exigir infraestrutura de servidor VPN dedicada e gerencia chaves automaticamente \cite{donahue2022}.
 
-\section{Pontos de Medição e Limitações Esperadas}
+\section{PONTOS DE MEDIÇÃO E LIMITAÇÕES ESPERADAS}
 
-A adoção de uma SBC com SSDs conectados por adaptador externo USB-SATA impõe limitações que devem ser observadas. Entre elas estão possíveis gargalos no barramento USB, variação de qualidade dos adaptadores, demanda elétrica dos SSDs, aquecimento, estabilidade sob carga e desempenho inferior ao de NAS comerciais com controladores SATA dedicados. Essas limitações não invalidam o projeto; elas definem justamente o que precisa ser medido.
+A adoção de uma SBC com SSDs conectados por adaptador externo USB-SATA impõe limitações que devem ser observadas. Entre elas estão possíveis gargalos no barramento USB, variação de qualidade dos adaptadores, demanda elétrica dos SSDs, aquecimento, estabilidade sob carga e desempenho inferior ao de NAS comerciais com controladores SATA dedicados \cite{gamess2025}. Essas limitações não invalidam o projeto; elas definem justamente o que precisa ser medido.
+
+A Figura~\ref{fig:gargalos} apresenta os pontos de medição e possíveis gargalos da arquitetura.
 
 \begin{figure}[htb]
-    \legenda[fig:gargalos]{Pontos de medição e possíveis gargalos}
+    \legenda[fig:gargalos]{PONTOS DE MEDIÇÃO E POSSÍVEIS GARGALOS}
     \fig{width=0.9\textwidth}{assets/img/gargalos}
     \fonteautoria
 \end{figure}

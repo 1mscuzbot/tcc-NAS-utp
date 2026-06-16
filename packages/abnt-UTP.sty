@@ -171,22 +171,6 @@
 \renewcommand{\cftparagraphfont}{\normalsize\normalfont}
 \renewcommand{\cftparagraphpagefont}{\normalsize\normalfont}
 
-\makeatletter
-\let\oldcontentsline\contentsline
-\def\contentsline#1#2{%
-    \expandafter\ifx\csname l@#1\endcsname\l@section
-    \expandafter\@firstoftwo
-    \else
-    \expandafter\@secondoftwo
-    \fi
-    {%
-        \oldcontentsline{#1}{\MakeTextUppercase{#2}}%
-    }{%
-    \oldcontentsline{#1}{#2}%
-}%
-}
-\makeatother
-
 \setlength{\cftbeforechapterskip}{0em}
 \setlength{\cftlastnumwidth}{4em}
 \cftsetindents{chapter}{0em}{\cftlastnumwidth}
@@ -201,6 +185,16 @@
     \let\tempf@rtoc\f@rtoc%
     \def\f@rtoc{%
         \texorpdfstring{\MakeTextUppercase{\tempf@rtoc}}{\tempf@rtoc}}%
+}
+\settocpreprocessor{section}{%
+    \let\tempf@rtoc\f@rtoc%
+    \def\f@rtoc{%
+        \texorpdfstring{\MakeTextUppercase{\tempf@rtoc}}{\tempf@rtoc}}%
+}
+\settocpreprocessor{subsection}{%
+    \let\tempf@rtoc\f@rtoc%
+    \def\f@rtoc{%
+        \texorpdfstring{\tempf@rtoc}{\tempf@rtoc}}%
 }
 \makeatother
 
@@ -417,7 +411,7 @@
 
 \newcommand{\legenda}[2][]{%
     \centering
-    \ifstrempty{#1}{\caption{#2.}}{\caption{#2.\label{#1}}}%
+    \ifstrempty{#1}{\caption{#2}}{\caption{#2}\label{#1}}%
 }
 \newcommand{\fonteautor}{\fonte{O autor}}
 \newcommand{\fonteautora}{\fonte{A autora}}

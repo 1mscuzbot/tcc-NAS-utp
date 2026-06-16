@@ -46,6 +46,4 @@ make        # Gera trabalho.pdf
 make clean  # Remove arquivos auxiliares
 ```
 
-## GitHub
 
-Repositório: [github.com/1mscuzbot/tcc-NAS-utp](https://github.com/1mscuzbot/tcc-NAS-utp)

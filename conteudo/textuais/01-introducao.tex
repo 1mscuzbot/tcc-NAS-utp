@@ -1,35 +1,39 @@
 % Capítulo 1 - Introdução
 
-\chapter{Introdução}
+\chapter{INTRODUÇÃO}
 \label{cap:introducao}
+
+Este capítulo apresenta o contexto, a motivação e os objetivos do trabalho, estruturando o problema de pesquisa, a hipótese, os objetivos geral e específicos, e a justificativa da proposta.
 
 A quantidade de dados produzidos em ambientes domésticos cresce continuamente. Computadores pessoais, celulares, câmeras, aplicativos de mensagens, consoles, bibliotecas 
 multimídia e rotinas de backup geram um volume cada vez maior de fotografias, vídeos, documentos e arquivos pessoais. Nesse cenário, o armazenamento deixa de ser apenas 
-um recurso auxiliar e passa a ocupar papel estrutural na vida digital cotidiana.
+um recurso auxiliar e passa a ocupar papel estrutural nas rotinas domésticas de armazenamento, backup, sincronização e compartilhamento de dados.
 
 Serviços de nuvem pública oferecem conveniência, sincronização automática e acesso remoto, mas também criam dependência da conectividade externa, da política comercial do fornecedor e da disponibilidade da infraestrutura de terceiros. O objetivo deste trabalho não é rejeitar a nuvem pública, mas investigar uma alternativa local complementar para armazenamento e sincronização de dados.
 
 O projeto propõe a construção e análise de um servidor NAS doméstico baseado em uma Radxa ROCK 4B+, três SSDs conectados por adaptador externo USB-SATA, OpenMediaVault, Nextcloud e Tailscale. O OpenMediaVault será utilizado como camada de administração do armazenamento em rede; o Nextcloud fornecerá recursos de nuvem privada; e o Tailscale permitirá acesso remoto seguro por meio de uma rede privada autenticada.
 
+A Figura~\ref{fig:arquitetura} apresenta a arquitetura lógica da solução proposta.
+
 \begin{figure}[htb]
-    \legenda[fig:arquitetura]{Arquitetura lógica da solução proposta}
+    \legenda[fig:arquitetura]{ARQUITETURA LÓGICA DA SOLUÇÃO PROPOSTA}
     \fig{width=0.9\textwidth}{assets/img/arquitetura}
     \fonteautoria
 \end{figure}
 
-\section{Problema de Pesquisa}
+\section{PROBLEMA DE PESQUISA}
 
 É tecnicamente viável implementar um servidor NAS doméstico de baixo custo baseado em Single Board Computer, administrado por OpenMediaVault, complementado por Nextcloud e acessado remotamente via Tailscale, mantendo desempenho, acessibilidade e usabilidade adequados ao contexto doméstico?
 
-\section{Hipótese}
+\section{HIPÓTESE}
 
 Um servidor NAS doméstico baseado em SBC, com OpenMediaVault como camada de administração, Nextcloud como camada de nuvem privada e Tailscale como mecanismo de acesso remoto seguro, pode atender de forma satisfatória cenários domésticos de armazenamento, sincronização e compartilhamento, com custo inferior ao de NAS comerciais de entrada.
 
-\section{Objetivo Geral}
+\section{OBJETIVO GERAL}
 
 Analisar a viabilidade técnica de um servidor NAS doméstico de baixo custo baseado em Single Board Computer, OpenMediaVault, Nextcloud e acesso remoto seguro.
 
-\section{Objetivos Específicos}
+\section{OBJETIVOS ESPECÍFICOS}
 
 \begin{alineas}
     \item Montar a infraestrutura física utilizando Radxa ROCK 4B+, fonte adequada, rede cabeada e três SSDs de 2,5 polegadas conectados por adaptador externo USB-SATA;
@@ -43,12 +47,14 @@ Analisar a viabilidade técnica de um servidor NAS doméstico de baixo custo bas
     \item Comparar o custo estimado da solução com modelos comerciais de NAS doméstico.
 \end{alineas}
 
-\section{Justificativa}
+\section{JUSTIFICATIVA}
 
 A justificativa acadêmica do trabalho está na combinação entre baixo custo de entrada, uso de software livre amplamente documentado, possibilidade de medição objetiva de desempenho e relevância prática para usuários domésticos. Diferentemente de um tutorial, o estudo pretende produzir evidências mensuráveis sobre desempenho de rede, comportamento do armazenamento, acesso remoto, consumo de recursos e comparação econômica.
 
+A Figura~\ref{fig:fluxos} ilustra os fluxos de acesso local, remoto e administrativo da solução.
+
 \begin{figure}[htb]
-    \legenda[fig:fluxos]{Fluxos de acesso local, remoto e administrativo}
+    \legenda[fig:fluxos]{FLUXOS DE ACESSO LOCAL, REMOTO E ADMINISTRATIVO}
     \fig{width=0.9\textwidth}{assets/img/fluxos}
     \fonteautoria
 \end{figure}
