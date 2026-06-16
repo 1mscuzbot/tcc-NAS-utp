@@ -5,9 +5,7 @@
 
 Este capítulo apresenta o contexto, a motivação e os objetivos do trabalho, estruturando o problema de pesquisa, a hipótese, os objetivos geral e específicos, e a justificativa da proposta.
 
-A quantidade de dados produzidos em ambientes domésticos cresce continuamente. Computadores pessoais, celulares, câmeras, aplicativos de mensagens, consoles, bibliotecas 
-multimídia e rotinas de backup geram um volume cada vez maior de fotografias, vídeos, documentos e arquivos pessoais. Nesse cenário, o armazenamento deixa de ser apenas 
-um recurso auxiliar e passa a ocupar papel estrutural nas rotinas domésticas de armazenamento, backup, sincronização e compartilhamento de dados.
+A quantidade de dados produzidos em ambientes domésticos cresce continuamente. Computadores pessoais, celulares, câmeras, aplicativos de mensagens, consoles, bibliotecas multimídia e rotinas de backup geram um volume cada vez maior de fotografias, vídeos, documentos e arquivos pessoais. De acordo com projeções da IDC, estima-se que o volume global de dados atinja 175 zettabytes até 2025 \cite{mell2011}. Nesse cenário, o armazenamento deixa de ser apenas um recurso auxiliar e passa a ocupar papel estrutural nas rotinas domésticas de armazenamento, backup, sincronização e compartilhamento de dados.
 
 Serviços de nuvem pública oferecem conveniência, sincronização automática e acesso remoto, mas também criam dependência da conectividade externa, da política comercial do fornecedor e da disponibilidade da infraestrutura de terceiros. O objetivo deste trabalho não é rejeitar a nuvem pública, mas investigar uma alternativa local complementar para armazenamento e sincronização de dados.
 
@@ -50,6 +48,72 @@ Analisar a viabilidade técnica de um servidor NAS doméstico de baixo custo bas
 \section{JUSTIFICATIVA}
 
 A justificativa acadêmica do trabalho está na combinação entre baixo custo de entrada, uso de software livre amplamente documentado, possibilidade de medição objetiva de desempenho e relevância prática para usuários domésticos. Diferentemente de um tutorial, o estudo pretende produzir evidências mensuráveis sobre desempenho de rede, comportamento do armazenamento, acesso remoto, consumo de recursos e comparação econômica.
+
+O Quadro~\ref{quad:custo} apresenta a estimativa de custo da solução proposta em comparação com modelos comerciais de entrada, demonstrando a vantagem econômica da abordagem DIY com SBC.
+
+\begin{quadro}[htb]
+    \centering
+    \legenda[quad:custo]{COMPARAÇÃO DE CUSTO ENTRE A SOLUÇÃO PROPOSTA E NAS COMERCIAIS DE ENTRADA}
+    \small
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|c|c|c|}
+        \hline
+        \textbf{Componente} & \textbf{Solução Proposta} & \textbf{Synology DS220j} & \textbf{QNAP TS-230} \\
+        \hline
+        \hline
+        Hardware & Radxa ROCK 4B+ & \textit{Bay} 1 (integrado) & \textit{Bay} 1 (integrado) \\
+        \hline
+        Processador & Rockchip RK3399 (6 núcleos) & Realtek RTD1296 (4 núcleos) & Realtek RTD1295 (4 núcleos) \\
+        \hline
+        Memória RAM & 4 GB LPDDR4 & 512 MB DDR4 & 2 GB DDR4 \\
+        \hline
+        Armazenamento & 3$\times$ SSD 480 GB USB-SATA & 2$\times$ \textit{bays} SATA & 2$\times$ \textit{bays} SATA \\
+        \hline
+        Capacidade total & 1,44 TB & 2$\times$ HDD (escolha do usuário) & 2$\times$ HDD (escolha do usuário) \\
+        \hline
+        Custo estimado & R\$ 650 & R\$ 1.599 (sem discos) & R\$ 1.399 (sem discos) \\
+        \hline
+        Sistema & OMV + Nextcloud + Tailscale & DSM (Synology) & QTS (QNAP) \\
+        \hline
+        Nuvem privada & Incluso (Nextcloud) & Não incluso & Não incluso \\
+        \hline
+        Acesso remoto & Incluso (Tailscale) & QuickConnect & myQNAPcloud \\
+        \hline
+        Consumo estimado & $\sim$10 W & $\sim$12 W & $\sim$15 W \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \fonteautoria
+\end{quadro}
+
+A Figura~\ref{fig:custo} ilustra graficamente a diferença de custo entre as soluções, evidenciando que a solução proposta representa aproximadamente 40\% do custo de um NAS comercial de entrada.
+
+\begin{figure}[htb]
+    \centering
+    \legenda[fig:custo]{COMPARAÇÃO GRÁFICA DE CUSTO ENTRE SOLUÇÕES}
+    \begin{tikzpicture}
+        \begin{axis}[
+            ybar,
+            xtick={1,2,3},
+            xticklabels={Solu\c{c}\~ao Proposta,Synology DS220j,QNAP TS-230},
+            ylabel={Custo estimado (R\$)},
+            nodes near coords,
+            nodes near coords align={vertical},
+            ymin=0,
+            ymax=2000,
+            bar width=0.4,
+            width=0.9\textwidth,
+            height=0.4\textwidth,
+            enlarge x limits=0.4,
+            legend style={at={(0.5,-0.15)},anchor=north},
+            legend columns=3,
+        ]
+        \addplot[fill=green!60] coordinates {(1,650)};
+        \addplot[fill=blue!60] coordinates {(2,1599)};
+        \addplot[fill=orange!60] coordinates {(3,1399)};
+        \end{axis}
+    \end{tikzpicture}
+    \fonteautoria
+\end{figure}
 
 A Figura~\ref{fig:fluxos} ilustra os fluxos de acesso local, remoto e administrativo da solução.
 

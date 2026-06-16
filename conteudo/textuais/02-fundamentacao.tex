@@ -3,7 +3,7 @@
 \chapter{FUNDAMENTAÇÃO TEÓRICA}
 \label{cap:fundamentacao}
 
-Este capítulo fundamenta teoricamente o trabalho, abordando os conceitos de NAS doméstico, armazenamento local e nuvem, Single Board Computers, OpenMediaVault, Nextcloud, Tailscale, além de apresentar os pontos de medição e limitações esperadas da solução proposta.
+Este capítulo fundamenta teoricamente o trabalho, abordando os conceitos de NAS doméstico, armazenamento local e nuvem, Single Board Computers, OpenMediaVault, Nextcloud, Tailscale, além de apresentar os pontos de medição, limitações esperadas e critérios de análise da solução proposta.
 
 \section{CONCEITO E FUNÇÃO DE UM NAS DOMÉSTICO}
 
@@ -42,5 +42,98 @@ A Figura~\ref{fig:gargalos} apresenta os pontos de medição e possíveis gargal
 \begin{figure}[htb]
     \legenda[fig:gargalos]{PONTOS DE MEDIÇÃO E POSSÍVEIS GARGALOS}
     \fig{width=0.9\textwidth}{assets/img/gargalos}
+    \fonteautoria
+\end{figure}
+
+Para mitigar os riscos identificados, o Quadro~\ref{quad:riscos} relaciona cada limitação, seu impacto potencial e a estratégia de mitigação prevista.
+
+\begin{quadro}[htb]
+    \centering
+    \legenda[quad:riscos]{LIMITAÇÕES, IMPACTOS E MITIGAÇÕES}
+    \small
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+        \hline
+        \textbf{Limitação} & \textbf{Impacto potencial} & \textbf{Mitigação} \\
+        \hline
+        \hline
+        Gargalo USB 3.0 & Throughput limitado pelo barramento compartilhado & Medir taxa por disco individualmente e agregada \\
+        \hline
+        Qualidade do adaptador USB-SATA & Instabilidade ou desconexão & Testar com diferentes adaptadores; documentar falhas \\
+        \hline
+        Demanda elétrica dos SSDs & Queda de tensão na porta USB & Usar hub USB com alimentação externa \\
+        \hline
+        Aquecimento da SBC & Throttling térmico e queda de desempenho & Monitorar temperatura com \textit{sensors}; usar dissipador \\
+        \hline
+        Estabilidade sob carga & Queda de serviço ou corrupção de dados & Testes de estresse com \textit{stress-ng} por 24h \\
+        \hline
+        Desempenho remoto via Tailscale & Latência adicional e menor throughput & Comparar iperf local vs remoto; medir overhead \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \fonteautoria
+\end{quadro}
+
+\section{CRITÉRIOS DE ANÁLISE}
+
+Para que a viabilidade técnica seja avaliada de forma objetiva, é necessário definir critérios mensuráveis que permitam concluir se a solução atende ou não aos requisitos domésticos. O Quadro~\ref{quad:criterios} estabelece as métricas, ferramentas e valores de referência que serão adotados.
+
+\begin{quadro}[htb]
+    \centering
+    \legenda[quad:criterios]{CRITÉRIOS DE ANÁLISE E MÉTRICAS DE AVALIAÇÃO}
+    \small
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+        \hline
+        \textbf{Critério} & \textbf{Métrica} & \textbf{Ferramenta} & \textbf{Referência} \\
+        \hline
+        \hline
+        Throughput de leitura local & MB/s (sequencial) & \texttt{dd}, \texttt{hdparm} & $>$ 50 MB/s (SMB) \\
+        \hline
+        Throughput de escrita local & MB/s (sequencial) & \texttt{dd}, \texttt{rsync} & $>$ 30 MB/s (SMB) \\
+        \hline
+        Throughput de acesso remoto & MB/s & \texttt{iperf3}, Nextcloud & $>$ 5 MB/s (Tailscale) \\
+        \hline
+        Estabilidade sob carga &         Temperatura (\%), quedas & \texttt{sensors}, \texttt{stress-ng} & $<$ 80\,\textdegree C, sem quedas \\
+        \hline
+        Consumo energético & Watts (idle/carga) & Medidor USB kill-a-watt & $<$ 15 W médio \\
+        \hline
+        Latência de acesso remoto & ms (ping) & \texttt{ping}, \texttt{mtr} & $<$ 50 ms (Tailscale) \\
+        \hline
+        Custo total & R\$ & Planilha de custos & $<$ R\$ 800 \\
+        \hline
+        Custo por TB & R\$/TB & Cálculo direto & $<$ R\$ 600/TB \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \fonteautoria
+\end{quadro}
+
+O fluxograma da Figura~\ref{fig:fluxo-avaliacao} ilustra o processo de avaliação, desde a montagem até a conclusão.
+
+\begin{figure}[htb]
+    \centering
+    \legenda[fig:fluxo-avaliacao]{FLUXOGRAMA DO PROCESSO DE AVALIAÇÃO}
+    \begin{tikzpicture}[node distance=1.2cm, auto]
+        \tikzstyle{block} = [rectangle, draw, fill=blue!10, text width=5cm, text centered, rounded corners, minimum height=1cm]
+        \tikzstyle{decision} = [diamond, draw, fill=green!10, text width=4cm, text centered, aspect=2]
+        \tikzstyle{arrow} = [thick, ->, >=stealth]
+
+        \node [block] (montagem) {Montagem física\\SBC + 3 SSDs + Rede};
+        \node [block, below of=montagem] (os) {Instalação do SO\\Armbian/Debian minimal};
+        \node [block, below of=os] (omv) {Configuração OMV\\Discos, pastas, SMB};
+        \node [block, below of=omv] (nextcloud) {Implantação Nextcloud\\Docker + banco de dados};
+        \node [block, below of=nextcloud] (tailscale) {Configuração Tailscale\\Mesh VPN + autenticação};
+
+        \node [decision, below of=tailscale, yshift=-0.5cm] (testes) {Testes locais\\e remotos};
+        \node [block, below of=testes, yshift=-0.5cm] (analise) {Análise dos resultados\\Métricas vs critérios};
+        \node [decision, below of=analise, yshift=-0.5cm] (conclusao) {Conclusão\\Viável ou não?};
+
+        \draw [arrow] (montagem) -- (os);
+        \draw [arrow] (os) -- (omv);
+        \draw [arrow] (omv) -- (nextcloud);
+        \draw [arrow] (nextcloud) -- (tailscale);
+        \draw [arrow] (tailscale) -- (testes);
+        \draw [arrow] (testes) -- (analise);
+        \draw [arrow] (analise) -- (conclusao);
+    \end{tikzpicture}
     \fonteautoria
 \end{figure}
