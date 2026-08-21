@@ -13,6 +13,14 @@ Este capítulo apresenta uma análise de trabalhos relacionados que fundamentam 
 
 \citeonline{gamess2025} investigam o uso de \textit{Raspberry Pi} como dispositivo \textit{NAS}, avaliando desempenho e limitações. O estudo é relevante para este projeto porque analisa empiricamente o desempenho e as limitações de uma \textit{SBC} utilizada como \textit{NAS}, aspecto diretamente relacionado à proposta aqui desenvolvida.
 
+\section{COMMODITY SINGLE BOARD COMPUTER CLUSTERS AND THEIR APPLICATIONS}
+
+\citeonline{johnston2018} examinam o uso de \textit{clusters} formados por \textit{Single Board Computers} de baixo custo, discutindo aplicações em ensino, pesquisa e serviços de rede, além de aspectos de desempenho e eficiência energética dessas plataformas. O trabalho é relevante porque consolida evidências de que \textit{SBCs} são adequadas a cargas de servidor leves, categoria na qual se enquadra o \textit{NAS} doméstico proposto neste projeto.
+
+\section{NETWORK PERFORMANCE EVALUATION OF SEVERAL RASPBERRY PI MODELS FOR IPV4 AND IPV6}
+
+\citeonline{gamess2022} avaliam o desempenho de rede de diversos modelos de \textit{Raspberry Pi} em \textit{IPv4} e \textit{IPv6}, medindo \textit{throughput} e latência em diferentes configurações de interface. Os resultados delimitam o desempenho de rede esperado da classe de plataforma adotada neste projeto e orientam a interpretação das medições locais e remotas.
+
 \section{HOME NETWORK ATTACHED STORAGE (HOMENAS) USING RASPBERRY PI WITH TELEGRAM BOT NOTIFICATION}
 
 \citeonline{homenas2025} apresentam o desenvolvimento de um \textit{NAS} doméstico de baixo custo utilizando \textit{Raspberry Pi} com \textit{OpenMediaVault}, armazenamento em disco externo conectado por \textit{USB} e compartilhamento por meio do \textit{Samba}. O trabalho avalia o desempenho de rede em cenários de \textit{streaming} com usuário único e múltiplos usuários, em conexões cabeada e sem fio, e estima redução expressiva de custo energético em relação a \textit{NAS} comerciais. É relevante para este projeto porque trata da mesma combinação entre \textit{SBC}, \textit{OMV} e compartilhamento de arquivos no contexto doméstico.
@@ -42,6 +50,10 @@ O Quadro~\ref{quad:comparacao} apresenta comparação detalhada entre os trabalh
         \hline
         Gamess e Hester & \textit{RPi 4B} & 1× \textit{SSD USB} & Nativo & Não & Não & \textit{Throughput}, latência \\
         \hline
+        Johnston et al. & Clusters de \textit{RPi} & --- & --- & Não & Não & Desempenho, eficiência energética \\
+        \hline
+        Gamess et al. & Vários modelos de \textit{RPi} & --- & Não & Não & Não & \textit{Throughput} e latência \textit{IPv4}/\textit{IPv6} \\
+        \hline
         Rashid et al. & \textit{Raspberry Pi} & 1× disco externo \textit{USB} & \textit{OMV} & Não & Não & \textit{Streaming}, custo energético \\
         \hline
         Salke et al. & \textit{Raspberry Pi} & --- & Não & \textit{Nextcloud} & Não & Uso de rede, tempo de computação \\
@@ -55,4 +67,4 @@ O Quadro~\ref{quad:comparacao} apresenta comparação detalhada entre os trabalh
     \fonteautoria
 \end{quadro}
 
-A comparação mostra que os trabalhos existentes tratam de partes isoladas da solução: \textit{NAS} com \textit{SBC} (Ritzkal et al., 2023; Rashid et al., 2025), avaliação de desempenho e limitações (Gamess e Hester, 2025), nuvem privada em \textit{SBC} (Salke et al., 2023) e acesso remoto seguro (Donenfeld, 2017; Tailscale, s.d.). O diferencial deste projeto está na integração completa de armazenamento local com três \textit{SSDs}, administração via \textit{OpenMediaVault}, nuvem privada via \textit{Nextcloud}, acesso remoto seguro via \textit{Tailscale} e comparação econômica com \textit{NAS} comerciais de entrada, produzindo evidências mensuráveis em múltiplas dimensões.
+A comparação mostra que os trabalhos existentes tratam de partes isoladas da solução: \textit{NAS} com \textit{SBC} (Ritzkal et al., 2023; Rashid et al., 2025), avaliações de desempenho e limitações de plataformas (Gamess e Hester, 2025; Gamess et al., 2022; Johnston et al., 2018), nuvem privada em \textit{SBC} (Salke et al., 2023) e acesso remoto seguro (Donenfeld, 2017; Tailscale, s.d.). O diferencial deste projeto está na integração completa de armazenamento local com três \textit{SSDs}, administração via \textit{OpenMediaVault}, nuvem privada via \textit{Nextcloud}, acesso remoto seguro via \textit{Tailscale} e comparação econômica com \textit{NAS} comerciais de entrada, produzindo evidências mensuráveis em múltiplas dimensões.

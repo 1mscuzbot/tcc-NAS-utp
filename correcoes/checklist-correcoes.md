@@ -75,7 +75,7 @@ Legenda de status:
 - `01-introducao.tex:8` atribui a projeção de 175 zettabytes (IDC) a `\cite{mell2011}`, que é a *NIST Definition of Cloud Computing* (Mell; Grance) — fonte errada.
 - **Ação:** citar a fonte correta do dado: relatório *Data Age 2025* (Reinsel; Gantz; Rydning — IDC/Seagate) e adicioná-la ao `referencias.bib`.
 
-## 9. Fortalecer relação entre conceitos e fontes específicas — ⚠️ PARCIAL (trabalhos relacionados agora citam apenas fontes reais e verificadas; sugerido expandir fundamentação — ver sugestões)
+## 9. Fortalecer relação entre conceitos e fontes específicas — ✅ CORRIGIDO (fundamentação reforçada com gamess2022/johnston2018; critérios com justificativa; metodologia ganhou subseção de consumo energético; +2 trabalhos relacionados)
 
 > Planilha, item 3 (nota 0,8/2,0): "fortalecer relação entre conceitos e fontes mais específicas".
 
