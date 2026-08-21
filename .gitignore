@@ -18,6 +18,7 @@
 *.snm
 *.vrb
 *.xdv
+missfont.log
 
 # PDFs e build
 build/

@@ -1,4 +1,4 @@
-BIBTEX ?= bibtex.original
+BIBTEX ?= bibtex
 
 .PHONY: all clean distclean
 

@@ -45,6 +45,69 @@ make        # Gera trabalho.pdf
 make clean  # Remove arquivos auxiliares
 ```
 
+Sem `make` (ex.: Windows), rode na ordem:
+
+```bat
+pdflatex -interaction=nonstopmode trabalho.tex
+bibtex trabalho
+pdflatex -interaction=nonstopmode trabalho.tex
+pdflatex -interaction=nonstopmode trabalho.tex
+```
+
+## Requisitos / Instalação do Ambiente
+
+Pacotes LaTeX necessários: `abntex2` (classe + citações ABNT), `memoir`, `babel-portuges`,
+`pgf`/`pgfplots` (diagramas TikZ), `psnfss` com fontes `times`/`helvetic`/`courier`,
+`listings`, `algorithmicx`, `enumitem`, `textcase`, `xpatch`, `colortbl`, `multirow`,
+`setspace`, `caption`, `subfig`, `geometry`, `tools` (tabularx, indentfirst), `cmap`,
+`microtype`, `xcolor`, `etoolbox`.
+
+### Linux — AlmaLinux 10 (testado)
+
+**Opção A — TinyTeX, sem root (recomendada; é a que validamos nesta máquina):**
+
+```bash
+wget -qO- "https://yihui.org/tinytex/install-bin-unix.sh" | sh
+~/.TinyTeX/bin/x86_64-linux/tlmgr install \
+  abntex2 memoir babel-portuges pgf pgfplots psnfss listings algorithmicx \
+  colortbl multirow setspace etoolbox xcolor caption subfig geometry \
+  textcase xpatch enumitem cmap microtype courier helvetic symbol
+```
+
+Reabra o terminal para o `pdflatex` entrar no `PATH` (`~/.local/bin`) e rode `make`.
+
+**Opção B — pacotes do sistema (requer sudo):**
+
+```bash
+sudo dnf install texlive-scheme-basic texlive-memoir texlive-pgf texlive-pgfplots \
+  texlive-psnfss texlive-times texlive-helvetic texlive-courier texlive-listings \
+  texlive-enumitem texlive-xpatch texlive-textcase texlive-colortbl texlive-multirow \
+  texlive-setspace texlive-caption texlive-subfig texlive-geometry texlive-tools \
+  texlive-cmap texlive-microtype texlive-xcolor texlive-etoolbox
+```
+
+Atenção: os repositórios do EL10 **não têm** `texlive-abntex2`, `texlive-babel-portuges`
+nem `texlive-algorithmicx`. Se precisar dessa rota, baixe os três do CTAN e extraia em
+`~/texmf/tex/latex/` seguido de `texhash ~/texmf` — ou simplesmente use a Opção A.
+
+### Windows
+
+1. Instale o [MiKTeX](https://miktex.org/download) (Basic Installer).
+2. Na primeira compilação, deixe o MiKTeX instalar os pacotes que faltam
+   (marcar *"Always install missing packages on-the-fly"* nas configurações,
+   ou aceitar os pop-ups: abntex2, babel-portuges, pgfplots etc.).
+   Alternativa: [TeX Live](https://tug.org/texlive/) (installer `install-tl-windows`),
+   que já traz tudo no esquema *full*.
+3. Compile pelo terminal (PowerShell) com a sequência de 4 comandos acima,
+   ou instale o [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
+   no VS Code. Para usar `make`, instale via [Chocolatey](https://chocolatey.org/): `choco install make`.
+4. Outra opção sem instalar nada: compilar no [Overleaf](https://www.overleaf.com)
+   (fazer upload do projeto; o compilador pdfLaTeX resolve os pacotes sozinho).
+
+> Nota: o Makefile usava `bibtex.original` como padrão (específico da máquina de um dos
+> autores); agora o padrão é `bibtex`. Se necessário, sobrescreva com `make BIBTEX=bibtex`.
+
+
 ## Rotina de Trabalho em Dupla
 
 ```bash
