@@ -92,15 +92,18 @@ nem `texlive-algorithmicx`. Se precisar dessa rota, baixe os três do CTAN e ext
 
 ### Windows
 
-1. Instale o [MiKTeX](https://miktex.org/download) (Basic Installer).
-2. Na primeira compilação, deixe o MiKTeX instalar os pacotes que faltam
+O projeto é baseado em TeX Live — no Windows dos autores usamos o TeX Live.
+
+1. Instale o [TeX Live](https://tug.org/texlive/) (installer `install-tl-windows`;
+   esquema *full* traz tudo; o esquema *medium* já cobre os pacotes listados acima).
+2. Compile pelo terminal (PowerShell) com a sequência de 4 comandos da seção
+   [Compilação](#compilação), ou instale o
+   [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
+   no VS Code. Para usar `make`, instale via [Chocolatey](https://chocolatey.org/): `choco install make`.
+3. Alternativa mais leve: [MiKTeX](https://miktex.org/download) (Basic Installer) —
+   na primeira compilação, deixe-o instalar os pacotes que faltam
    (marcar *"Always install missing packages on-the-fly"* nas configurações,
    ou aceitar os pop-ups: abntex2, babel-portuges, pgfplots etc.).
-   Alternativa: [TeX Live](https://tug.org/texlive/) (installer `install-tl-windows`),
-   que já traz tudo no esquema *full*.
-3. Compile pelo terminal (PowerShell) com a sequência de 4 comandos acima,
-   ou instale o [LaTeX Workshop](https://marketplace.visualstudio.com/items?itemName=James-Yu.latex-workshop)
-   no VS Code. Para usar `make`, instale via [Chocolatey](https://chocolatey.org/): `choco install make`.
 4. Outra opção sem instalar nada: compilar no [Overleaf](https://www.overleaf.com)
    (fazer upload do projeto; o compilador pdfLaTeX resolve os pacotes sozinho).
 
