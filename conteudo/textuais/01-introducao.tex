@@ -5,11 +5,11 @@
 
 Este capítulo apresenta o contexto, a motivação e os objetivos do trabalho, estruturando o problema de pesquisa, a hipótese, os objetivos geral e específicos, e a justificativa da proposta.
 
-A quantidade de dados produzidos em ambientes domésticos cresce continuamente. Computadores pessoais, celulares, câmeras, aplicativos de mensagens, consoles, bibliotecas multimídia e rotinas de \textit{backup} geram um volume cada vez maior de fotografias, vídeos, documentos e arquivos pessoais. De acordo com projeções da \textit{IDC}, estima-se que o volume global de dados atinja 175 \textit{zettabytes} até 2025 \cite{mell2011}. Nesse cenário, o armazenamento deixa de ser apenas um recurso auxiliar e passa a ocupar papel estrutural nas rotinas domésticas de armazenamento, \textit{backup}, sincronização e compartilhamento de dados.
+A quantidade de dados produzidos em ambientes domésticos cresce continuamente. Computadores pessoais, celulares, câmeras, aplicativos de mensagens, consoles, bibliotecas multimídia e rotinas de \textit{backup} geram um volume cada vez maior de fotografias, vídeos, documentos e arquivos pessoais. De acordo com projeções da \textit{International Data Corporation} (\textit{IDC}), estima-se que o volume global de dados atinja 175 \textit{zettabytes} até 2025 \cite{reinsel2018}. Nesse cenário, o armazenamento deixa de ser apenas um recurso auxiliar e passa a ocupar papel estrutural nas rotinas domésticas de armazenamento, \textit{backup}, sincronização e compartilhamento de dados.
 
 Serviços de nuvem pública oferecem conveniência, sincronização automática e acesso remoto, mas também criam dependência da conectividade externa, da política comercial do fornecedor e da disponibilidade da infraestrutura de terceiros. O objetivo deste trabalho não é rejeitar a nuvem pública, mas investigar uma alternativa local complementar para armazenamento e sincronização de dados.
 
-O projeto propõe a construção e análise de um servidor \textit{Network Attached Storage} (\textit{NAS}) doméstico baseado em uma \textit{Radxa ROCK 4B+}, três \textit{SSDs} conectados por adaptador externo \textit{USB-SATA}, \textit{OpenMediaVault}, \textit{Nextcloud} e \textit{Tailscale}. O \textit{OpenMediaVault} será utilizado como camada de administração do armazenamento em rede; o \textit{Nextcloud} fornecerá recursos de nuvem privada; e o \textit{Tailscale} permitirá acesso remoto seguro por meio de uma rede privada autenticada.
+O projeto propõe a construção e análise de um servidor \textit{Network Attached Storage} (\textit{NAS}) doméstico baseado em uma \textit{Radxa ROCK 4B+}, três dispositivos de \textit{Solid State Drive} (\textit{SSDs}) conectados por adaptador externo \textit{USB-SATA}, \textit{OpenMediaVault}, \textit{Nextcloud} e \textit{Tailscale}. O \textit{OpenMediaVault} será utilizado como camada de administração do armazenamento em rede; o \textit{Nextcloud} fornecerá recursos de nuvem privada; e o \textit{Tailscale} permitirá acesso remoto seguro por meio de uma rede privada autenticada.
 
 A Figura~\ref{fig:arquitetura} apresenta a arquitetura lógica da solução proposta.
 
@@ -53,19 +53,11 @@ A Figura~\ref{fig:arquitetura} apresenta a arquitetura lógica da solução prop
     \fonteautoria
 \end{figure}
 
-\section{PROBLEMA DE PESQUISA}
-
 É tecnicamente viável implementar um servidor \textit{NAS} doméstico de baixo custo baseado em \textit{Single Board Computer}, administrado por \textit{OpenMediaVault}, complementado por \textit{Nextcloud} e acessado remotamente via \textit{Tailscale}, mantendo desempenho, acessibilidade e usabilidade adequados ao contexto doméstico?
-
-\section{HIPÓTESE}
 
 Um servidor \textit{NAS} doméstico baseado em \textit{SBC}, com \textit{OpenMediaVault} como camada de administração, \textit{Nextcloud} como camada de nuvem privada e \textit{Tailscale} como mecanismo de acesso remoto seguro, pode atender de forma satisfatória cenários domésticos de armazenamento, sincronização e compartilhamento, com custo inferior ao de \textit{NAS} comerciais de entrada.
 
-\section{OBJETIVO GERAL}
-
 Analisar a viabilidade técnica de um servidor \textit{NAS} doméstico de baixo custo baseado em \textit{Single Board Computer}, \textit{OpenMediaVault}, \textit{Nextcloud} e acesso remoto seguro.
-
-\section{OBJETIVOS ESPECÍFICOS}
 
 \begin{alineas}
     \item Montar a infraestrutura física utilizando \textit{Radxa ROCK 4B+}, fonte adequada, rede cabeada e três \textit{SSDs} de 2,5 polegadas conectados por adaptador externo \textit{USB-SATA};
@@ -78,8 +70,6 @@ Analisar a viabilidade técnica de um servidor \textit{NAS} doméstico de baixo 
     \item Executar testes locais e remotos de desempenho, estabilidade e usabilidade;
     \item Comparar o custo estimado da solução com modelos comerciais de \textit{NAS} doméstico.
 \end{alineas}
-
-\section{JUSTIFICATIVA}
 
 A justificativa acadêmica do trabalho está na combinação entre baixo custo de entrada, uso de \textit{software} livre amplamente documentado, possibilidade de medição objetiva de desempenho e relevância prática para usuários domésticos. Diferentemente de um \textit{tutorial}, o estudo pretende produzir evidências mensuráveis sobre desempenho de rede, comportamento do armazenamento, acesso remoto, consumo de recursos e comparação econômica.
 
@@ -116,7 +106,7 @@ O Quadro~\ref{quad:custo} apresenta a estimativa de custo da solução proposta 
         \hline
     \end{tabularx}
     \vspace{0.2cm}
-    \fonteautoria
+    \fonte{Elaborado pelos autores com base em preços médios consultados nos sites dos fabricantes e em plataformas de venda online brasileiras, em maio de 2026. Valores aproximados.}
 \end{quadro}
 
 A Figura~\ref{fig:custo} ilustra graficamente a diferença de custo entre as soluções, evidenciando que a solução proposta representa aproximadamente 40\% do custo de um \textit{NAS} comercial de entrada.

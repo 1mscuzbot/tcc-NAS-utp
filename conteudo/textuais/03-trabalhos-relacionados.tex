@@ -13,17 +13,17 @@ Este capítulo apresenta uma análise de trabalhos relacionados que fundamentam 
 
 \citeonline{gamess2025} investigam o uso de \textit{Raspberry Pi} como dispositivo \textit{NAS}, avaliando desempenho e limitações. O estudo é relevante para este projeto porque analisa empiricamente o desempenho e as limitações de uma \textit{SBC} utilizada como \textit{NAS}, aspecto diretamente relacionado à proposta aqui desenvolvida.
 
-\section{BUILDING A LOW-COST NAS WITH ROCK64 AND OPENMEDIAVAULT}
+\section{HOME NETWORK ATTACHED STORAGE (HOMENAS) USING RASPBERRY PI WITH TELEGRAM BOT NOTIFICATION}
 
-\citeonline{kumar2022} descrevem a construção de um \textit{NAS} de baixo custo utilizando a placa \textit{Rock64} e \textit{OpenMediaVault}, com foco em armazenamento doméstico. O trabalho aborda configuração de \textit{RAID} via \textit{software}, compartilhamento \textit{SMB} e métricas de \textit{throughput} em rede \textit{Gigabit Ethernet}, sendo relevante para comparar plataformas \textit{ARM} alternativas ao \textit{Raspberry Pi}.
+\citeonline{homenas2025} apresentam o desenvolvimento de um \textit{NAS} doméstico de baixo custo utilizando \textit{Raspberry Pi} com \textit{OpenMediaVault}, armazenamento em disco externo conectado por \textit{USB} e compartilhamento por meio do \textit{Samba}. O trabalho avalia o desempenho de rede em cenários de \textit{streaming} com usuário único e múltiplos usuários, em conexões cabeada e sem fio, e estima redução expressiva de custo energético em relação a \textit{NAS} comerciais. É relevante para este projeto porque trata da mesma combinação entre \textit{SBC}, \textit{OMV} e compartilhamento de arquivos no contexto doméstico.
 
-\section{NEXTCLOUD ON ARM: PERFORMANCE ANALYSIS FOR PERSONAL CLOUD STORAGE}
+\section{ANALYZING THE FEASIBILITY AND RELIABILITY OF NEXTCLOUD AS A NETWORK ATTACHED CLOUD STORAGE SOLUTION ON RASPBERRY PI}
 
-\citeonline{silva2024} avaliam o desempenho do \textit{Nextcloud} em arquitetura \textit{ARM} (\textit{Raspberry Pi 4} e \textit{Rock Pi 4}), medindo tempo de sincronização, uso de \textit{CPU} e \textit{RAM}, e latência de \textit{upload}/\textit{download}. O estudo demonstra a viabilidade de nuvem privada \textit{self-hosted} em \textit{SBCs}, com gargalos identificados em criptografia \textit{SSL} e indexação de arquivos.
+\citeonline{salke2023} analisam a viabilidade e a confiabilidade do \textit{Nextcloud} como solução de nuvem privada executada sobre \textit{Raspberry Pi}, medindo o uso de rede, o tamanho dos arquivos transferidos e o tempo de computação para diferentes cargas de trabalho. O estudo demonstra a viabilidade da nuvem privada \textit{self-hosted} em \textit{SBCs} e é relevante porque cobre a camada de sincronização e acesso \textit{web} contemplada nesta proposta.
 
-\section{WIREGUARD VS. TAILSCALE: COMPARATIVE ANALYSIS FOR HOME NETWORK REMOTE ACCESS}
+\section{WIREGUARD AND MESH VPN FOR SECURE REMOTE ACCESS}
 
-\citeonline{chen2023} comparam \textit{WireGuard} configurado manualmente com \textit{Tailscale} para acesso remoto seguro em redes domésticas. Avaliam tempo de configuração, latência de conexão, facilidade de gerenciamento de chaves e suporte a \textit{NAT traversal}. Concluem que \textit{Tailscale} reduz significativamente a complexidade operacional com desempenho equivalente.
+\citeonline{donenfeld2017} apresenta o \textit{WireGuard}, protocolo de túnel de rede executado no núcleo do sistema, projetado para oferecer criptografia moderna com alto desempenho e base de código reduzida. A documentação oficial do \textit{Tailscale}~\cite{tailscalehowworks} descreve como o serviço constrói uma \textit{mesh VPN} sobre o \textit{WireGuard}, agregando servidor de coordenação, troca automática de chaves e travessia de \textit{NAT}. Esses elementos fundamentam a escolha do mecanismo de acesso remoto adotado neste projeto, que reduz a complexidade operacional em relação a configurações manuais de \textit{VPN}.
 
 \section{COMPARAÇÃO ENTRE OS TRABALHOS}
 
@@ -42,11 +42,11 @@ O Quadro~\ref{quad:comparacao} apresenta comparação detalhada entre os trabalh
         \hline
         Gamess e Hester & \textit{RPi 4B} & 1× \textit{SSD USB} & Nativo & Não & Não & \textit{Throughput}, latência \\
         \hline
-        Kumar et al. & \textit{Rock64} & 2× \textit{HDD SATA} & \textit{OMV} & Não & Não & \textit{Throughput} \textit{SMB}, \textit{RAID} \\
+        Rashid et al. & \textit{Raspberry Pi} & 1× disco externo \textit{USB} & \textit{OMV} & Não & Não & \textit{Streaming}, custo energético \\
         \hline
-        Silva e Santos & \textit{RPi 4B}, \textit{Rock Pi 4} & 1× \textit{SSD USB} & Não & \textit{Nextcloud} & Não & \textit{Sync time}, \textit{CPU}, \textit{RAM}, \textit{SSL} \\
+        Salke et al. & \textit{Raspberry Pi} & --- & Não & \textit{Nextcloud} & Não & Uso de rede, tempo de computação \\
         \hline
-        Chen et al. & \textit{x86} & \textit{N/A} & Não & Não & \textit{WireGuard}, \textit{Tailscale} & Latência, \textit{setup time}, \textit{NAT} \\
+        Donenfeld; Tailscale & --- & --- & Não & Não & \textit{WireGuard}, \textit{Tailscale} & Desempenho do túnel, travessia de \textit{NAT} \\
         \hline
         \textbf{Proposto} & \textit{ROCK 4B+} & 3× \textit{SSD USB} & \textit{OMV} & \textit{Nextcloud} & \textit{Tailscale} & \textit{Throughput}, estab., custo \\
         \hline
@@ -55,4 +55,4 @@ O Quadro~\ref{quad:comparacao} apresenta comparação detalhada entre os trabalh
     \fonteautoria
 \end{quadro}
 
-A comparação mostra que os trabalhos existentes tratam de partes isoladas da solução: \textit{NAS} com \textit{SBC} (Ritzkal et al., 2023; Kumar et al., 2022), avaliação de desempenho e limitações (Gamess e Hester, 2025), nuvem privada em \textit{ARM} (Silva e Santos, 2024) e acesso remoto seguro (Chen et al., 2023). O diferencial deste projeto está na integração completa de armazenamento local com três \textit{SSDs}, administração via \textit{OpenMediaVault}, nuvem privada via \textit{Nextcloud}, acesso remoto seguro via \textit{Tailscale} e comparação econômica com \textit{NAS} comerciais de entrada, produzindo evidências mensuráveis em múltiplas dimensões.
+A comparação mostra que os trabalhos existentes tratam de partes isoladas da solução: \textit{NAS} com \textit{SBC} (Ritzkal et al., 2023; Rashid et al., 2025), avaliação de desempenho e limitações (Gamess e Hester, 2025), nuvem privada em \textit{SBC} (Salke et al., 2023) e acesso remoto seguro (Donenfeld, 2017; Tailscale, s.d.). O diferencial deste projeto está na integração completa de armazenamento local com três \textit{SSDs}, administração via \textit{OpenMediaVault}, nuvem privada via \textit{Nextcloud}, acesso remoto seguro via \textit{Tailscale} e comparação econômica com \textit{NAS} comerciais de entrada, produzindo evidências mensuráveis em múltiplas dimensões.

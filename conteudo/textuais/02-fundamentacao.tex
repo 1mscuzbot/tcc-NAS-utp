@@ -17,7 +17,7 @@ Armazenamento local e nuvem pública não devem ser tratados como categorias exc
 
 \section{\textit{SINGLE BOARD COMPUTERS} COMO BASE DE INFRAESTRUTURA DOMÉSTICA}
 
-\textit{Single Board Computers} são computadores completos concentrados em uma única placa, geralmente com \textit{CPU}, memória, interfaces \textit{USB}, rede e armazenamento de \textit{boot} \cite{upton2016}. Plataformas \textit{ARM} de baixo custo são utilizadas em ensino, automação, \textit{IoT}, prototipagem e servidores leves. Suas vantagens incluem baixo consumo energético, formato compacto e compatibilidade com \textit{Linux} \cite{halder2020}.
+\textit{Single Board Computers} são computadores completos concentrados em uma única placa, geralmente com \textit{CPU}, memória, interfaces \textit{USB}, rede e armazenamento de \textit{boot} \cite{upton2016}. Plataformas \textit{ARM} de baixo custo são utilizadas em ensino, automação, \textit{IoT}, prototipagem e servidores leves. Suas vantagens incluem baixo consumo energético, formato compacto e compatibilidade com \textit{Linux} \cite{johnston2018}.
 
 A \textit{Radxa ROCK 4B+} será utilizada como plataforma de bancada para avaliar a viabilidade de um \textit{NAS} doméstico com três \textit{SSDs} externos. A escolha por \textit{SSDs} conectados por adaptador externo \textit{USB-SATA} reduz custo e simplifica a montagem, mas também cria pontos de atenção relacionados a energia, barramento \textit{USB}, aquecimento e estabilidade \cite{radxa2024}.
 
@@ -31,7 +31,7 @@ De acordo com a documentação oficial do \textit{Nextcloud}~\cite{nextcloud2026
 
 \section{\textit{TAILSCALE} E ACESSO REMOTO SEGURO}
 
-A exposição direta de serviços domésticos à \textit{internet} aumenta a superfície de ataque. O \textit{Tailscale} oferece uma alternativa prática ao criar uma \textit{mesh VPN} baseada em \textit{WireGuard}~\cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao \textit{Nextcloud} e, quando adequado, aos serviços administrativos. Diferentemente de abertura de portas, \textit{DDNS} ou \textit{VPN} tradicional, o \textit{Tailscale} simplifica a configuração ao não exigir infraestrutura de servidor \textit{VPN} dedicada e gerencia chaves automaticamente \cite{donahue2022}.
+A exposição direta de serviços domésticos à \textit{internet} aumenta a superfície de ataque. O \textit{Tailscale} oferece uma alternativa prática ao criar uma \textit{mesh VPN} baseada em \textit{WireGuard}~\cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao \textit{Nextcloud} e, quando adequado, aos serviços administrativos. Diferentemente de abertura de portas, \textit{DDNS} ou \textit{VPN} tradicional, o \textit{Tailscale} simplifica a configuração ao não exigir infraestrutura de servidor \textit{VPN} dedicada e gerencia chaves automaticamente \cite{tailscalehowworks}.
 
 \section{PONTOS DE MEDIÇÃO E LIMITAÇÕES ESPERADAS}
 
@@ -112,21 +112,25 @@ O fluxograma da Figura~\ref{fig:fluxo-avaliacao} ilustra o processo de avaliaç�
 \begin{figure}[!h]
     \centering
     \legenda[fig:fluxo-avaliacao]{FLUXOGRAMA DO PROCESSO DE AVALIAÇÃO}
-    \begin{tikzpicture}[node distance=3cm, auto, every node/.style={font=\small}]
-        \tikzstyle{block} = [rectangle, draw, fill=blue!10, text width=5cm, text centered, rounded corners, minimum height=1.2cm]
+    \begin{tikzpicture}[node distance=1.6cm, auto, every node/.style={font=\small}]
+        \tikzstyle{terminator} = [rectangle, draw, fill=gray!15, text width=2.5cm, text centered, rounded corners=0.7cm, minimum height=0.8cm]
+        \tikzstyle{block} = [rectangle, draw, fill=blue!10, text width=5cm, text centered, minimum height=1cm]
         \tikzstyle{decision} = [diamond, draw, fill=green!10, text width=4cm, text centered, aspect=1.5]
         \tikzstyle{arrow} = [thick, ->, >=stealth]
 
-        \node [block] (montagem) {Montagem física\\\textit{SBC} + 3 \textit{SSDs} + Rede};
+        \node [terminator] (inicio) {Início};
+        \node [block, below of=inicio] (montagem) {Montagem física\\\textit{SBC} + 3 \textit{SSDs} + Rede};
         \node [block, below of=montagem] (os) {Instalação do SO\\\textit{Armbian/Debian minimal}};
         \node [block, below of=os] (omv) {Configuração \textit{OMV}\\Discos, pastas, \textit{SMB}};
         \node [block, below of=omv] (nextcloud) {Implantação \textit{Nextcloud}\\\textit{Docker} + banco de dados};
         \node [block, below of=nextcloud] (tailscale) {Configuração \textit{Tailscale}\\\textit{Mesh VPN} + autenticação};
 
-        \node [decision, below of=tailscale] (testes) {Testes locais e remotos};
+        \node [block, below of=tailscale] (testes) {Testes locais e remotos};
         \node [block, below of=testes] (analise) {Análise dos resultados\\Métricas vs critérios};
         \node [decision, below of=analise] (conclusao) {Conclusão\\Viável ou não?};
+        \node [terminator, below of=conclusao] (fim) {Fim};
 
+        \draw [arrow] (inicio) -- (montagem);
         \draw [arrow] (montagem) -- (os);
         \draw [arrow] (os) -- (omv);
         \draw [arrow] (omv) -- (nextcloud);
@@ -134,6 +138,8 @@ O fluxograma da Figura~\ref{fig:fluxo-avaliacao} ilustra o processo de avaliaç�
         \draw [arrow] (tailscale) -- (testes);
         \draw [arrow] (testes) -- (analise);
         \draw [arrow] (analise) -- (conclusao);
+        \draw [arrow] (conclusao) -- node {SIM} (fim);
+        \draw [arrow] (conclusao.east) -- ++(2.5,0) node[midway, above] {NÃO} |- (omv.east);
     \end{tikzpicture}
     \fonteautoria
 \end{figure}
