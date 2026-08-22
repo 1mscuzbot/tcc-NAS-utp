@@ -13,7 +13,7 @@ O projeto propõe a construção e análise de um servidor \textit{Network Attac
 
 A Figura~\ref{fig:arquitetura} apresenta a arquitetura lógica da solução proposta.
 
-\begin{figure}[!h]
+\begin{figure}[H]
     \legenda[fig:arquitetura]{ARQUITETURA LÓGICA DA SOLUÇÃO PROPOSTA}
     \centering
     \begin{tikzpicture}[
@@ -53,12 +53,13 @@ A Figura~\ref{fig:arquitetura} apresenta a arquitetura lógica da solução prop
     \fonteautoria
 \end{figure}
 
-É tecnicamente viável implementar um servidor \textit{NAS} doméstico de baixo custo baseado em \textit{Single Board Computer}, administrado por \textit{OpenMediaVault}, complementado por \textit{Nextcloud} e acessado remotamente via \textit{Tailscale}, mantendo desempenho, acessibilidade e usabilidade adequados ao contexto doméstico?
+Isso posto, se levanta o seguinte problema de pesquisa: É tecnicamente viável implementar um servidor \textit{NAS} doméstico de baixo custo baseado em \textit{Single Board Computer}, administrado por \textit{OpenMediaVault}, complementado por \textit{Nextcloud} e acessado remotamente via \textit{Tailscale}, mantendo desempenho, acessibilidade e usabilidade adequados ao contexto doméstico?
 
-Um servidor \textit{NAS} doméstico baseado em \textit{SBC}, com \textit{OpenMediaVault} como camada de administração, \textit{Nextcloud} como camada de nuvem privada e \textit{Tailscale} como mecanismo de acesso remoto seguro, pode atender de forma satisfatória cenários domésticos de armazenamento, sincronização e compartilhamento, com custo inferior ao de \textit{NAS} comerciais de entrada.
+Como hipótese, tem-se que um servidor \textit{NAS} doméstico baseado em \textit{SBC}, com \textit{OpenMediaVault} como camada de administração, \textit{Nextcloud} como camada de nuvem privada e \textit{Tailscale} como mecanismo de acesso remoto seguro, pode atender de forma satisfatória cenários domésticos de armazenamento, sincronização e compartilhamento, com custo inferior ao de \textit{NAS} comerciais de entrada.
 
-Analisar a viabilidade técnica de um servidor \textit{NAS} doméstico de baixo custo baseado em \textit{Single Board Computer}, \textit{OpenMediaVault}, \textit{Nextcloud} e acesso remoto seguro.
+O objetivo geral desta pesquisa é analisar a viabilidade técnica de um servidor \textit{NAS} doméstico de baixo custo baseado em \textit{Single Board Computer}, \textit{OpenMediaVault}, \textit{Nextcloud} e acesso remoto seguro.
 
+Como objetivos específicos, tem-se:
 \begin{alineas}
     \item Montar a infraestrutura física utilizando \textit{Radxa ROCK 4B+}, fonte adequada, rede cabeada e três \textit{SSDs} de 2,5 polegadas conectados por adaptador externo \textit{USB-SATA};
     \item Instalar e configurar \textit{Armbian}/\textit{Debian} \textit{minimal} compatível com a plataforma escolhida;

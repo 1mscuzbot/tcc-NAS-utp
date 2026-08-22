@@ -114,34 +114,34 @@ O fluxograma da Figura~\ref{fig:fluxo-avaliacao} ilustra o processo de avaliaç�
 \begin{figure}[!h]
     \centering
     \legenda[fig:fluxo-avaliacao]{FLUXOGRAMA DO PROCESSO DE AVALIAÇÃO}
-    \begin{tikzpicture}[node distance=1.6cm, auto, every node/.style={font=\small}]
-        \tikzstyle{terminator} = [rectangle, draw, fill=gray!15, text width=2.5cm, text centered, rounded corners=0.7cm, minimum height=0.8cm]
-        \tikzstyle{block} = [rectangle, draw, fill=blue!10, text width=5cm, text centered, minimum height=1cm]
-        \tikzstyle{decision} = [diamond, draw, fill=green!10, text width=4cm, text centered, aspect=1.5]
+    \begin{tikzpicture}[node distance=7cm, auto, every node/.style={font=\small}]
+        \tikzstyle{terminator} = [retangle, draw=black!80, fill=gray!50, ultra thick, text width=5cm, text centered, rounded corners=0.5cm, minimum height=1cm]
+        \tikzstyle{block} = [rectangle, draw=black!50, fill=blue!10, thick, text width=5cm, text centered, minimum height=2cm]
+        \tikzstyle{decision} = [diamond, draw=yellow!50, fill=yellow!10, ultra thick, text width=4cm, text centered, aspect=1.5]
         \tikzstyle{arrow} = [thick, ->, >=stealth]
 
         \node [terminator] (inicio) {Início};
-        \node [block, below of=inicio] (montagem) {Montagem física\\\textit{SBC} + 3 \textit{SSDs} + Rede};
-        \node [block, below of=montagem] (os) {Instalação do SO\\\textit{Armbian/Debian minimal}};
-        \node [block, below of=os] (omv) {Configuração \textit{OMV}\\Discos, pastas, \textit{SMB}};
-        \node [block, below of=omv] (nextcloud) {Implantação \textit{Nextcloud}\\\textit{Docker} + banco de dados};
-        \node [block, below of=nextcloud] (tailscale) {Configuração \textit{Tailscale}\\\textit{Mesh VPN} + autenticação};
+        \node [block, right of=inicio] (montagem) {Montagem física:\\\textit{SBC} + 3 \textit{SSDs} + Rede};
+        \node [block, below of=montagem, node distance=3cm] (os) {Instalação do SO:\\\textit{Armbian/Debian minimal}};
+        \node [block, left of=os] (omv) {Configuração \textit{OMV}:\\Discos, pastas, \textit{SMB}};
+        \node [block, below of=omv, node distance=3cm] (nextcloud) {Implantação \textit{Nextcloud}\\\textit{Docker} + banco de dados};
+        \node [block, right of=nextcloud] (tailscale) {Configuração \textit{Tailscale}\\\textit{Mesh VPN} + autenticação};
 
-        \node [block, below of=tailscale] (testes) {Testes locais e remotos};
-        \node [block, below of=testes] (analise) {Análise dos resultados\\Métricas vs critérios};
-        \node [decision, below of=analise] (conclusao) {Conclusão\\Viável ou não?};
-        \node [terminator, below of=conclusao] (fim) {Fim};
+        \node [block, below of=tailscale, node distance=3cm, draw=black!50, fill=orange!20] (testes) {Testes locais e remotos};
+        \node [block, left of=testes, draw=black!50, fill=cyan!20] (analise) {Análise dos resultados\\Métricas vs critérios};
+        \node [decision, below of=analise, node distance=4cm] (conclusao) {Conclusão\\Viável ou não?};
+        \node [terminator, right of=conclusao] (fim) {Fim};
 
-        \draw [arrow] (inicio) -- (montagem);
-        \draw [arrow] (montagem) -- (os);
-        \draw [arrow] (os) -- (omv);
-        \draw [arrow] (omv) -- (nextcloud);
-        \draw [arrow] (nextcloud) -- (tailscale);
-        \draw [arrow] (tailscale) -- (testes);
-        \draw [arrow] (testes) -- (analise);
-        \draw [arrow] (analise) -- (conclusao);
-        \draw [arrow] (conclusao) -- node {SIM} (fim);
-        \draw [arrow] (conclusao.east) -- ++(2.5,0) node[midway, above] {NÃO} |- (omv.east);
+        \draw [ultra thick, ->] (inicio) -- (montagem);
+        \draw [ultra thick, ->] (montagem) -- (os);
+        \draw [ultra thick, ->] (os) -- (omv);
+        \draw [ultra thick, ->] (omv) -- (nextcloud);
+        \draw [ultra thick, ->] (nextcloud) -- (tailscale);
+        \draw [ultra thick, ->] (tailscale) -- (testes);
+        \draw [ultra thick, ->] (testes) -- (analise);
+        \draw [ultra thick, ->] (analise) -- (conclusao);
+        \draw [ultra thick, ->] (conclusao) -- node {Sim} (fim);
+        \draw [ultra thick, ->] (conclusao.west) -- ++(-1.5,0) node[midway, above] {Não} |- (omv.west);
     \end{tikzpicture}
     \fonteautoria
 \end{figure}
