@@ -32,3 +32,6 @@ Thumbs.db
 
 # Configurações locais
 .vscode/
+# arquivos de lock/temp do Office
+~$*
+*.pdf.tmp
