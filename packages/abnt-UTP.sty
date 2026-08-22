@@ -21,7 +21,8 @@
     abnt-emphasize=bf
 ]{abntex2cite}
 
-\usepackage{float}
+% NOTA: não carregar o pacote float — o memoir já embute o posicionamento [H]
+% e o \newfloat do pacote conflita com o \newfloat nativo do memoir (quebra o ambiente quadro).
 
 \usepackage[cmex10]{amsmath}
 \interdisplaylinepenalty=2500
