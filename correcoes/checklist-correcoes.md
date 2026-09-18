@@ -126,3 +126,15 @@ Problemas em `referencias/referencias.bib`:
 
 Notas da planilha: Justificativa 1,0 · Objetivos 1,0 · Revisão literatura 0,8/2,0 ·
 Trabalhos relacionados 1,0 · Metodologia 1,0 · Bibliografia 1,0 · Normas 0,6/2,0.
+
+---
+
+## Materiais de correção no repositório (`correcoes/`)
+
+| Arquivo | Origem / uso |
+|---------|----------------|
+| `Avaliação PG1_DAVI e LUCAS.xlsx` | Notas e justificativas da PG1 |
+| `PG1-Davi_Lucas-SERVIDOR_NAS_correção Angela.pdf` | PDF com comentários inline da Prof.ª Angela |
+| `TCC_NAS_2SSDS_FINAL_COMPARACAO_SEGURANCA.docx` | Documento do Davi — comparação 2 SSDs / segurança (base para atualização do TCC) |
+| `TCC_NAS_2SSDS_FINAL_COMPARACAO_SEGURANCA-atualizacao-do-TCC.pdf` | PDF correspondente à atualização gerada a partir desse material |
+| `checklist-correcoes.md` | Este checklist |

@@ -23,6 +23,8 @@ missfont.log
 # PDFs e build
 build/
 *.pdf
+!trabalho.pdf
+!correcoes/**/*.pdf
 
 # Arquivos de sistema operacional
 .DS_Store
