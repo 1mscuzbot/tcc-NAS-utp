@@ -1,0 +1,246 @@
+% Capítulo 5 - Resultados
+
+\chapter{RESULTADOS}
+\label{cap:resultados}
+
+Este capítulo apresenta os resultados obtidos. Inicialmente são descritos os testes preliminares em rede cabeada, que estabelecem o desempenho do \textit{NAS} sem a limitação do \textit{Wi-Fi} do cliente; em seguida, os resultados da fase consolidada, por cenário, e a análise de estabilidade, de custo e de atendimento aos critérios definidos no Quadro~\ref{quad:criterios}.
+
+\section{TESTES PRELIMINARES E COMPLEMENTARES}
+
+Antes da fase consolidada e depois dela, foram realizadas três séries de medições complementares. Em outubro de 2025, os testes foram feitos com um \textit{SSD SATA} de 240 \textit{GB} (\textit{ADATA SU650}) em \textit{case USB-SATA} com controladora \textit{Realtek RTL9201} (modo \textit{UAS}) e um \textit{laptop Debian} como cliente, com um compartilhamento \textit{SMB} de teste, comparando a rede local cabeada de 1 \textit{GbE} com o \textit{Wi-Fi} de 5 \textit{GHz}. Os valores iniciais, em torno de 20 \textit{MB/s}, foram atribuídos ao uso de \textit{Wi-Fi}, a um trecho de rede de 100 \textit{Mb/s} do ambiente doméstico (posteriormente substituído por um enlace \textit{Gigabit}) e à conexão \textit{USB} 2.0 do adaptador; corrigidas essas condições, o caminho 1 \textit{GbE} apresentou o comportamento esperado. Em março de 2026, uma nova série foi executada com um \textit{PC Windows}, em \textit{Wi-Fi}, acessando o \textit{NAS} pelo endereço do \textit{Tailscale}. Em 1º de novembro de 2026, com a configuração final de dois \textit{SSDs} e o \textit{NAS} em \textit{Ethernet}, o mesmo \textit{PC} (adaptador \textit{Wi-Fi} 802.11ac, enlace de 433 \textit{Mbps}) mediu latência e \textit{SMB} via \textit{Tailscale} com 3 repetições de um arquivo de 2 \textit{GB}, enquanto a temperatura da \textit{CPU} do \textit{NAS} era registrada a cada 2 segundos. O Quadro~\ref{quad:preliminares} consolida os valores.
+
+\begin{quadro}[H]
+    \centering
+    \legenda[quad:preliminares]{RESULTADOS PRELIMINARES E COMPLEMENTARES (REDE LOCAL E \textit{TAILSCALE})}
+    \footnotesize
+    \renewcommand{\arraystretch}{1.1}
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+        \hline
+        \textbf{Teste} & \textbf{Resultado} & \textbf{Observação} \\
+        \hline
+        \hline
+        \texttt{iperf3} (\textit{Wi-Fi} do cliente, out/2025) & $\sim$0,33 \textit{Gbit/s} & Indício de gargalo no \textit{Wi-Fi} \\
+        \hline
+        \texttt{iperf3} (cabeado, out/2025) & $\sim$0,89 \textit{Gbit/s} & Caminho 1 \textit{GbE} íntegro \\
+        \hline
+        \texttt{fio} no \textit{NAS} (\textit{SSD}, out/2025) & Escrita $\sim$364 \textit{MiB/s}; leitura $\sim$396 \textit{MiB/s} & E/S direta; disco não é o gargalo \\
+        \hline
+        \texttt{hdparm} (out/2025) & $\sim$266,94 \textit{MB/s} & Leitura em \textit{buffer} do disco \\
+        \hline
+        \textit{SMB}, rede local cabeada (out/2025) & Escrita $\sim$76 \textit{MB/s}; leitura $\sim$81 \textit{MB/s} (faixa 76--86) & Arquivo real de $\sim$2,9 \textit{GB}, \texttt{dd} com E/S direta \\
+        \hline
+        \textit{SMB}, cliente em \textit{Wi-Fi} 5 \textit{GHz} (out/2025) & Escrita $\sim$21--26 \textit{MB/s}; leitura $\sim$26--31 \textit{MB/s} & Equivale ao cenário com \textit{NAS} em \textit{Ethernet} e cliente em \textit{Wi-Fi} \\
+        \hline
+        \textit{SMB} via \textit{Tailscale}, cliente em \textit{Wi-Fi} (out/2025) & Escrita $\sim$64 \textit{MB/s}; leitura $\sim$59 \textit{MB/s} (faixa 60--69) & Criptografia e roteamento da \textit{VPN}; mesmas condições das séries de mar/2026 e nov/2026 \\
+        \hline
+        \texttt{iperf3 TCP} via \textit{Tailscale}, cliente em \textit{Wi-Fi} (mar/2026) & Cliente $\rightarrow$ \textit{NAS} $\sim$850 \textit{Mbit/s}; \textit{NAS} $\rightarrow$ cliente $\sim$705 \textit{Mbit/s} & Algumas retransmissões \textit{TCP} \\
+        \hline
+        \texttt{iperf3 UDP} via \textit{Tailscale} (mar/2026) & $\sim$99,7 \textit{Mbit/s} a 100 \textit{Mbit/s}; \textit{jitter} $\sim$0,115 \textit{ms}; perda 0,07\% & --- \\
+        \hline
+        \textit{SMB} via \textit{Tailscale}, \textit{PC Windows} em \textit{Wi-Fi} (mar/2026) & Escrita $\sim$9,5 \textit{MB/s}; leitura $\sim$26,3 \textit{MB/s} & Cópia de arquivo de 1 \textit{GB} com \textit{Robocopy} \\
+        \hline
+        Latência via \textit{Tailscale}, cliente em \textit{Wi-Fi} (mar/2026) & $\sim$2 \textit{ms} (1--3 \textit{ms}), 0\% de perda & 29 pacotes \\
+        \hline
+        \texttt{tailscale ping} e \texttt{ping} (nov/2026) & Conexão direta pelo \textit{IP} da interface \textit{Ethernet} do \textit{NAS} (192.168.0.25); 2--3 \textit{ms}; média de 3 \textit{ms} (2--15 \textit{ms}), 0\% de perda em 30 pacotes & \textit{NAS} em \textit{Ethernet}; \textit{PC} em \textit{Wi-Fi} 802.11ac, enlace de 433 \textit{Mbps} \\
+        \hline
+        \textit{SMB} via \textit{Tailscale}, \textit{PC Windows} em \textit{Wi-Fi} (nov/2026) & Escrita 15,4--16,3 \textit{MB/s} (média 15,9); leitura 30,1--32,3 \textit{MB/s} (média 31,4) & Arquivo de 2 \textit{GB}, 3 repetições, cópia com \texttt{Copy-Item} \\
+        \hline
+        Temperatura da \textit{CPU} do \textit{NAS} (nov/2026) & Repouso 49--52~$^\circ$C; sustentada de 70 a 75~$^\circ$C durante as cópias; máximo de 78,1~$^\circ$C (pico isolado) & Cerca de 10 minutos de cópias; leitura a cada 2 \textit{s} com \textit{cooler} pequeno \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \fonte{Autoria própria, a partir dos relatórios de teste dos autores (out/2025 e mar/2026).}
+\end{quadro}
+
+As três séries de \textit{SMB} via \textit{Tailscale} (outubro de 2025, março de 2026 e novembro de 2026) foram realizadas nas mesmas condições: \textit{NAS} em \textit{Ethernet}, cliente em \textit{Wi-Fi} e acesso pelo endereço do \textit{Tailscale}. Elas diferem apenas em cliente, sistema operacional e método de cópia (E/S direta em \textit{Debian} em outubro; \textit{Robocopy} e \texttt{Copy-Item} em \textit{Windows} em março e novembro). A variação entre elas (escrita de 9,5 a 64 \textit{MB/s} e leitura de 26 a 59 \textit{MB/s}) decorre das instabilidades da rede sem fio em cada data. Por essa razão, os valores são apresentados por série e não combinados em uma única média. Todas as séries superam o valor de referência de acesso remoto de 5 \textit{MB/s}. Os resultados com o cliente em \textit{Wi-Fi} 5 \textit{GHz} em outubro de 2025 são coerentes com o cenário híbrido da fase consolidada, o que reforça que a rede sem fio do cliente é o fator limitante nesses casos.
+
+\section{DESEMPENHO DE REDE}
+
+A Tabela~\ref{tab:iperf3} consolida os resultados do \texttt{iperf3} da fase consolidada. O cenário híbrido, no qual o \textit{NAS} foi conectado por \textit{Ethernet} e o cliente permaneceu em \textit{Wi-Fi}, apresentou o melhor desempenho, com aproximadamente 257--258 \textit{Mbit/s} no sentido cliente-\textit{NAS} e 273--274 \textit{Mbit/s} no sentido \textit{NAS}-cliente. Quando ambos permaneceram em \textit{Wi-Fi}, observou-se forte assimetria: aproximadamente 32,4 \textit{Mbit/s} no sentido cliente-\textit{NAS} e 107 \textit{Mbit/s} no sentido inverso. No acesso remoto por \textit{Tailscale} sobre rede móvel, foram medidos aproximadamente 9,8--9,9 \textit{Mbit/s} no envio para o \textit{NAS} e 22,7--23,1 \textit{Mbit/s} no sentido \textit{NAS}-cliente.
+
+\begin{table}[H]
+    \centering
+    \legenda[tab:iperf3]{RESULTADOS DO \texttt{IPERF3} POR CENÁRIO}
+    \small
+    \renewcommand{\arraystretch}{1.15}
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|c|c|}
+        \hline
+        \textbf{Cenário} & \textbf{Cliente $\rightarrow$ \textit{NAS} (\textit{Mbit/s})} & \textbf{\textit{NAS} $\rightarrow$ cliente (\textit{Mbit/s})} \\
+        \hline
+        \hline
+        \textit{Wi-Fi} em ambos & 32,4 & 107,0 \\
+        \hline
+        \textit{NAS Ethernet} / cliente \textit{Wi-Fi} & 257--258 & 273--274 \\
+        \hline
+        Remoto \textit{Tailscale} / rede móvel & 9,8--9,9 & 22,7--23,1 \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \fonteautoria
+\end{table}
+
+A Figura~\ref{fig:resultados-rede} apresenta o \textit{throughput} de rede observado nos três cenários.
+
+\begin{figure}[H]
+    \centering
+    \legenda[fig:resultados-rede]{\textit{THROUGHPUT} DE REDE OBSERVADO NOS TRÊS CENÁRIOS}
+    \fig{width=0.8\linewidth}{resultados-rede}
+    \fonteautoria
+\end{figure}
+
+\section{COMPARTILHAMENTO SMB}
+
+No cenário com ambos os equipamentos em \textit{Wi-Fi}, o \textit{SMB} apresentou escrita na faixa de aproximadamente 5--9 \textit{MB/s} e leitura entre 11--13 \textit{MB/s}. Com o \textit{NAS} em \textit{Ethernet} e o cliente em \textit{Wi-Fi}, a escrita subiu para cerca de 18--19 \textit{MB/s} e a leitura atingiu aproximadamente 25 \textit{MB/s} em média, com picos próximos de 30 \textit{MB/s}. No cenário remoto, a escrita variou, inicialmente próxima de 1 \textit{MB/s} e posteriormente em torno de 6--7 \textit{MB/s}, enquanto a leitura permaneceu próxima de 26 \textit{MB/s}.
+
+\begin{table}[H]
+    \centering
+    \legenda[tab:smb]{DESEMPENHO DO COMPARTILHAMENTO \textit{SMB} POR CENÁRIO}
+    \small
+    \renewcommand{\arraystretch}{1.15}
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|c|c|}
+        \hline
+        \textbf{Cenário} & \textbf{Escrita \textit{SMB}} & \textbf{Leitura \textit{SMB}} \\
+        \hline
+        \hline
+        \textit{Wi-Fi} em ambos & 5--9 \textit{MB/s} & 11--13 \textit{MB/s} \\
+        \hline
+        \textit{NAS Ethernet} / cliente \textit{Wi-Fi} & 18--19 \textit{MB/s} & $\sim$25 \textit{MB/s} (pico $\sim$30,4) \\
+        \hline
+        Remoto \textit{Tailscale} & $\sim$6--7 \textit{MB/s} após estabilização & $\sim$26 \textit{MB/s} \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \fonteautoria
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \legenda[fig:resultados-smb]{DESEMPENHO REPRESENTATIVO DO \textit{SMB}}
+    \fig{width=0.8\linewidth}{resultados-smb}
+    \fonteautoria
+\end{figure}
+
+\section{\textit{NEXTCLOUD}}
+
+O \textit{Nextcloud} apresentou desempenho coerente com a topologia de rede. No cenário \textit{Wi-Fi}, o \textit{upload} ficou aproximadamente entre 6--7 \textit{MB/s} e o \textit{download} entre 10--13 \textit{MB/s}. No cenário híbrido, o \textit{download} permaneceu estável em aproximadamente 26--27 \textit{MB/s}; o \textit{upload} iniciou em taxa mais alta e se estabilizou em torno de 13--15 \textit{MB/s}, com uma pausa observada durante uma transferência. A análise dos \textit{logs} registrou conclusão \textit{HTTP} 201 do \textit{WebDAV}, sem erro 5xx, falha fatal ou evidência de problema de armazenamento.
+
+No cenário remoto por \textit{Tailscale}, o \textit{upload} ficou em aproximadamente 6--7 \textit{MB/s} e o \textit{download} em torno de 18 \textit{MB/s} até a interrupção causada pelo limite de dados da rede móvel. Essa interrupção não foi atribuída ao \textit{NAS}.
+
+\begin{table}[H]
+    \centering
+    \legenda[tab:nextcloud]{DESEMPENHO DO \textit{NEXTCLOUD} POR CENÁRIO}
+    \small
+    \renewcommand{\arraystretch}{1.15}
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|c|c|}
+        \hline
+        \textbf{Cenário} & \textbf{\textit{Upload}} & \textbf{\textit{Download}} \\
+        \hline
+        \hline
+        \textit{Wi-Fi} em ambos & $\sim$6--7 \textit{MB/s} & $\sim$10--13 \textit{MB/s} \\
+        \hline
+        \textit{NAS Ethernet} / cliente \textit{Wi-Fi} & $\sim$13--15 \textit{MB/s} & $\sim$26--27 \textit{MB/s} \\
+        \hline
+        Remoto \textit{Tailscale} & $\sim$6--7 \textit{MB/s} & $\sim$18 \textit{MB/s} \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \fonteautoria
+\end{table}
+
+\begin{figure}[H]
+    \centering
+    \legenda[fig:resultados-nextcloud]{DESEMPENHO REPRESENTATIVO DO \textit{NEXTCLOUD}}
+    \fig{width=0.8\linewidth}{resultados-nextcloud}
+    \fonteautoria
+\end{figure}
+
+\section{ACESSO REMOTO POR \textit{TAILSCALE}}
+
+O acesso remoto foi validado utilizando rede móvel no cliente, com a rede \textit{Wi-Fi} local desconectada. O cliente alcançou o \textit{NAS} pelo endereço privado do \textit{Tailscale}, com \textit{SSH}, \textit{SMB} e \textit{Nextcloud} acessíveis. A latência média observada na rede móvel ficou próxima de 80 \textit{ms}, enquanto, com o \textit{PC} na rede local, a latência medida via \textit{Tailscale} foi de cerca de 3 \textit{ms}, com conexão direta pela interface \textit{Ethernet} do \textit{NAS}. O \texttt{tailscale ping} confirmou comunicação direta entre os pares nos cenários validados.
+
+Durante a implantação, o \textit{Tailscale} apresentou incompatibilidade com regras \textit{MARK} do \textit{netfilter}/\textit{iptables} e comportamento inadequado com \textit{nftables}. A solução funcional foi manter o \textit{Tailscale} instalado no \textit{host} com \texttt{netfilter-mode=off}. Após essa alteração, o acesso remoto permaneceu operacional e persistiu após reinicialização.
+
+\section{ESTABILIDADE, RECURSOS, CONSUMO E RECUPERAÇÃO}
+
+O sistema foi reiniciado após a correção dos volumes \textit{Docker} e retornou com \textit{OpenMediaVault}, \textit{Docker}, \textit{Nextcloud}, \textit{MariaDB}, \textit{Redis}, \textit{SMB} e \textit{Tailscale} operacionais. O \textit{Nextcloud} confirmou instalação válida e ausência de necessidade de atualização do banco. Não foram observados erros fatais de aplicação ou falhas de armazenamento durante os testes de transferência considerados.
+
+O servidor dispõe de aproximadamente 3,76 \textit{GiB} de memória \textit{RAM} utilizável. O monitoramento realizado durante os testes não indicou saturação persistente de \textit{CPU} ou memória que impedisse o uso dos serviços avaliados. A temperatura foi acompanhada durante a fase experimental, com refrigeração por dissipador e \textit{cooler} pequeno. Em novembro de 2026, durante cerca de 10 minutos de cópias \textit{SMB} contínuas, a temperatura da \textit{CPU} subiu de 49~$^\circ$C para 70--75~$^\circ$C e atingiu o máximo de 78,1~$^\circ$C em uma única leitura, permanecendo abaixo do limite de referência de 80~$^\circ$C, embora com margem pequena. Não houve evidência registrada de \textit{throttling} que inviabilizasse o uso.
+
+Não foi realizada medição direta do consumo elétrico do conjunto completo por indisponibilidade de medidor de potência. Por esse motivo, o consumo energético não é tratado como resultado experimental do protótipo. Como referência bibliográfica complementar, uma medição independente da \textit{ROCK 4B+} com \textit{Armbian Trixie} em \textit{microSD} reportou aproximadamente 4,3 \textit{W} em repouso e 10,5 \textit{W} sob carga, sem incluir necessariamente o mesmo conjunto de \textit{SSDs}, adaptadores e periféricos utilizado neste trabalho \cite{sbc2026}.
+
+Foi implementado um mecanismo de \textit{backup} automático de configuração com cópia nos dois \textit{SSDs}. O pacote contém configuração do \textit{OMV}, \texttt{fstab}, \textit{Docker Compose}, configuração do \textit{Nextcloud}, \textit{dump} lógico do \textit{MariaDB} e inventário do sistema. A integridade foi verificada com \textit{SHA-256}. O \textit{backup} é executado por \textit{timer} do \texttt{systemd} a cada 10 dias, com retenção das seis versões mais recentes.
+
+\section{ANÁLISE DE CUSTO}
+
+A comparação econômica utiliza, para o protótipo, os valores efetivamente pagos pelos componentes que compõem a plataforma-base. As unidades de armazenamento foram excluídas da comparação porque os \textit{NAS} comerciais analisados também são comercializados sem discos. Dessa forma, comparam-se apenas os custos necessários para disponibilizar a plataforma \textit{NAS}, mantendo o armazenamento fora de ambos os lados.
+
+\begin{table}[H]
+    \centering
+    \legenda[tab:custo]{COMPOSIÇÃO DO CUSTO-BASE DO PROTÓTIPO}
+    \small
+    \renewcommand{\arraystretch}{1.15}
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|c|>{\raggedright\arraybackslash}X|}
+        \hline
+        \textbf{Componente} & \textbf{Estimativa (R\$)} & \textbf{Base de referência} \\
+        \hline
+        \hline
+        \textit{Radxa ROCK 4B+} 4 \textit{GB} & 393,42 & valor efetivamente pago \\
+        \hline
+        2 $\times$ \textit{case}/adaptador \textit{USB} 3.0-\textit{SATA} & 103,56 & R\$ 51,78 por unidade; valor efetivamente pago \\
+        \hline
+        \textit{microSD} 32 \textit{GB} & 49,51 & valor efetivamente pago \\
+        \hline
+        carregador \textit{Motorola} 20 \textit{W} & 78,99 & valor efetivamente pago \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \fonteautoria
+\end{table}
+
+O custo-base efetivamente pago do protótipo foi de R\$ 625,48, composto pela \textit{Radxa ROCK 4B+} 4 \textit{GB} (R\$ 393,42), dois \textit{cases}/adaptadores \textit{USB} 3.0-\textit{SATA} (R\$ 103,56 no total), cartão \textit{microSD} de 32 \textit{GB} (R\$ 49,51) e carregador \textit{Motorola} de 20 \textit{W} (R\$ 78,99). Os dois \textit{SSDs} utilizados no protótipo não foram incluídos. Em consulta realizada em 7 de setembro de 2026, o \textit{Synology DS223j} de duas baias, sem discos, estava anunciado por R\$ 2.355,05 \cite{kabum2026synology}, enquanto o \textit{QNAP TS-233} de duas baias, sem discos, estava anunciado por R\$ 2.331,20 \cite{kabum2026qnap}. Nessas condições, o protótipo apresentou custo aproximadamente 73,4\% inferior ao \textit{Synology} e 73,2\% inferior ao \textit{QNAP}.
+
+Os valores da \textit{ROCK 4B+}, dos dois \textit{cases} \textit{USB-SATA}, do \textit{microSD} e do carregador correspondem aos valores efetivamente pagos pelos autores. Os \textit{SSDs} foram excluídos da comparação. Os preços dos \textit{NAS} comerciais correspondem a anúncios de varejo consultados em 7 de setembro de 2026 e estão sujeitos a variação de mercado. A comparação utiliza modelos de duas baias, compatíveis com a arquitetura final do protótipo, que utiliza dois \textit{SSDs}.
+
+\section{CONFRONTO COM OS CRITÉRIOS DE ANÁLISE}
+
+O Quadro~\ref{quad:confronto} confronta os resultados com os critérios do Quadro~\ref{quad:criterios}, distinguindo o cliente cabeado (fase preliminar) dos cenários com \textit{Wi-Fi} (fase consolidada). Com o cliente cabeado em 1 \textit{GbE}, as taxas de leitura ($\sim$81 \textit{MB/s}) e de escrita ($\sim$76 \textit{MB/s}) do \textit{SMB} superaram os valores de referência de 50 \textit{MB/s} e de 30 \textit{MB/s}. Nos cenários em que o cliente utilizou \textit{Wi-Fi}, as taxas ficaram abaixo dessas referências, inclusive nas medições de novembro de 2026 ($\sim$31 \textit{MB/s} de leitura e $\sim$16 \textit{MB/s} de escrita via \textit{Tailscale}), o que está associado à rede sem fio, já que o \texttt{iperf3} indicou limite de rede de cerca de 274 \textit{Mbit/s} mesmo com o \textit{NAS} em \textit{Ethernet}. O acesso remoto atendeu à referência de 5 \textit{MB/s} em todos os cenários medidos.
+
+\begin{quadro}[H]
+    \centering
+    \legenda[quad:confronto]{RESULTADOS FRENTE AOS CRITÉRIOS DE ANÁLISE}
+    \footnotesize
+    \renewcommand{\arraystretch}{1.1}
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+        \hline
+        \textbf{Critério} & \textbf{Referência} & \textbf{Resultado} & \textbf{Situação} \\
+        \hline
+        \hline
+        Leitura \textit{SMB} & $>$ 50 \textit{MB/s} & Cliente cabeado: $\sim$81 \textit{MB/s} (out/2025). Cliente em \textit{Wi-Fi}: $\sim$25 \textit{MB/s} (\textit{NAS} em \textit{Ethernet}), 11--13 \textit{MB/s} (\textit{Wi-Fi} em ambos) e $\sim$31 \textit{MB/s} via \textit{Tailscale} na rede local (nov/2026) & Atendido com cliente cabeado; não atendido com \textit{Wi-Fi} \\
+        \hline
+        Escrita \textit{SMB} & $>$ 30 \textit{MB/s} & Cliente cabeado: $\sim$76 \textit{MB/s} (out/2025). Cliente em \textit{Wi-Fi}: 18--19 \textit{MB/s} (\textit{NAS} em \textit{Ethernet}), 5--9 \textit{MB/s} (\textit{Wi-Fi} em ambos) e $\sim$16 \textit{MB/s} via \textit{Tailscale} na rede local (nov/2026) & Atendido com cliente cabeado; não atendido com \textit{Wi-Fi} \\
+        \hline
+        Acesso remoto & $>$ 5 \textit{MB/s} & Rede móvel: \textit{SMB} $\sim$26 \textit{MB/s} (leitura) e 6--7 \textit{MB/s} (escrita); \textit{Nextcloud} 6--7 \textit{MB/s} (\textit{upload}) e $\sim$18 \textit{MB/s} (\textit{download}) & Atendido \\
+        \hline
+        Latência remota & $<$ 100 \textit{ms} (\textit{Tailscale}) & $\sim$3 \textit{ms} via \textit{Tailscale} na rede local (nov/2026); $\sim$80 \textit{ms} em rede móvel & Atendido \\
+        \hline
+        Estabilidade & $<$ 80~$^\circ$C, sem quedas & Máximo de 78,1~$^\circ$C (pico isolado) e 70--75~$^\circ$C sustentada em cópias de $\sim$10 min; sem quedas, sem erros fatais e serviços persistentes após reinício & Atendido, com margem térmica pequena; teste de 24 h não repetido \\
+        \hline
+        Consumo & $<$ 15 \textit{W} médio & Não medido; referência de 4,3 \textit{W} (repouso) e 10,5 \textit{W} (carga) & Apenas referência bibliográfica \\
+        \hline
+        Custo-base & $<$ R\$ 800 & R\$ 625,48 & Atendido \\
+        \hline
+        Custo frente a \textit{NAS} comerciais & Inferior & $\sim$73\% inferior & Atendido \\
+        \hline
+        Administrabilidade & Rotina sem terminal & Interfaces \textit{web} (\textit{OMV} e \textit{Nextcloud}) & Atendido \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \fonteautoria
+\end{quadro}
+
+\begin{figure}[H]
+    \centering
+    \legenda[fig:smb-referencia]{DESEMPENHO DO \textit{SMB} FRENTE AOS VALORES DE REFERÊNCIA}
+    \fig{width=0.8\linewidth}{resultados-smb-referencia}
+    \fonte{Autoria própria. Cliente cabeado: testes de out/2025; demais cenários: fase consolidada.}
+\end{figure}

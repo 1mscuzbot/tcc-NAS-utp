@@ -1,0 +1,79 @@
+% Capítulo 6 - Discussão
+
+\chapter{DISCUSSÃO}
+\label{cap:discussao}
+
+\section{DESEMPENHO E GARGALOS}
+
+Os resultados mostram que a rede do cliente exerceu influência direta sobre o desempenho. Quando o \textit{NAS} foi movido do \textit{Wi-Fi} para \textit{Ethernet}, mantendo o cliente em \textit{Wi-Fi}, o \textit{throughput} aumentou de forma expressiva. Com o cliente também cabeado, o \textit{SMB} alcançou cerca de 76--81 \textit{MB/s}, próximo do limite prático de uma rede \textit{Gigabit}, e o \texttt{fio} indicou que o \textit{SSD} entrega taxas muito superiores (364--396 \textit{MiB/s}), o que mostra que o armazenamento e o barramento \textit{USB} 3.0 não foram o gargalo nessa fase. Isso indica que a conexão do servidor por cabo deve ser preferida na implantação definitiva, enquanto o \textit{Wi-Fi} permanece uma alternativa funcional.
+
+O \textit{SMB} apresentou melhor comportamento de leitura do que de escrita em todos os cenários. No cenário híbrido, a leitura média de aproximadamente 25 \textit{MB/s} é coerente com o \textit{throughput} de rede observado e suficiente para transferência de documentos, fotos, \textit{backups} pessoais e reprodução de mídia doméstica. A escrita entre 18--19 \textit{MB/s} é inferior à capacidade nominal de uma rede \textit{Gigabit}, porém esse cenário não representa uma ligação totalmente cabeada entre cliente e servidor; o cliente permaneceu em \textit{Wi-Fi}.
+
+O \textit{Nextcloud} introduz uma camada adicional de processamento \textit{HTTP}, \textit{PHP}, banco de dados e gerenciamento de arquivos; portanto, não é esperado que reproduza exatamente o comportamento do \textit{SMB}. Mesmo assim, o \textit{download} de aproximadamente 26--27 \textit{MB/s} no cenário híbrido mostra que a camada de nuvem privada não se tornou um gargalo impeditivo. A pausa observada em um \textit{upload} foi registrada como evidência experimental, mas os \textit{logs} não demonstraram falha fatal ou erro de armazenamento que permitisse atribuir uma causa específica.
+
+O desempenho remoto dependeu fortemente da conexão móvel. A assimetria e a variação observadas devem ser interpretadas como características do caminho remoto e não como defeito do \textit{NAS}. Ainda assim, as taxas obtidas foram suficientes para navegação, sincronização de documentos, transferência de arquivos e administração remota.
+
+Para contextualizar o desempenho, foram consultados resultados publicados para \textit{NAS} comerciais de duas baias com interface \textit{Gigabit Ethernet}. Em teste independente do \textit{Synology DS223j} com transferência \textit{SMB} sequencial de blocos grandes, o equipamento atingiu aproximadamente 115 \textit{MB/s} de leitura e 115 \textit{MB/s} de escrita, saturando a interface de 1 \textit{GbE} \cite{storagereview2026}. A \textit{QNAP} informa, para o \textit{TS-233} em teste de laboratório com 1 \textit{GbE}, cerca de 114 \textit{MB/s} de \textit{download} e 103 \textit{MB/s} de \textit{upload} em transferência de arquivos do \textit{Windows}; em sua tabela de desempenho \textit{SMB}, o modelo alcança aproximadamente 113 \textit{MB/s} de leitura e 112 \textit{MB/s} de escrita \cite{qnap2026product,qnap2026performance}. Esses valores são superiores aos 25 \textit{MB/s} de leitura e 18--19 \textit{MB/s} de escrita observados no melhor cenário consolidado do protótipo, mas se aproximam dos 76--81 \textit{MB/s} obtidos pelo protótipo com cliente cabeado na fase preliminar.
+
+A comparação, contudo, não constitui um \textit{benchmark} em condições equivalentes. Os resultados comerciais foram obtidos em ambientes controlados com cliente cabeado e interface \textit{Gigabit}, enquanto, na fase consolidada do protótipo, o cliente permaneceu conectado por \textit{Wi-Fi}, e o \texttt{iperf3} mediu aproximadamente 257--258 \textit{Mbit/s} no sentido cliente-\textit{NAS} e 273--274 \textit{Mbit/s} no sentido \textit{NAS}-cliente, um limite de rede significativamente inferior ao teto de 1 \textit{GbE} antes mesmo de se alcançar o limite do armazenamento. Dessa forma, os resultados demonstram menor desempenho bruto que os \textit{NAS} comerciais, mas não permitem atribuir toda a diferença à \textit{ROCK 4B+} ou aos \textit{SSDs}.
+
+Para o recorte deste trabalho, o ponto central não é alcançar a mesma taxa sequencial máxima de um \textit{NAS} comercial, mas verificar se o desempenho obtido é suficiente para o uso doméstico diante do custo-base muito inferior. As taxas observadas atendem com folga atividades como acesso a documentos e fotografias, sincronização de arquivos, cópias de segurança pessoais e reprodução de mídia comum. Assim, os equipamentos comerciais mantêm vantagem em desempenho bruto, integração física e suporte, enquanto o protótipo preserva vantagem em custo, flexibilidade e controle sobre a infraestrutura.
+
+\clearpage
+\section{USABILIDADE E ADMINISTRABILIDADE}
+
+A administrabilidade foi considerada adequada ao objetivo doméstico porque as operações rotineiras podem ser realizadas por interface \textit{web}. O \textit{OpenMediaVault} concentra o gerenciamento do armazenamento e do \textit{SMB}; o \textit{Nextcloud} fornece a interface de nuvem privada; e o \textit{Tailscale} reduz a complexidade do acesso remoto por dispensar exposição direta de portas. O Quadro~\ref{quad:usabilidade} resume a avaliação.
+
+\begin{quadro}[H]
+    \centering
+    \legenda[quad:usabilidade]{AVALIAÇÃO DE USABILIDADE E ADMINISTRABILIDADE}
+    \small
+    \renewcommand{\arraystretch}{1.15}
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+        \hline
+        \textbf{Aspecto} & \textbf{Avaliação} & \textbf{Justificativa} \\
+        \hline
+        \hline
+        Uso cotidiano & Adequado & \textit{OMV} e \textit{Nextcloud} disponíveis por navegador; \textit{SMB} integrado ao sistema cliente \\
+        \hline
+        Administração & Adequada & \textit{OMV} centraliza discos, pastas, usuários e serviço \textit{SMB} \\
+        \hline
+        Acesso remoto & Adequado & \textit{Tailscale} validado por rede móvel sem abertura pública de portas \\
+        \hline
+        Implantação inicial & Complexidade moderada & Exige terminal, \textit{Docker} e atenção a volumes, permissões e rede \\
+        \hline
+        Recuperação & Melhorada & \textit{Backup} automático de configuração e \textit{dump} lógico do \textit{MariaDB} \\
+        \hline
+        Manutenção & Moderada & Terminal reservado a diagnóstico e manutenção excepcional \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \fonteautoria
+\end{quadro}
+
+A principal limitação administrativa encontrada foi a necessidade de diagnóstico em terminal para resolver a incompatibilidade do \textit{Tailscale} com \textit{netfilter} e o erro de \textit{bind mounts} do \textit{Docker}. Esses eventos, entretanto, também constituem evidência experimental relevante: depois de solucionados, o ambiente passou a operar de forma persistente e a rotina diária deixou de depender do terminal.
+
+\section{VIABILIDADE ECONÔMICA}
+
+A comparação econômica indica vantagem expressiva de custo para a solução baseada na \textit{ROCK 4B+}. Excluindo o armazenamento de todos os equipamentos, o custo-base efetivamente pago do protótipo foi de R\$ 625,48, frente a R\$ 2.355,05 do \textit{Synology DS223j} e R\$ 2.331,20 do \textit{QNAP TS-233} nas referências consultadas. Isso representa redução aproximada de 73\% no custo da plataforma-base em relação aos dois \textit{NAS} comerciais analisados.
+
+A comparação deve considerar também diferenças qualitativas. \textit{NAS} comerciais fornecem gabinete integrado, baias \textit{SATA}, suporte do fabricante e ecossistema de \textit{software} mais consolidado. O protótipo, por outro lado, oferece maior flexibilidade, uso de \textit{software} livre, possibilidade de reaproveitamento de componentes e controle direto sobre o ambiente. Assim, o menor custo é acompanhado por maior responsabilidade técnica na implantação.
+
+\section{SEGURANÇA, DISPONIBILIDADE E SOBERANIA DOS DADOS}
+
+A adoção de armazenamento autohospedado não torna o ambiente automaticamente mais seguro nem elimina indisponibilidades. Ela modifica a distribuição de riscos e responsabilidades. Em serviços de nuvem pública, o usuário depende da disponibilidade, das políticas e dos mecanismos de segurança de terceiros. Como exemplos de disponibilidade, o \textit{Google} registrou em seu painel de status um incidente no \textit{Google Drive} iniciado em 18 de agosto de 2026, no qual clientes poderiam enfrentar lentidão \cite{google2026}, e, em outubro de 2026, um incidente no \textit{Google Cloud Storage}, na região \texttt{us-central1}, com erros \textit{HTTP} 503 em operações de gravação em duas janelas, em 8 e 9 de outubro, totalizando 18 horas e 11 minutos \cite{googlecloud2026}.
+
+Incidentes de segurança também ocorreram em serviços consolidados de armazenamento em nuvem. Em setembro de 2026, a \textit{Reuters} reportou que o \textit{Dropbox} informou o comprometimento de aproximadamente 5.000 contas, com acesso não autorizado entre 4 e 21 de agosto, por meio de contas vinculadas a um \textit{Lenovo ID} sem autenticação em dois fatores, e, em parte dos casos, visualização ou \textit{download} de conteúdo \cite{reuters2026}. Em 2024, o ambiente de produção do \textit{Dropbox Sign} foi acessado por meio de uma conta de serviço interna comprometida, expondo endereços de \textit{e-mail}, nomes de usuário, telefones, senhas em formato \textit{hash}, chaves de \textit{API}, \textit{tokens OAuth} e dados de autenticação em múltiplos fatores \cite{malwarebytes2024}. No \textit{Google Drive} para \textit{desktop} em \textit{Windows}, um pesquisador demonstrou, em 2025, que o cache local (\textit{DriveFS}) não isolava adequadamente os arquivos entre perfis de usuário, permitindo carregar o \textit{Drive} de outra pessoa sem reautenticação; segundo o pesquisador, o programa de vulnerabilidades do \textit{Google} respondeu que isso não era considerado uma falha de segurança \cite{cybersecuritynews2025}. No ecossistema \textit{Microsoft}, a própria empresa descreveu, em maio de 2026, o grupo \textit{Storm-2949}, que, por engenharia social sobre a redefinição de senhas, comprometeu identidades de nuvem, baixou milhares de arquivos pelo \textit{OneDrive} e extraiu grandes volumes de dados do armazenamento \textit{Azure} ao longo de vários dias \cite{microsoft2026}; em setembro de 2026, foi relatada uma campanha ativa desde maio, de \textit{phishing} com tema de \textit{passkey}, que sequestra contas e coleta dados do \textit{SharePoint} e do \textit{OneDrive} \cite{thehackernews2026}.
+
+Em comum, esses casos envolvem infraestruturas e contas de provedores que concentram dados de muitos usuários e são alvo de campanhas em escala. Eles não demonstram que a nuvem pública seja inadequada, mas mostram que a segurança e a disponibilidade dependem de decisões e de falhas fora do controle do usuário. Um \textit{NAS} doméstico, ainda que com desempenho bruto inferior, não depende de uma conta de provedor para o acesso aos dados nem é alvo de ataques em massa, o que reduz a superfície de ataque e a dependência de terceiros para a disponibilidade.
+
+No modelo implementado neste trabalho, os dados permanecem sob controle físico do usuário e o acesso remoto ocorre por \textit{Tailscale}, sem exposição direta das portas dos serviços à \textit{internet}. Essa característica reduz a dependência de um provedor de armazenamento e permite maior controle sobre políticas de retenção, usuários e \textit{backups}. Em contrapartida, atualizações, credenciais, \textit{backups}, disponibilidade elétrica, segurança física e manutenção passam a ser responsabilidade do proprietário do \textit{NAS}. Portanto, a principal vantagem de segurança do protótipo deve ser entendida como maior controle e menor exposição pública, e não como segurança absoluta.
+
+No uso fora da residência, inclusive em viagens, a limitação predominante passa a ser a qualidade da conexão de \textit{internet} disponível nas duas extremidades. Nos testes remotos deste trabalho, o acesso por \textit{Tailscale} permitiu utilizar \textit{SSH}, \textit{SMB} e \textit{Nextcloud} por rede móvel, com taxas suficientes para documentos, fotografias, sincronização e transferências pessoais. Assim, embora o protótipo não tenha o mesmo desempenho bruto de um \textit{NAS} comercial em rede local totalmente cabeada, o conjunto \textit{Nextcloud} + \textit{Tailscale} mostrou-se adequado ao objetivo de acesso cotidiano remoto.
+
+\section{LIMITAÇÕES DO ESTUDO}
+\label{sec:limitacoes}
+
+As principais limitações são: ausência de uma medição elétrica direta do conjunto completo; cenário cabeado de ponta a ponta documentado apenas na fase preliminar, realizada com um único \textit{SSD} e com cliente e ferramentas distintos dos da fase consolidada; variabilidade inerente à rede móvel utilizada no cenário remoto e instabilidades da rede sem fio entre as séries de medição realizadas em datas diferentes; temperatura registrada em uma única sessão de cópias de cerca de 10 minutos; e uso de \textit{SSDs} de pequena capacidade, que privilegia a avaliação funcional em vez da análise de custo por \textit{terabyte}, razão pela qual esse indicador não foi calculado. O consumo energético é apresentado apenas como referência bibliográfica e não como resultado do protótipo.
+
+Também não foi repetido um novo ensaio contínuo de 24 horas nesta etapa final. A estabilidade foi sustentada pelo histórico de operação já documentado, pelas transferências realizadas, pela persistência após reinicialização, pelos \textit{logs} e pelo mecanismo de \textit{backup} e recuperação. Essa decisão é explicitada para evitar apresentar um teste não repetido como nova evidência experimental.

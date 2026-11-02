@@ -13,6 +13,10 @@
 % Carrega o estilo institucional do projeto.
 \usepackage{packages/abnt-UTP}
 
+% Carregado após o estilo (e após o \newfloat do memoir) para permitir [H]:
+% figuras, quadros e tabelas ficam exatamente na sequência do texto.
+\usepackage{float}
+
 % Pacote adicional para tabelas comparativas
 \usepackage{tabularx}
 
@@ -46,8 +50,9 @@ como requisito à obtenção do grau de Bacharel.}
 \input{conteudo/textuais/02-fundamentacao}
 \input{conteudo/textuais/03-trabalhos-relacionados}
 \input{conteudo/textuais/04-metodologia}
-\input{conteudo/textuais/05-cronograma}
-\input{conteudo/textuais/06-consideracoes-finais}
+\input{conteudo/textuais/05-resultados}
+\input{conteudo/textuais/06-discussao}
+\input{conteudo/textuais/07-conclusao}
 % Elementos pós-textuais.
 \input{conteudo/pos-textuais/referencias}
 

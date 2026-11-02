@@ -3,7 +3,7 @@
 \chapter{FUNDAMENTAÇÃO TEÓRICA}
 \label{cap:fundamentacao}
 
-Este capítulo fundamenta teoricamente o trabalho, abordando os conceitos de \textit{NAS} doméstico, armazenamento local e nuvem, \textit{Single Board Computers}, \textit{OpenMediaVault}, \textit{Nextcloud}, \textit{Tailscale}, além de apresentar os pontos de medição, limitações esperadas e critérios de análise da solução proposta.
+Este capítulo fundamenta teoricamente o trabalho, abordando os conceitos de \textit{NAS} doméstico, armazenamento local e nuvem, \textit{Single Board Computers}, \textit{OpenMediaVault}, \textit{Nextcloud} e \textit{Tailscale}, além de apresentar os pontos de medição, as limitações esperadas e os critérios de análise da solução.
 
 \section{CONCEITO E FUNÇÃO DE UM \textit{NAS} DOMÉSTICO}
 
@@ -19,54 +19,60 @@ Armazenamento local e nuvem pública não devem ser tratados como categorias exc
 
 \textit{Single Board Computers} são computadores completos concentrados em uma única placa, geralmente com \textit{CPU}, memória, interfaces \textit{USB}, rede e armazenamento de \textit{boot} \cite{upton2016}. Plataformas \textit{ARM} de baixo custo são utilizadas em ensino, automação, \textit{IoT}, prototipagem e servidores leves. Suas vantagens incluem baixo consumo energético, formato compacto e compatibilidade com \textit{Linux} \cite{johnston2018}.
 
-A \textit{Radxa ROCK 4B+} será utilizada como plataforma de bancada para avaliar a viabilidade de um \textit{NAS} doméstico com três \textit{SSDs} externos. A escolha por \textit{SSDs} conectados por adaptador externo \textit{USB-SATA} reduz custo e simplifica a montagem, mas também cria pontos de atenção relacionados a energia, barramento \textit{USB}, aquecimento e estabilidade \cite{radxa2024}.
+A \textit{Radxa ROCK 4B+} utilizada neste trabalho emprega processador da família \textit{Rockchip RK3399}, com seis núcleos \textit{ARM}, até 4 \textit{GB} de memória \textit{LPDDR4}, \textit{USB} 3.0 e \textit{Ethernet Gigabit}, características que permitem sua aplicação como servidor leve \cite{radxa2026}. A escolha por \textit{SSDs} conectados por adaptadores externos \textit{USB-SATA} reduz o custo e simplifica a montagem, mas também cria pontos de atenção relacionados a energia, barramento \textit{USB}, aquecimento e estabilidade.
 
 \section{\textit{OPENMEDIAVAULT}}
 
-O \textit{OpenMediaVault} é apresentado em sua documentação oficial como uma solução completa de \textit{NAS} baseada em \textit{Debian Linux}, com interface \textit{web} de administração e suporte a protocolos como \textit{FTP}, \textit{SMB/CIFS} e \textit{NFS} \cite{openmediavault2026}. No projeto, ele atua como camada de gerenciamento do \textit{NAS}, centralizando montagem de discos, criação de pastas compartilhadas, usuários, permissões e serviços de arquivo.
+O \textit{OpenMediaVault} é apresentado em sua documentação oficial como uma solução completa de \textit{NAS} baseada em \textit{Debian Linux}, com interface \textit{web} de administração e suporte a protocolos como \textit{FTP}, \textit{SMB}/\textit{CIFS} e \textit{NFS} \cite{openmediavault2026}. No projeto, ele atua como camada de gerenciamento do \textit{NAS}, centralizando a montagem de discos, a criação de pastas compartilhadas, usuários, permissões e serviços de arquivo, o que reduz a necessidade de uso do terminal na rotina diária.
 
 \section{\textit{NEXTCLOUD}}
 
-De acordo com a documentação oficial do \textit{Nextcloud}~\cite{nextcloud2026}, é uma plataforma \textit{open source} de sincronização, compartilhamento de arquivos e colaboração \textit{self-hosted}. No contexto do projeto, ele não substitui o \textit{NAS}; ele opera sobre o armazenamento administrado pelo sistema, oferecendo experiência de nuvem privada com interface \textit{web}, clientes \textit{desktop} e móveis, \textit{upload}, \textit{download}, compartilhamento e sincronização.
+De acordo com a documentação oficial \cite{nextcloud2026}, o \textit{Nextcloud} é uma plataforma \textit{open source} de sincronização, compartilhamento de arquivos e colaboração \textit{self-hosted}. No contexto do projeto, ele não substitui o \textit{NAS}; ele opera sobre o armazenamento administrado pelo sistema, oferecendo experiência de nuvem privada com interface \textit{web}, clientes \textit{desktop} e móveis, \textit{upload}, \textit{download}, compartilhamento e sincronização. A aplicação é executada em \textit{Docker}, acompanhada por \textit{MariaDB} como banco de dados e \textit{Redis} para cache e controle de bloqueios de arquivos.
 
 \section{\textit{TAILSCALE} E ACESSO REMOTO SEGURO}
 
-A exposição direta de serviços domésticos à \textit{internet} aumenta a superfície de ataque. O \textit{Tailscale} oferece uma alternativa prática ao criar uma \textit{mesh VPN} baseada em \textit{WireGuard}~\cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao \textit{Nextcloud} e, quando adequado, aos serviços administrativos. Diferentemente de abertura de portas, \textit{DDNS} ou \textit{VPN} tradicional, o \textit{Tailscale} simplifica a configuração ao não exigir infraestrutura de servidor \textit{VPN} dedicada e gerencia chaves automaticamente \cite{tailscalehowworks}.
+A exposição direta de serviços domésticos à \textit{internet} aumenta a superfície de ataque. O \textit{Tailscale} oferece uma alternativa prática ao criar uma \textit{mesh VPN} baseada em \textit{WireGuard} \cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao \textit{Nextcloud} e, quando adequado, aos serviços administrativos. Diferentemente de abertura de portas, \textit{DDNS} ou \textit{VPN} tradicional, o \textit{Tailscale} simplifica a configuração ao não exigir infraestrutura de servidor \textit{VPN} dedicada e ao gerenciar chaves automaticamente \cite{tailscalehowworks}.
+
+No ambiente final, o \textit{Tailscale} é executado diretamente no \textit{host} e não em contêiner. Durante a implantação foi identificada incompatibilidade entre o mecanismo de marcação de pacotes do \textit{Tailscale} e o conjunto de regras \textit{netfilter}/\textit{nftables} do ambiente; a configuração funcional validada utiliza \texttt{netfilter-mode=off}, preservando a conectividade privada entre os dispositivos autorizados.
 
 \section{PONTOS DE MEDIÇÃO E LIMITAÇÕES ESPERADAS}
 
-A adoção de uma \textit{SBC} com \textit{SSDs} conectados por adaptador externo \textit{USB-SATA} impõe limitações que devem ser observadas. Entre elas estão possíveis gargalos no barramento \textit{USB}, variação de qualidade dos adaptadores, demanda elétrica dos \textit{SSDs}, aquecimento, estabilidade sob carga e desempenho inferior ao de \textit{NAS} comerciais com controladores \textit{SATA} dedicados \cite{gamess2025}. Essas limitações não invalidam o projeto; elas definem justamente o que precisa ser medido.
+A adoção de uma \textit{SBC} com \textit{SSDs} conectados por adaptadores externos \textit{USB-SATA} impõe limitações que devem ser observadas. Entre elas estão possíveis gargalos no barramento \textit{USB}, variação de qualidade dos adaptadores, demanda elétrica dos \textit{SSDs}, aquecimento, estabilidade sob carga, variação de desempenho da rede sem fio e desempenho inferior ao de \textit{NAS} comerciais com controladores \textit{SATA} dedicados \cite{gamess2025}. Essas limitações não invalidam o projeto; elas definem justamente o que precisa ser medido.
 
-A Figura~\ref{fig:gargalos} apresenta os pontos de medição e possíveis gargalos da arquitetura.
+A Figura~\ref{fig:gargalos} apresenta os pontos de medição e os possíveis gargalos da arquitetura.
 
-\begin{figure}[!h]
+\begin{figure}[H]
+    \centering
     \legenda[fig:gargalos]{PONTOS DE MEDIÇÃO E POSSÍVEIS GARGALOS}
-    \fig{width=0.85\textwidth}{assets/img/gargalos}
+    \fig{width=0.82\linewidth}{gargalos}
     \fonteautoria
 \end{figure}
 
-Para mitigar os riscos identificados, o Quadro~\ref{quad:riscos} relaciona cada limitação, seu impacto potencial e a estratégia de mitigação prevista.
+Para mitigar os riscos identificados, o Quadro~\ref{quad:limitacoes} relaciona cada limitação, seu impacto potencial e a estratégia de mitigação prevista.
 
-\begin{quadro}[!h]
+\begin{quadro}[H]
     \centering
-    \legenda[quad:riscos]{LIMITAÇÕES, IMPACTOS E MITIGAÇÕES}
+    \legenda[quad:limitacoes]{LIMITAÇÕES, IMPACTOS E MITIGAÇÕES}
     \small
+    \renewcommand{\arraystretch}{1.15}
     \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
         \hline
         \textbf{Limitação} & \textbf{Impacto potencial} & \textbf{Mitigação} \\
         \hline
         \hline
-        Gargalo \textit{USB 3.0} & \textit{Throughput} limitado pelo barramento compartilhado & Medir taxa por disco individualmente e agregada \\
+        Gargalo \textit{USB} 3.0 & \textit{Throughput} limitado pelo barramento e pela porta utilizada & Usar portas \textit{USB} 3.0 e verificar a velocidade negociada (5000 \textit{Mb/s}); medir cada \textit{SSD} individualmente \\
         \hline
-        Qualidade do adaptador \textit{USB-SATA} & Instabilidade ou desconexão & Testar com diferentes adaptadores; documentar falhas \\
+        Qualidade do adaptador \textit{USB-SATA} & Instabilidade ou desconexão & Preferir adaptadores com suporte a \textit{UAS}; documentar falhas \\
         \hline
-        Demanda elétrica dos \textit{SSDs} & Queda de tensão na porta \textit{USB} & Usar \textit{hub} \textit{USB} com alimentação externa \\
+        Demanda elétrica dos \textit{SSDs} & Queda de tensão na porta \textit{USB} & Usar fonte adequada (carregador de 20 \textit{W}) e, se necessário, \textit{hub USB} com alimentação externa \\
         \hline
-        Aquecimento da \textit{SBC} & \textit{Throttling} térmico e queda de desempenho & Monitorar temperatura com \textit{sensors}; usar dissipador \\
+        Aquecimento da \textit{SBC} & \textit{Throttling} térmico e queda de desempenho & Monitorar temperatura com \texttt{sensors}; usar dissipador e \textit{cooler} \\
         \hline
-        Estabilidade sob carga & Queda de serviço ou corrupção de dados & Testes de estresse com \textit{stress-ng} por 24h \\
+        Estabilidade sob carga & Queda de serviço ou corrupção de dados & Acompanhar serviços, \textit{logs} e reinicialização; teste de estresse com \texttt{stress-ng} previsto \\
         \hline
-        Desempenho remoto via \textit{Tailscale} & Latência adicional e menor \textit{throughput} & Comparar \textit{iperf} local vs remoto; medir \textit{overhead} \\
+        Rede sem fio do cliente & Redução do \textit{throughput} medido & Comparar cenários com \textit{Ethernet} e com \textit{Wi-Fi} e isolar a rede com \texttt{iperf3} \\
+        \hline
+        Desempenho remoto via \textit{Tailscale} & Latência adicional e menor \textit{throughput} & Comparar \texttt{iperf3} local e remoto; medir \textit{overhead} \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
@@ -75,73 +81,48 @@ Para mitigar os riscos identificados, o Quadro~\ref{quad:riscos} relaciona cada 
 
 \section{CRITÉRIOS DE ANÁLISE}
 
-Para que a viabilidade técnica seja avaliada de forma objetiva, é necessário definir critérios mensuráveis que permitam concluir se a solução atende ou não aos requisitos domésticos. O Quadro~\ref{quad:criterios} estabelece as métricas, ferramentas e valores de referência que serão adotados.
+Para que a viabilidade técnica seja avaliada de forma objetiva, é necessário definir critérios mensuráveis que permitam concluir se a solução atende ou não aos requisitos domésticos. O Quadro~\ref{quad:criterios} estabelece as métricas, as ferramentas e os valores de referência adotados.
 
-\begin{quadro}[!h]
+Os valores de referência consideram o limite prático de uma rede \textit{Gigabit Ethernet}, desempenhos reportados para \textit{NAS} construídos sobre \textit{Raspberry Pi} em condições semelhantes \cite{gamess2025,homenas2025} e demandas típicas do uso doméstico, como transmissão de vídeo e sincronização de documentos. Os valores de leitura e escrita referem-se ao cenário de referência, com cliente cabeado em 1 \textit{GbE}; os cenários em que o cliente utiliza \textit{Wi-Fi} são analisados separadamente, pois o enlace sem fio passa a ser o fator limitante da medição.
+
+\begin{quadro}[H]
     \centering
     \legenda[quad:criterios]{CRITÉRIOS DE ANÁLISE E MÉTRICAS DE AVALIAÇÃO}
     \small
+    \renewcommand{\arraystretch}{1.15}
     \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
         \hline
         \textbf{Critério} & \textbf{Métrica} & \textbf{Ferramenta} & \textbf{Referência} \\
         \hline
         \hline
-        \textit{Throughput} de leitura local & MB/s (sequencial) & \texttt{dd}, \texttt{hdparm} & $>$ 50 MB/s (\textit{SMB}) \\
+        \textit{Throughput} de leitura local & \textit{MB/s} (sequencial) & \texttt{dd}, \texttt{hdparm}, cópia \textit{SMB} & $>$ 50 \textit{MB/s} (\textit{SMB}, cliente cabeado) \\
         \hline
-        \textit{Throughput} de escrita local & MB/s (sequencial) & \texttt{dd}, \texttt{rsync} & $>$ 30 MB/s (\textit{SMB}) \\
+        \textit{Throughput} de escrita local & \textit{MB/s} (sequencial) & \texttt{dd}, \texttt{fio}, cópia \textit{SMB} & $>$ 30 \textit{MB/s} (\textit{SMB}, cliente cabeado) \\
         \hline
-        \textit{Throughput} de acesso remoto & MB/s & \texttt{iperf3}, \textit{Nextcloud} & $>$ 5 MB/s (\textit{Tailscale}) \\
+        \textit{Throughput} de acesso remoto & \textit{MB/s} & \texttt{iperf3}, \textit{SMB}, \textit{Nextcloud} & $>$ 5 \textit{MB/s} (\textit{Tailscale}) \\
         \hline
-        Estabilidade sob carga & Temperatura (\%), quedas & \texttt{sensors}, \texttt{stress-ng} & $<$ 80\,\textdegree C, sem quedas \\
+        Estabilidade sob carga & Temperatura, quedas e persistência & \texttt{sensors}, \textit{logs}, reinicialização & $<$ 80~$^\circ$C, sem quedas, serviços persistentes \\
         \hline
-        Consumo energético & Watts (\textit{idle}/carga) & Medidor \textit{USB kill-a-watt} & $<$ 15 W médio \\
+        Consumo energético & \textit{Watts} (ocioso/carga) & Medidor de tomada ou referência bibliográfica & $<$ 15 \textit{W} médio \\
         \hline
-        Latência de acesso remoto & ms (\textit{ping}) & \texttt{ping}, \texttt{mtr} & $<$ 50 ms (\textit{Tailscale}) \\
+        Latência de acesso remoto & \textit{ms} (\textit{ping}) & \texttt{ping}, \texttt{tailscale ping} & $<$ 100 \textit{ms} (\textit{Tailscale}) \\
         \hline
-        Custo total & R\$ & Planilha de custos & $<$ R\$ 800 \\
+        Custo-base & R\$ & Planilha de custos & $<$ R\$ 800 (sem unidades de armazenamento) \\
         \hline
-        Custo por TB & R\$/TB & Cálculo direto & $<$ R\$ 600/TB \\
+        Custo frente a \textit{NAS} comerciais & \% de redução & Comparação de preços & Inferior ao de \textit{NAS} comerciais de duas baias \\
+        \hline
+        Administrabilidade & Operações sem terminal & Observação de uso & Rotina diária pelas interfaces \textit{web} \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
     \fonteautoria
 \end{quadro}
 
-Os valores de referência adotados consideram o limite prático de uma rede \textit{Gigabit Ethernet}, desempenhos reportados para \textit{NAS} construídos sobre \textit{Raspberry Pi} em condições semelhantes \cite{gamess2025,homenas2025} e demandas típicas do uso doméstico, como transmissão de vídeo e sincronização de documentos.
+O fluxograma da Figura~\ref{fig:fluxograma} ilustra o processo de avaliação, desde a montagem até a conclusão.
 
-O fluxograma da Figura~\ref{fig:fluxo-avaliacao} ilustra o processo de avaliação, desde a montagem até a conclusão.
-
-\begin{figure}[!h]
+\begin{figure}[H]
     \centering
-    \legenda[fig:fluxo-avaliacao]{FLUXOGRAMA DO PROCESSO DE AVALIAÇÃO}
-    \begin{tikzpicture}[node distance=7cm, auto, every node/.style={font=\small}]
-        \tikzstyle{terminator} = [rectangle, draw=black!80, fill=gray!50, ultra thick, text width=5cm, text centered, rounded corners=0.5cm, minimum height=1cm]
-        \tikzstyle{block} = [rectangle, draw=black!50, fill=blue!10, thick, text width=5cm, text centered, minimum height=2cm]
-        \tikzstyle{decision} = [diamond, draw=yellow!50, fill=yellow!10, ultra thick, text width=4cm, text centered, aspect=1.5]
-        \tikzstyle{arrow} = [thick, ->, >=stealth]
-
-        \node [terminator] (inicio) {Início};
-        \node [block, right of=inicio] (montagem) {Montagem física:\\\textit{SBC} + 3 \textit{SSDs} + Rede};
-        \node [block, below of=montagem, node distance=3cm] (os) {Instalação do SO:\\\textit{Armbian/Debian minimal}};
-        \node [block, left of=os] (omv) {Configuração \textit{OMV}:\\Discos, pastas, \textit{SMB}};
-        \node [block, below of=omv, node distance=3cm] (nextcloud) {Implantação \textit{Nextcloud}\\\textit{Docker} + banco de dados};
-        \node [block, right of=nextcloud] (tailscale) {Configuração \textit{Tailscale}\\\textit{Mesh VPN} + autenticação};
-
-        \node [block, below of=tailscale, node distance=3cm, draw=black!50, fill=orange!20] (testes) {Testes locais e remotos};
-        \node [block, left of=testes, draw=black!50, fill=cyan!20] (analise) {Análise dos resultados\\Métricas vs critérios};
-        \node [decision, below of=analise, node distance=4cm] (conclusao) {Conclusão\\Viável ou não?};
-        \node [terminator, right of=conclusao] (fim) {Fim};
-
-        \draw [ultra thick, ->] (inicio) -- (montagem);
-        \draw [ultra thick, ->] (montagem) -- (os);
-        \draw [ultra thick, ->] (os) -- (omv);
-        \draw [ultra thick, ->] (omv) -- (nextcloud);
-        \draw [ultra thick, ->] (nextcloud) -- (tailscale);
-        \draw [ultra thick, ->] (tailscale) -- (testes);
-        \draw [ultra thick, ->] (testes) -- (analise);
-        \draw [ultra thick, ->] (analise) -- (conclusao);
-        \draw [ultra thick, ->] (conclusao) -- node {Sim} (fim);
-        \draw [ultra thick, ->] (conclusao.west) -- ++(-1.5,0) node[midway, above] {Não} |- (omv.west);
-    \end{tikzpicture}
+    \legenda[fig:fluxograma]{FLUXOGRAMA DO PROCESSO DE AVALIAÇÃO}
+    \fig{width=0.72\linewidth}{fluxograma-avaliacao}
     \fonteautoria
 \end{figure}

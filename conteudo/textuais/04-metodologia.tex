@@ -3,128 +3,162 @@
 \chapter{METODOLOGIA}
 \label{cap:metodologia}
 
-Este capítulo descreve a metodologia adotada para a montagem, configuração e teste da solução proposta, detalhando os procedimentos, ferramentas e cenários de avaliação.
+Este capítulo descreve a metodologia adotada para a montagem, a configuração e o teste da solução, detalhando os procedimentos, as ferramentas e os cenários de avaliação. A abordagem é experimental: o protótipo foi construído com componentes reais e submetido a medições em cenários representativos do uso doméstico.
 
 \section{MONTAGEM DA INFRAESTRUTURA}
 
 A montagem física compreende os seguintes componentes:
-
 \begin{alineas}
-    \item \textit{Radxa ROCK 4B+} como placa principal;
-    \item Fonte de alimentação \textit{USB-C} 5V/3A compatível;
-    \item Cabo de rede \textit{Gigabit Ethernet};
-    \item Três \textit{SSDs SATA} de 2,5 polegadas (480 \textit{GB} cada);
-    \item Três adaptadores \textit{USB 3.0} para \textit{SATA};
-    \item \textit{Hub USB 3.0} com alimentação externa;
-    \item Cartão \textit{microSD} (32 \textit{GB}, Classe 10) para sistema operacional;
-    \item Dissipador passivo e ventilação para refrigeração.
+    \item \textit{Radxa ROCK 4B+} (4 \textit{GB}) como placa principal;
+    \item carregador \textit{Motorola} de 20 \textit{W} para alimentação da placa;
+    \item cabo de rede \textit{Gigabit Ethernet} (categoria 6);
+    \item dois \textit{SSDs SATA} de 2,5 polegadas, de aproximadamente 240 \textit{GB} cada;
+    \item dois \textit{cases}/adaptadores \textit{USB} 3.0 para \textit{SATA}, conectados diretamente às portas \textit{USB} 3.0 da placa;
+    \item cartão \textit{microSD} de 32 \textit{GB} para o sistema operacional;
+    \item \textit{cooler} pequeno e dissipador para refrigeração da placa.
 \end{alineas}
 
-A ordem de montagem segue o fluxo: conexão dos adaptadores \textit{USB-SATA} ao \textit{hub USB}, conexão do \textit{hub} à \textit{ROCK 4B+}, inserção dos \textit{SSDs} nos adaptadores, conexão do cabo de rede e da fonte de alimentação.
+A ordem de montagem segue o fluxo: inserção dos \textit{SSDs} nos adaptadores, conexão dos adaptadores às portas \textit{USB} 3.0 (azuis) da \textit{ROCK 4B+}, inserção do cartão \textit{microSD} com o sistema, conexão do cabo de rede e, por último, da fonte de alimentação. Durante a validação preliminar verificou-se que o uso de porta ou cabo \textit{USB} 2.0 fazia o dispositivo ser reconhecido a 480 \textit{Mb/s}; após a troca, o dispositivo passou a negociar 5000 \textit{Mb/s} com o \textit{driver UAS}, condição adotada como padrão.
 
-\section{INSTALAÇÃO E CONFIGURAÇÃO DO SOFTWARE}
+\section{ARQUITETURA FINAL DO PROTÓTIPO}
 
-A implementação prática deste projeto consiste na construção dos \textit{scripts} de automação, na elaboração dos arquivos de orquestração (\textit{Docker Compose YML}) e na configuração avançada via terminal de cada componente da solução. Essa etapa constitui o código e a aplicação prática gerados pelo projeto, conforme exigido pelo regulamento do curso.
+A arquitetura final utiliza uma \textit{Radxa ROCK 4B+}, sistema base instalado em cartão \textit{microSD} e dois \textit{SSDs SATA}. Um dos \textit{SSDs} é utilizado principalmente pelo compartilhamento \textit{SMB} de dados. O segundo concentra os diretórios persistentes do \textit{Nextcloud}, do \textit{MariaDB} e do \textit{Redis}. O \textit{OpenMediaVault} permanece como camada principal de administração do \textit{NAS}. O Quadro~\ref{quad:arquitetura-final} resume a configuração final.
 
-O processo de instalação segue as etapas descritas no Quadro~\ref{quad:instalacao}.
-
-\begin{quadro}[!h]
+\begin{quadro}[H]
     \centering
-    \legenda[quad:instalacao]{ETAPAS DE INSTALAÇÃO E CONFIGURAÇÃO}
+    \legenda[quad:arquitetura-final]{CONFIGURAÇÃO FINAL DO PROTÓTIPO}
     \small
-    \begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash}X|}
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
         \hline
-        \textbf{Etapa} & \textbf{Descrição} \\
+        \textbf{Elemento} & \textbf{Configuração final} \\
         \hline
         \hline
-        1 & Gravação da imagem \textit{Armbian} \textit{minimal} no cartão microSD com \textit{Raspberry Pi Imager} \\
+        Plataforma & \textit{Radxa ROCK 4B+} (\textit{RK3399}, 4 \textit{GB}) \\
         \hline
-         2 & Inicialização da \textit{ROCK 4B+} e configuração de rede (\textit{IP} fixo) \\
+        Sistema base & \textit{Armbian}/\textit{Debian Trixie} arm64 em \textit{microSD} \\
         \hline
-         3 & Atualização do sistema com \texttt{apt update \&\& apt upgrade} \\
+        Armazenamento & 2 \textit{SSDs SATA} de aproximadamente 240 \textit{GB}, via \textit{USB-SATA} \\
         \hline
-         4 & Instalação do \textit{OpenMediaVault} via \textit{script} oficial \\
+        Administração & \textit{OpenMediaVault} \\
         \hline
-         5 & Configuração dos discos: formatação \textit{ext4}, montagem, pastas compartilhadas \\
+        Compartilhamento local & \textit{SMB} \\
         \hline
-         6 & Instalação do \textit{Docker} e \textit{Docker Compose} \\
+        Nuvem privada & \textit{Nextcloud} em \textit{Docker} (porta 8081) \\
         \hline
-         7 & Implantação do \textit{Nextcloud} via \textit{Compose} (\textit{PHP}, \textit{MariaDB}, \textit{Redis}) \\
+        Banco / cache & \textit{MariaDB} 11 / \textit{Redis} 7-alpine \\
         \hline
-         8 & Configuração do \textit{Tailscale} via \textit{Compose} ou pacote oficial \\
+        Acesso remoto & \textit{Tailscale} instalado no \textit{host} \\
         \hline
-         9 & Criação de usuários e permissões no \textit{OMV} e \textit{Nextcloud} \\
+        Compatibilidade \textit{Tailscale} & \texttt{netfilter-mode=off} \\
         \hline
-        10 & Configuração de compartilhamento \textit{SMB/CIFS} para rede local \\
+        Rotina de \textit{backup} & \textit{Backup} de configuração automático a cada 10 dias, retenção de 6 cópias \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
     \fonteautoria
 \end{quadro}
 
+\section{INSTALAÇÃO E CONFIGURAÇÃO DO SOFTWARE}
+
+A implementação prática do projeto consiste na construção dos \textit{scripts} de automação, na elaboração dos arquivos de orquestração (\textit{Docker Compose YML}) e na configuração via terminal de cada componente da solução. Essa etapa constitui o código e a aplicação prática gerados pelo projeto. A implantação foi realizada e configurada para persistir após reinicialização: o sistema operacional reside no \textit{microSD}, enquanto os dados e os diretórios persistentes dos serviços residem nos \textit{SSDs}, e \textit{Docker}, \texttt{tailscaled} e os componentes principais do \textit{NAS} são habilitados para inicialização automática. O processo de instalação segue as etapas descritas no Quadro~\ref{quad:etapas}.
+
+\begin{quadro}[H]
+    \centering
+    \legenda[quad:etapas]{ETAPAS DE INSTALAÇÃO E CONFIGURAÇÃO}
+    \small
+    \begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash}X|}
+        \hline
+        \textbf{Etapa} & \textbf{Descrição} \\
+        \hline
+        \hline
+        1 & Gravação da imagem \textit{Armbian}/\textit{Debian} no cartão \textit{microSD} \\
+        \hline
+        2 & Inicialização da \textit{ROCK 4B+} e configuração de rede (\textit{IP} fixo) \\
+        \hline
+        3 & Atualização do sistema com \texttt{apt update} e \texttt{apt upgrade} \\
+        \hline
+        4 & Instalação do \textit{OpenMediaVault} por \textit{script} oficial \\
+        \hline
+        5 & Configuração dos discos: formatação \texttt{ext4}, montagem por \textit{UUID} e pastas compartilhadas \\
+        \hline
+        6 & Instalação do \textit{Docker} e do \textit{Docker Compose} \\
+        \hline
+        7 & Implantação do \textit{Nextcloud} via \textit{Compose} (imagens \texttt{nextcloud:apache}, \texttt{mariadb:11} e \texttt{redis:7-alpine}) \\
+        \hline
+        8 & Instalação do \textit{Tailscale} no \textit{host} e ajuste \texttt{netfilter-mode=off} \\
+        \hline
+        9 & Criação de usuários e permissões no \textit{OMV} e no \textit{Nextcloud} \\
+        \hline
+        10 & Configuração do compartilhamento \textit{SMB}/\textit{CIFS} para a rede local \\
+        \hline
+        11 & \textit{Backup} automático de configuração por \textit{timer} do \texttt{systemd}, com verificação \textit{SHA-256} \\
+        \hline
+    \end{tabularx}
+    \vspace{0.2cm}
+    \fonteautoria
+\end{quadro}
+
+O uso cotidiano é realizado preferencialmente pelas interfaces \textit{web} do \textit{OMV} e do \textit{Nextcloud}; o terminal é reservado à implantação, ao diagnóstico e à manutenção excepcional. Durante a validação foi detectado que os \textit{bind mounts} do \textit{Nextcloud} e do \textit{MariaDB} apontavam para um \textit{UUID} antigo, fazendo com que parte dos dados fosse gravada no \textit{microSD}. O problema foi corrigido por migração controlada para o \textit{SSD} correto, com \textit{dump} lógico do banco de dados, modo de manutenção, cópia preservando atributos e recriação dos contêineres. Após a migração, os \textit{mounts} foram conferidos e o sistema reiniciado com sucesso.
+
 \section{PROCEDIMENTOS DE TESTE}
 
-Os testes serão conduzidos em dois cenários: rede local (\textit{Gigabit Ethernet} cabeada) e acesso remoto (via \textit{Tailscale}). Cada teste será executado três vezes para garantir reprodutibilidade, e o valor médio será registrado.
+Os testes foram conduzidos em cenários de rede local (\textit{Ethernet} e \textit{Wi-Fi}) e de acesso remoto (via \textit{Tailscale}). Cada medição foi repetida três vezes e o valor médio foi adotado como valor representativo de cada cenário. A repetição reduz a influência de oscilações pontuais, como variações da rede sem fio, e, como a variação entre as repetições foi pequena, a média foi mantida como medida de síntese. Quando uma faixa é apresentada nos resultados (por exemplo, 18--19 \textit{MB/s}), ela indica os valores mínimo e máximo obtidos entre as repetições. Em cada cenário foram executadas medições de rede com \texttt{iperf3} e transferências por \textit{SMB} e por \textit{Nextcloud}.
 
 \subsection{Teste de \textit{Throughput} Local}
 
-O \textit{throughput} de leitura e escrita será medido com as seguintes ferramentas e comandos:
-
+O \textit{throughput} de rede, de disco e de acesso aos serviços foi medido com as seguintes ferramentas e procedimentos:
 \begin{itemize}
-    \item \textbf{dd}: Escrita sequencial (\texttt{dd if=/dev/zero of=/mnt/teste/test.img bs=1M count=1024}) e leitura (\texttt{dd if=/mnt/teste/test.img of=/dev/null bs=1M});
-    \item \textbf{iperf3}: Medição de \textit{throughput} de rede (\texttt{iperf3 -c <ip> -t 30});
-    \item \textbf{rsync}: Transferência de arquivos grandes (1 \textit{GB}) entre máquina cliente e \textit{NAS};
-    \item \textbf{hdparm}: Leitura de \textit{cache} e \textit{buffer} do disco (\texttt{hdparm -Tt /dev/sda}).
+    \item \texttt{iperf3}: medição de \textit{throughput} de rede \textit{TCP}, com o \textit{NAS} como servidor (\texttt{iperf3 -s}) e o cliente executando \texttt{iperf3 -c <ip>}, nos sentidos cliente-\textit{NAS} e \textit{NAS}-cliente (opção \texttt{-R});
+    \item \texttt{fio}: leitura e escrita sequenciais no próprio \textit{NAS}, com blocos de 1 \textit{MiB} e E/S direta (\texttt{--direct=1}), para verificar se o \textit{SSD} constitui gargalo;
+    \item \texttt{dd}: escrita (\texttt{oflag=direct}, \texttt{conv=fdatasync}) e leitura (\texttt{iflag=direct}) de arquivo grande, evitando a influência de cache;
+    \item \texttt{hdparm}: leitura de cache e de \textit{buffer} do disco (\texttt{hdparm -Tt});
+    \item cópia \textit{SMB}: transferência de arquivo grande (de 1 \textit{GB} a cerca de 2,9 \textit{GB}) entre o cliente e o compartilhamento do \textit{NAS}, registrando tempo e taxa de escrita e de leitura;
+    \item \textit{Nextcloud}: \textit{upload} e \textit{download} de arquivo grande pela interface \textit{web}, com registro da taxa observada e análise dos \textit{logs} do servidor.
 \end{itemize}
 
 \subsection{Teste de \textit{Throughput} Remoto}
 
-O acesso remoto será testado através do \textit{Tailscale}, com os mesmos procedimentos do teste local, porém utilizando o endereço \textit{IP} atribuído pela malha \textit{VPN}. A latência será medida com \texttt{ping} e \texttt{mtr}.
+O acesso remoto foi testado por meio do \textit{Tailscale}, com os mesmos procedimentos do teste local, porém utilizando o endereço privado atribuído pela malha. Para caracterizar o acesso fora da residência, o cliente foi conectado por rede móvel, com a rede \textit{Wi-Fi} local desconectada. A latência foi medida com \texttt{ping}, e o tipo de caminho (direto ou intermediado) foi verificado com \texttt{tailscale ping}.
 
 \subsection{Teste de Estabilidade}
 
-A estabilidade será avaliada submetendo o sistema a carga contínua com \texttt{stress-ng} por 24 horas, monitorando temperatura (\texttt{sensors}), uso de \textit{CPU} e \textit{RAM} (\texttt{htop}), e verificação de quedas de serviço.
+A estabilidade foi avaliada pelo funcionamento continuado do ambiente, pelas transferências repetidas, pela observação de \textit{logs} de aplicação e de armazenamento, pelo uso de \textit{CPU} e de \textit{RAM} (\texttt{htop} e \texttt{docker stats}), pela persistência dos serviços após reinicialização e pela capacidade de restauração das configurações por meio dos \textit{backups}. O teste de estresse contínuo de 24 horas com \texttt{stress-ng}, previsto como procedimento de referência, não foi repetido na etapa final, o que é explicitado na Seção~\ref{sec:limitacoes}.
 
 \subsection{Teste de Consumo Energético}
 
-O consumo elétrico do conjunto completo (\textit{SBC}, \textit{hub USB} e \textit{SSDs}) será medido na tomada, em dois estados: \textit{idle}, sem acesso aos discos por dez minutos, e sob carga, durante o teste de estresse. Essa abordagem acompanha práticas de avaliação de plataformas \textit{SBC} reportadas na literatura \cite{johnston2018}. Os valores obtidos serão confrontados com o critério do Quadro~\ref{quad:criterios} e utilizados na comparação econômica com \textit{NAS} comerciais de entrada.
+Previu-se medir o consumo elétrico do conjunto completo (\textit{SBC}, adaptadores e \textit{SSDs}) na tomada, em dois estados: ocioso e sob carga. Como não havia medidor de potência disponível, o consumo não foi tratado como resultado experimental; adotou-se, como referência complementar, a medição independente da mesma placa reportada na literatura técnica \cite{sbc2026}, prática compatível com a avaliação de plataformas \textit{SBC} reportada em trabalhos relacionados \cite{johnston2018}.
 
 \subsection{Monitoramento Térmico}
 
-A temperatura da \textit{SBC} será registrada a cada 5 minutos durante os testes de estresse, utilizando \texttt{watch -n 300 sensors >> termal.log}. O limite de segurança adotado é 80\,\textdegree C.
+A temperatura da \textit{SBC} foi acompanhada durante os testes com o utilitário \texttt{sensors}, e a refrigeração foi feita com dissipador e um \textit{cooler} pequeno dedicado à placa. O limite de segurança adotado como referência é 80~$^\circ$C, e o objetivo do acompanhamento foi verificar a ausência de \textit{throttling} térmico que inviabilizasse o uso.
 
 \section{CENÁRIOS DE TESTE}
 
-O Quadro~\ref{quad:cenarios} resume os cenários de teste previstos.
+Os testes foram organizados em cenários representativos do uso doméstico. O cenário C1 corresponde a uma fase preliminar, realizada com a rede cabeada de ponta a ponta, o cenário C5 a testes complementares e os demais à fase consolidada. O Quadro~\ref{quad:cenarios} resume os cenários.
 
-\begin{quadro}[!h]
+\begin{quadro}[H]
     \centering
     \legenda[quad:cenarios]{CENÁRIOS DE TESTE}
     \small
-    \begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash}X|c|c|}
+    \renewcommand{\arraystretch}{1.15}
+    \begin{tabularx}{\linewidth}{|c|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
         \hline
-        \textbf{Cenário} & \textbf{Descrição} & \textbf{Acesso} & \textbf{Protocolo} \\
+        \textbf{Cenário} & \textbf{Topologia} & \textbf{Fase} & \textbf{Métricas principais} \\
         \hline
         \hline
-        C1 & Leitura sequencial local (1 \textit{SSD}) & Local & \textit{SMB} \\
+        C1 & \textit{NAS Ethernet} + cliente \textit{Ethernet} (1 \textit{GbE}) & Preliminar & \texttt{iperf3}, \texttt{fio}, \textit{SMB} \\
         \hline
-        C2 & Escrita sequencial local (1 \textit{SSD}) & Local & \textit{SMB} \\
+        C2 & \textit{NAS Wi-Fi} + cliente \textit{Wi-Fi} & Consolidada & \texttt{iperf3}, \textit{SMB}, \textit{Nextcloud} \\
         \hline
-        C3 & Leitura simultânea (3 \textit{SSDs}) & Local & \textit{SMB} \\
+        C3 & \textit{NAS Ethernet} + cliente \textit{Wi-Fi} & Consolidada & \texttt{iperf3}, \textit{SMB}, \textit{Nextcloud} \\
         \hline
-        C4 & Escrita simultânea (3 \textit{SSDs}) & Local & \textit{SMB} \\
+        C4 & \textit{Tailscale} + rede móvel no cliente & Consolidada & \texttt{ping}, \texttt{iperf3}, \textit{SMB}, \textit{Nextcloud} \\
         \hline
-        C5 & \textit{Upload Nextcloud} (100 \textit{MB}) & Local & \textit{HTTPS} \\
+        C5 & \textit{NAS Ethernet} + cliente \textit{Wi-Fi}, com \textit{Tailscale} em conexão direta & Complementar & \texttt{ping}, \texttt{iperf3}, \textit{SMB}, temperatura \\
         \hline
-        C6 & \textit{Download Nextcloud} (100 \textit{MB}) & Local & \textit{HTTPS} \\
+        C6 & Persistência e reinicialização & Consolidada & Serviços, \textit{mounts}, acesso \textit{web} e remoto \\
         \hline
-        C7 & Leitura sequencial remota & \textit{Tailscale} & \textit{SMB} \\
-        \hline
-        C8 & Escrita sequencial remota & \textit{Tailscale} & \textit{SMB} \\
-        \hline
-        C9 & \textit{Upload Nextcloud} remoto & \textit{Tailscale} + \textit{HTTPS} & \textit{HTTPS} \\
-        \hline
-        C10 & Estresse 24h (\textit{CPU} + disco + rede) & Local & Misto \\
+        C7 & Recuperação e administrabilidade & Consolidada & \textit{Backup} de configuração, integridade, agendamento \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
@@ -133,11 +167,9 @@ O Quadro~\ref{quad:cenarios} resume os cenários de teste previstos.
 
 \section{FERRAMENTAS DE IMPLEMENTAÇÃO E TESTES}
 
-As ferramentas de implementação compreendem os \textit{softwares} base que compõem a infraestrutura da solução: \textit{Armbian} (sistema operacional de base), \textit{OpenMediaVault} (administração do \textit{NAS}), \textit{Docker} e \textit{Docker Compose} (orquestração de contêineres), \textit{Nextcloud} (nuvem privada) e \textit{Tailscale} (acesso remoto seguro). A configuração desses componentes é realizada por meio de \textit{scripts} de automação, arquivos \textit{YML} de orquestração e comandos no terminal, constituindo a aplicação prática deste projeto.
+As ferramentas de implementação compreendem os \textit{softwares} base que compõem a infraestrutura da solução: \textit{Armbian} (sistema operacional de base), \textit{OpenMediaVault} (administração do \textit{NAS}), \textit{Docker} e \textit{Docker Compose} (orquestração de contêineres), \textit{Nextcloud} (nuvem privada) e \textit{Tailscale} (acesso remoto seguro). A configuração desses componentes é realizada por meio de \textit{scripts} de automação, arquivos \textit{YML} de orquestração e comandos no terminal, constituindo a aplicação prática deste projeto. O Quadro~\ref{quad:ferramentas} lista as ferramentas de teste e monitoramento empregadas e suas finalidades.
 
-O Quadro~\ref{quad:ferramentas} lista as ferramentas de teste e monitoramento que serão empregadas na fase experimental e suas respectivas finalidades.
-
-\begin{quadro}[!h]
+\begin{quadro}[H]
     \centering
     \legenda[quad:ferramentas]{FERRAMENTAS DE TESTE E MONITORAMENTO}
     \small
@@ -146,23 +178,25 @@ O Quadro~\ref{quad:ferramentas} lista as ferramentas de teste e monitoramento qu
         \textbf{Ferramenta} & \textbf{Finalidade} \\
         \hline
         \hline
-        \texttt{dd} & Medição de \textit{throughput} de leitura/escrita sequencial em disco \\
+        \texttt{iperf3} & Medição de \textit{throughput} de rede \textit{TCP}/\textit{UDP} \\
         \hline
-        \texttt{hdparm} & Medição de velocidade de \textit{cache} e \textit{buffer} do disco \\
+        \texttt{fio} & Medição de \textit{throughput} de leitura e escrita sequencial em disco, com E/S direta \\
         \hline
-        \texttt{iperf3} & Medição de \textit{throughput} de rede \textit{TCP/UDP} \\
+        \texttt{dd} & Escrita e leitura sequencial de arquivos grandes \\
         \hline
-        \texttt{rsync} & Transferência de arquivos com medição de taxa \\
+        \texttt{hdparm} & Medição de velocidade de cache e \textit{buffer} do disco \\
         \hline
-        \texttt{stress-ng} & Geração de carga computacional para testes de estresse \\
+        Cópia \textit{SMB} (\textit{Robocopy}, \texttt{Copy-Item}, \texttt{mount.cifs}) & Transferência de arquivos entre cliente e \textit{NAS} com medição de tempo e taxa \\
+        \hline
+        \texttt{ping} e \texttt{tailscale ping} & Medição de latência, perda de pacotes e tipo de caminho \\
         \hline
         \texttt{sensors} & Monitoramento de temperatura da \textit{SBC} \\
         \hline
-        \texttt{htop} & Monitoramento de \textit{CPU}, \textit{RAM} e processos em tempo real \\
+        \texttt{htop} e \texttt{docker stats} & Monitoramento de \textit{CPU}, \textit{RAM} e processos em tempo real \\
         \hline
-        \texttt{ping} / \texttt{mtr} & Medição de latência e perda de pacotes \\
+        \texttt{sha256sum} & Verificação de integridade dos \textit{backups} \\
         \hline
-        Medidor de energia & Consumo elétrico (\textit{idle} e sob carga) \\
+        \texttt{stress-ng} & Geração de carga para teste de estresse (previsto) \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}

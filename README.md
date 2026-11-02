@@ -8,7 +8,7 @@ Universidade Tuiuti do Paraná (UTP)
 
 ---
 
-Pré-projeto que analisa a viabilidade técnica de um servidor NAS doméstico de baixo custo baseado em Radxa ROCK 4B+, OpenMediaVault, Nextcloud e Tailscale.
+Trabalho que analisa a viabilidade técnica de um servidor NAS doméstico de baixo custo baseado em Radxa ROCK 4B+, OpenMediaVault, Nextcloud e Tailscale.
 
 ## Estrutura do Projeto
 
@@ -17,9 +17,11 @@ Pré-projeto que analisa a viabilidade técnica de um servidor NAS doméstico de
 ├── Makefile                              # Compilação e limpeza
 ├── trabalho.tex                          # Arquivo principal
 ├── assets/img/                           # Imagens e diagramas
-│   ├── arquitetura.png
-│   ├── fluxos.png
-│   └── gargalos.png
+│   ├── arquitetura-final.png
+│   ├── resultados-rede.png
+│   ├── resultados-smb.png
+│   ├── resultados-nextcloud.png
+│   └── resultados-custo.png
 ├── conteudo/
 │   ├── pre-textuais/                     # Resumo, listas, siglas, sumário
 │   │   ├── resumo.tex
@@ -29,7 +31,11 @@ Pré-projeto que analisa a viabilidade técnica de um servidor NAS doméstico de
 │   ├── textuais/                         # Capítulos
 │   │   ├── 01-introducao.tex
 │   │   ├── 02-fundamentacao.tex
-│   │   └── 03-trabalhos-relacionados.tex
+│   │   ├── 03-trabalhos-relacionados.tex
+│   │   ├── 04-metodologia.tex
+│   │   ├── 05-resultados.tex
+│   │   ├── 06-discussao.tex
+│   │   └── 07-conclusao.tex
 │   └── pos-textuais/                     # Referências
 │       └── referencias.tex
 ├── packages/

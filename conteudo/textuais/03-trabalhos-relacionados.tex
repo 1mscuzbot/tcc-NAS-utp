@@ -3,11 +3,11 @@
 \chapter{TRABALHOS RELACIONADOS}
 \label{cap:trabalhos-relacionados}
 
-Este capítulo apresenta uma análise de trabalhos relacionados que fundamentam a proposta deste projeto, abordando implementações de \textit{NAS} com \textit{Single Board Computers}, avaliações de desempenho e limitações, além de soluções de nuvem privada e acesso remoto. A seleção contempla referências diretamente pertinentes ao recorte do trabalho.
+Este capítulo apresenta uma análise de trabalhos relacionados que fundamentam a proposta, abordando implementações de \textit{NAS} com \textit{Single Board Computers}, avaliações de desempenho e limitações, além de soluções de nuvem privada e acesso remoto. A seleção contempla referências diretamente pertinentes ao recorte do trabalho.
 
 \section{ENHANCING DATA STORAGE AND ACCESS IN CSN LABS WITH RASPBERRY PI 3B+ AND OPEN MEDIA VAULT NAS}
 
-\citeonline{ritzkal2023} apresentam a implementação de um \textit{NAS} em ambiente acadêmico utilizando \textit{Raspberry Pi 3B+} e \textit{OpenMediaVault}. O estudo de \citeonline{ritzkal2023} é relevante porque combina \textit{SBC} e \textit{OMV} em uma implementação prática de armazenamento em rede, ainda que seu contexto seja laboratorial e não doméstico.
+\citeonline{ritzkal2023} apresentam a implementação de um \textit{NAS} em ambiente acadêmico utilizando \textit{Raspberry Pi 3B+} e \textit{OpenMediaVault}. O estudo é relevante porque combina \textit{SBC} e \textit{OMV} em uma implementação prática de armazenamento em rede, ainda que seu contexto seja laboratorial e não doméstico.
 
 \section{USING A RASPBERRY PI AS A NETWORK-ATTACHED STORAGE DEVICE: PERFORMANCE AND LIMITATIONS}
 
@@ -15,7 +15,7 @@ Este capítulo apresenta uma análise de trabalhos relacionados que fundamentam 
 
 \section{COMMODITY SINGLE BOARD COMPUTER CLUSTERS AND THEIR APPLICATIONS}
 
-\citeonline{johnston2018} examinam o uso de \textit{clusters} formados por \textit{Single Board Computers} de baixo custo, discutindo aplicações em ensino, pesquisa e serviços de rede, além de aspectos de desempenho e eficiência energética dessas plataformas. O trabalho é relevante porque consolida evidências de que \textit{SBCs} são adequadas a cargas de servidor leves, categoria na qual se enquadra o \textit{NAS} doméstico proposto neste projeto.
+\citeonline{johnston2018} examinam o uso de \textit{clusters} formados por \textit{Single Board Computers} de baixo custo, discutindo aplicações em ensino, pesquisa e serviços de rede, além de aspectos de desempenho e eficiência energética dessas plataformas. O trabalho é relevante porque consolida evidências de que \textit{SBCs} são adequadas a cargas de servidor leves, categoria na qual se enquadra o \textit{NAS} doméstico avaliado neste projeto.
 
 \section{NETWORK PERFORMANCE EVALUATION OF SEVERAL RASPBERRY PI MODELS FOR IPV4 AND IPV6}
 
@@ -23,48 +23,49 @@ Este capítulo apresenta uma análise de trabalhos relacionados que fundamentam 
 
 \section{HOME NETWORK ATTACHED STORAGE (HOMENAS) USING RASPBERRY PI WITH TELEGRAM BOT NOTIFICATION}
 
-\citeonline{homenas2025} apresentam o desenvolvimento de um \textit{NAS} doméstico de baixo custo utilizando \textit{Raspberry Pi} com \textit{OpenMediaVault}, armazenamento em disco externo conectado por \textit{USB} e compartilhamento por meio do \textit{Samba}. O trabalho avalia o desempenho de rede em cenários de \textit{streaming} com usuário único e múltiplos usuários, em conexões cabeada e sem fio, e estima redução expressiva de custo energético em relação a \textit{NAS} comerciais. É relevante para este projeto porque trata da mesma combinação entre \textit{SBC}, \textit{OMV} e compartilhamento de arquivos no contexto doméstico.
+\citeonline{homenas2025} apresentam o desenvolvimento de um \textit{NAS} doméstico de baixo custo utilizando \textit{Raspberry Pi} com \textit{OpenMediaVault}, armazenamento em disco externo conectado por \textit{USB} e compartilhamento por meio do \textit{Samba}. O trabalho avalia o desempenho de rede em cenários de \textit{streaming} com usuário único e múltiplos usuários, em conexões cabeada e sem fio, e estima redução expressiva de custo energético em relação a \textit{NAS} comerciais. É relevante porque trata da mesma combinação entre \textit{SBC}, \textit{OMV} e compartilhamento de arquivos no contexto doméstico.
 
 \section{ANALYZING THE FEASIBILITY AND RELIABILITY OF NEXTCLOUD AS A NETWORK ATTACHED CLOUD STORAGE SOLUTION ON RASPBERRY PI}
 
-\citeonline{salke2023} analisam a viabilidade e a confiabilidade do \textit{Nextcloud} como solução de nuvem privada executada sobre \textit{Raspberry Pi}, medindo o uso de rede, o tamanho dos arquivos transferidos e o tempo de computação para diferentes cargas de trabalho. O estudo demonstra a viabilidade da nuvem privada \textit{self-hosted} em \textit{SBCs} e é relevante porque cobre a camada de sincronização e acesso \textit{web} contemplada nesta proposta.
+\citeonline{salke2023} analisam a viabilidade e a confiabilidade do \textit{Nextcloud} como solução de nuvem privada executada sobre \textit{Raspberry Pi}, medindo o uso de rede, o tamanho dos arquivos transferidos e o tempo de computação para diferentes cargas de trabalho. O estudo demonstra a viabilidade da nuvem privada \textit{self-hosted} em \textit{SBCs} e cobre a camada de sincronização e acesso \textit{web} contemplada neste projeto.
 
 \section{WIREGUARD AND MESH VPN FOR SECURE REMOTE ACCESS}
 
-\citeonline{donenfeld2017} apresenta o \textit{WireGuard}, protocolo de túnel de rede executado no núcleo do sistema, projetado para oferecer criptografia moderna com alto desempenho e base de código reduzida. A documentação oficial do \textit{Tailscale}~\cite{tailscalehowworks} descreve como o serviço constrói uma \textit{mesh VPN} sobre o \textit{WireGuard}, agregando servidor de coordenação, troca automática de chaves e travessia de \textit{NAT}. Esses elementos fundamentam a escolha do mecanismo de acesso remoto adotado neste projeto, que reduz a complexidade operacional em relação a configurações manuais de \textit{VPN}.
+\citeonline{donenfeld2017} apresenta o \textit{WireGuard}, protocolo de túnel de rede executado no núcleo do sistema, projetado para oferecer criptografia moderna com alto desempenho e base de código reduzida. A documentação oficial do \textit{Tailscale} \cite{tailscalehowworks} descreve como o serviço constrói uma \textit{mesh VPN} sobre o \textit{WireGuard}, agregando servidor de coordenação, troca automática de chaves e travessia de \textit{NAT}. Esses elementos fundamentam a escolha do mecanismo de acesso remoto adotado, que reduz a complexidade operacional em relação a configurações manuais de \textit{VPN}.
 
 \section{COMPARAÇÃO ENTRE OS TRABALHOS}
 
-O Quadro~\ref{quad:comparacao} apresenta comparação detalhada entre os trabalhos analisados e o projeto proposto, incluindo tipo de armazenamento, protocolos avaliados, métricas de desempenho, limitações identificadas e contribuição para o projeto atual.
+O Quadro~\ref{quad:comparacao-trabalhos} apresenta comparação entre os trabalhos analisados e o projeto desenvolvido, incluindo tipo de armazenamento, protocolos avaliados, métricas de desempenho e contribuição para o trabalho atual.
 
-\begin{quadro}[!h]
+\begin{quadro}[H]
     \centering
-    \legenda[quad:comparacao]{COMPARAÇÃO ENTRE TRABALHOS RELACIONADOS E O PROJETO PROPOSTO}
-    \tiny
-    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\centering\arraybackslash}X|>{\centering\arraybackslash}X|>{\raggedright\arraybackslash}X|}
+    \legenda[quad:comparacao-trabalhos]{COMPARAÇÃO ENTRE TRABALHOS RELACIONADOS E O PROJETO}
+    \footnotesize
+    \renewcommand{\arraystretch}{1.1}
+    \begin{tabularx}{\linewidth}{|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|>{\raggedright\arraybackslash}X|}
         \hline
-        \textbf{Trabalho} & \textbf{\textit{Hardware}} & \textbf{Armazenamento} & \textbf{\textit{NAS}} & \textbf{Nuvem} & \textbf{Acesso Remoto} & \textbf{Métricas} \\
+        \textbf{Trabalho} & \textbf{\textit{Hardware}} & \textbf{Armaz.} & \textbf{\textit{NAS}} & \textbf{Nuvem} & \textbf{Acesso remoto} & \textbf{Métricas} \\
         \hline
         \hline
-        Ritzkal et al. & \textit{RPi 3B+} & 1× \textit{HDD USB} & \textit{OMV} & Não & Não & \textit{Throughput} \textit{SMB}, \textit{CPU}, \textit{RAM} \\
+        \citeonline{ritzkal2023} & \textit{RPi} 3B+ & 1$\times$ \textit{HDD USB} & \textit{OMV} & Não & Não & \textit{Throughput SMB}, \textit{CPU}, \textit{RAM} \\
         \hline
-        Gamess e Hester & \textit{RPi 4B} & 1× \textit{SSD USB} & Nativo & Não & Não & \textit{Throughput}, latência \\
+        \citeonline{gamess2025} & \textit{RPi} 4B & 1$\times$ \textit{SSD USB} & Nativo & Não & Não & \textit{Throughput}, latência \\
         \hline
-        Johnston et al. & \textit{Clusters} de \textit{RPi} & --- & --- & Não & Não & Desempenho, eficiência energética \\
+        \citeonline{johnston2018} & \textit{Clusters} de \textit{RPi} & --- & --- & Não & Não & Desempenho, eficiência energética \\
         \hline
-        Gamess et al. & Vários modelos de \textit{RPi} & --- & Não & Não & Não & \textit{Throughput} e latência \textit{IPv4}/\textit{IPv6} \\
+        \citeonline{gamess2022} & Vários modelos de \textit{RPi} & --- & Não & Não & Não & \textit{Throughput} e latência \textit{IPv4}/\textit{IPv6} \\
         \hline
-        Rashid et al. & \textit{Raspberry Pi} & 1× disco externo \textit{USB} & \textit{OMV} & Não & Não & \textit{Streaming}, custo energético \\
+        \citeonline{homenas2025} & \textit{Raspberry Pi} & 1$\times$ disco \textit{USB} & \textit{OMV} & Não & Não & \textit{Streaming}, custo energético \\
         \hline
-        Salke et al. & \textit{Raspberry Pi} & --- & Não & \textit{Nextcloud} & Não & Uso de rede, tempo de computação \\
+        \citeonline{salke2023} & \textit{Raspberry Pi} & --- & Não & \textit{Nextcloud} & Não & Uso de rede, tempo de computação \\
         \hline
-        Donenfeld; Tailscale & --- & --- & Não & Não & \textit{WireGuard}, \textit{Tailscale} & Desempenho do túnel, travessia de \textit{NAT} \\
+        \citeonline{donenfeld2017}; \textit{Tailscale} & --- & --- & Não & Não & \textit{WireGuard}, \textit{Tailscale} & Desempenho do túnel, travessia de \textit{NAT} \\
         \hline
-        \textbf{Proposto} & \textit{ROCK 4B+} & 3× \textit{SSD USB} & \textit{OMV} & \textit{Nextcloud} & \textit{Tailscale} & \textit{Throughput}, estab., custo \\
+        Este trabalho & \textit{ROCK 4B+} & 2$\times$ \textit{SSD USB} & \textit{OMV} & \textit{Nextcloud} & \textit{Tailscale} & \textit{Throughput}, estabilidade, administrabilidade, custo \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}
     \fonteautoria
 \end{quadro}
 
-A comparação mostra que os trabalhos existentes tratam de partes isoladas da solução: \textit{NAS} com \textit{SBC} (Ritzkal et al., 2023; Rashid et al., 2025), avaliações de desempenho e limitações de plataformas (Gamess e Hester, 2025; Gamess et al., 2022; Johnston et al., 2018), nuvem privada em \textit{SBC} (Salke et al., 2023) e acesso remoto seguro (Donenfeld, 2017; Tailscale, s.d.). O diferencial deste projeto está na integração completa de armazenamento local com três \textit{SSDs}, administração via \textit{OpenMediaVault}, nuvem privada via \textit{Nextcloud}, acesso remoto seguro via \textit{Tailscale} e comparação econômica com \textit{NAS} comerciais de entrada, produzindo evidências mensuráveis em múltiplas dimensões.
+A comparação mostra que os trabalhos existentes tratam de partes isoladas da solução: \textit{NAS} com \textit{SBC} \cite{ritzkal2023,homenas2025}, avaliações de desempenho e limitações de plataformas \cite{gamess2025,gamess2022,johnston2018}, nuvem privada em \textit{SBC} \cite{salke2023} e acesso remoto seguro \cite{donenfeld2017,tailscalehowworks}. O diferencial deste trabalho está na integração de uma \textit{SBC} distinta da família \textit{Raspberry Pi}, dois \textit{SSDs}, administração via \textit{OpenMediaVault}, nuvem privada via \textit{Nextcloud} em \textit{Docker}, acesso remoto seguro via \textit{Tailscale} no \textit{host} e comparação econômica com \textit{NAS} comerciais de duas baias, com avaliação local e remota e registro dos problemas reais de implantação e de suas soluções, produzindo evidências mensuráveis em múltiplas dimensões.
