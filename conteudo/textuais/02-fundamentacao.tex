@@ -19,19 +19,47 @@ Armazenamento local e nuvem pública não devem ser tratados como categorias exc
 
 \textit{Single Board Computers} são computadores completos concentrados em uma única placa, geralmente com \textit{CPU}, memória, interfaces \textit{USB}, rede e armazenamento de \textit{boot} \cite{upton2016}. Plataformas \textit{ARM} de baixo custo são utilizadas em ensino, automação, \textit{IoT}, prototipagem e servidores leves. Suas vantagens incluem baixo consumo energético, formato compacto e compatibilidade com \textit{Linux} \cite{johnston2018}.
 
-A \textit{Radxa ROCK 4B+} utilizada neste trabalho emprega processador da família \textit{Rockchip RK3399}, com seis núcleos \textit{ARM}, até 4 \textit{GB} de memória \textit{LPDDR4}, \textit{USB} 3.0 e \textit{Ethernet Gigabit}, características que permitem sua aplicação como servidor leve \cite{radxa2026}. A escolha por \textit{SSDs} conectados por adaptadores externos \textit{USB-SATA} reduz o custo e simplifica a montagem, mas também cria pontos de atenção relacionados a energia, barramento \textit{USB}, aquecimento e estabilidade.
+A \textit{Radxa ROCK 4B+} utilizada neste trabalho emprega processador da família \textit{Rockchip RK3399}, com seis núcleos \textit{ARM}, até 4 \textit{GB} de memória \textit{LPDDR4}, \textit{USB} 3.0 e \textit{Ethernet Gigabit}, características que permitem sua aplicação como servidor leve \cite{radxa2026}. A escolha por \textit{SSDs} conectados por adaptadores externos \textit{USB-SATA} reduz o custo e simplifica a montagem, mas também cria pontos de atenção relacionados a energia, barramento \textit{USB}, aquecimento e estabilidade. A Figura~\ref{fig:radxa-rock4b} ilustra a placa utilizada como base de \textit{hardware}.
+
+\begin{figure}[H]
+    \centering
+    \legenda[fig:radxa-rock4b]{RADXA ROCK 4B+ (VISTA SUPERIOR DA PLACA)}
+    \fig{width=0.72\linewidth}{radxa-rock4b}
+    \fonte{\citeonline{radxa2026}. Imagem oficial do produto, reproduzida para fins acadêmicos. Captura em 2 nov. 2026.}
+\end{figure}
 
 \section{\textit{OPENMEDIAVAULT}}
 
-O \textit{OpenMediaVault} é apresentado em sua documentação oficial como uma solução completa de \textit{NAS} baseada em \textit{Debian Linux}, com interface \textit{web} de administração e suporte a protocolos como \textit{FTP}, \textit{SMB}/\textit{CIFS} e \textit{NFS} \cite{openmediavault2026}. No projeto, ele atua como camada de gerenciamento do \textit{NAS}, centralizando a montagem de discos, a criação de pastas compartilhadas, usuários, permissões e serviços de arquivo, o que reduz a necessidade de uso do terminal na rotina diária.
+O \textit{OpenMediaVault} é apresentado em sua documentação oficial como uma solução completa de \textit{NAS} baseada em \textit{Debian Linux}, com interface \textit{web} de administração e suporte a protocolos como \textit{FTP}, \textit{SMB}/\textit{CIFS} e \textit{NFS} \cite{openmediavault2026}. No projeto, ele atua como camada de gerenciamento do \textit{NAS}, centralizando a montagem de discos, a criação de pastas compartilhadas, usuários, permissões e serviços de arquivo, o que reduz a necessidade de uso do terminal na rotina diária. A Figura~\ref{fig:omv-logo} apresenta a identidade visual do projeto, cuja documentação é licenciada em CC-BY-SA-3.0 e o \textit{software} sob GPL-3.0 \cite{omvlicensing2026}.
+
+\begin{figure}[H]
+    \centering
+    \legenda[fig:omv-logo]{LOGOTIPO DO OPENMEDIAVAULT}
+    \fig{width=0.55\linewidth}{omv-logo}
+    \fonte{\citeonline{omvlicensing2026}; \citeonline{openmediavault2026}. Logotipo oficial (marca branca sobre fundo azul), reproduzido para fins acadêmicos. Acesso em: 2 nov. 2026.}
+\end{figure}
 
 \section{\textit{NEXTCLOUD}}
 
-De acordo com a documentação oficial \cite{nextcloud2026}, o \textit{Nextcloud} é uma plataforma \textit{open source} de sincronização, compartilhamento de arquivos e colaboração \textit{self-hosted}. No contexto do projeto, ele não substitui o \textit{NAS}; ele opera sobre o armazenamento administrado pelo sistema, oferecendo experiência de nuvem privada com interface \textit{web}, clientes \textit{desktop} e móveis, \textit{upload}, \textit{download}, compartilhamento e sincronização. A aplicação é executada em \textit{Docker}, acompanhada por \textit{MariaDB} como banco de dados e \textit{Redis} para cache e controle de bloqueios de arquivos.
+De acordo com a documentação oficial \cite{nextcloud2026}, o \textit{Nextcloud} é uma plataforma \textit{open source} de sincronização, compartilhamento de arquivos e colaboração \textit{self-hosted}. No contexto do projeto, ele não substitui o \textit{NAS}; ele opera sobre o armazenamento administrado pelo sistema, oferecendo experiência de nuvem privada com interface \textit{web}, clientes \textit{desktop} e móveis, \textit{upload}, \textit{download}, compartilhamento e sincronização. A aplicação é executada em \textit{Docker}, acompanhada por \textit{MariaDB} como banco de dados e \textit{Redis} para cache e controle de bloqueios de arquivos. A Figura~\ref{fig:nextcloud-logo} apresenta o logotipo oficial; o uso da marca segue as diretrizes de marcas da \textit{Nextcloud GmbH} \cite{nextcloudtrademarks2026}.
+
+\begin{figure}[H]
+    \centering
+    \legenda[fig:nextcloud-logo]{LOGOTIPO DO NEXTCLOUD}
+    \fig{width=0.28\linewidth}{nextcloud-logo}
+    \fonte{\citeonline{nextcloudtrademarks2026}; \citeonline{nextcloud2026}. Imagem oficial / repositório \textit{Nextcloud}, reproduzida para fins acadêmicos. Acesso em: 2 nov. 2026.}
+\end{figure}
 
 \section{\textit{TAILSCALE} E ACESSO REMOTO SEGURO}
 
-A exposição direta de serviços domésticos à \textit{internet} aumenta a superfície de ataque. O \textit{Tailscale} oferece uma alternativa prática ao criar uma malha de \textit{Virtual Private Network} (\textit{VPN}) baseada em \textit{WireGuard} \cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao \textit{Nextcloud} e, quando adequado, aos serviços administrativos. Diferentemente de abertura de portas, \textit{DDNS} ou \textit{VPN} tradicional, o \textit{Tailscale} simplifica a configuração ao não exigir infraestrutura de servidor \textit{VPN} dedicada e ao gerenciar chaves automaticamente \cite{tailscalehowworks}.
+A exposição direta de serviços domésticos à \textit{internet} aumenta a superfície de ataque. O \textit{Tailscale} oferece uma alternativa prática ao criar uma malha de \textit{Virtual Private Network} (\textit{VPN}) baseada em \textit{WireGuard} \cite{tailscale2026}, com autenticação e controle de dispositivos autorizados. Neste projeto, ele reduz a necessidade de abertura direta de portas no roteador e permite testes remotos de acesso ao \textit{Nextcloud} e, quando adequado, aos serviços administrativos. Diferentemente de abertura de portas, \textit{DDNS} ou \textit{VPN} tradicional, o \textit{Tailscale} simplifica a configuração ao não exigir infraestrutura de servidor \textit{VPN} dedicada e ao gerenciar chaves automaticamente \cite{tailscalehowworks}. A Figura~\ref{fig:tailscale-logo} apresenta o logotipo do projeto, cujo código-cliente é distribuído sob licença BSD-3-Clause \cite{tailscalebsd2026}.
+
+\begin{figure}[H]
+    \centering
+    \legenda[fig:tailscale-logo]{LOGOTIPO DO TAILSCALE}
+    \fig{width=0.28\linewidth}{tailscale-logo}
+    \fonte{\citeonline{tailscalebsd2026}; \citeonline{tailscale2026}. Logotipo oficial, reproduzido para fins acadêmicos. Política de privacidade: \url{https://tailscale.com/privacy-policy}. Acesso em: 2 nov. 2026.}
+\end{figure}
 
 No ambiente final, o \textit{Tailscale} é executado diretamente no \textit{host} e não em contêiner. Durante a implantação foi identificada incompatibilidade entre o mecanismo de marcação de pacotes do \textit{Tailscale} e o conjunto de regras \textit{netfilter}/\textit{nftables} do ambiente; a configuração funcional validada utiliza \texttt{netfilter-mode=off}, preservando a conectividade privada entre os dispositivos autorizados.
 

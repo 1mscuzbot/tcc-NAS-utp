@@ -20,6 +20,26 @@ A montagem física compreende os seguintes componentes:
 
 A ordem de montagem segue o fluxo: inserção dos \textit{SSDs} nos adaptadores, conexão dos adaptadores às portas \textit{USB} 3.0 (azuis) da \textit{ROCK 4B+}, inserção do cartão \textit{microSD} com o sistema, conexão do cabo de rede e, por último, da fonte de alimentação. Durante a validação preliminar verificou-se que o uso de porta ou cabo \textit{USB} 2.0 fazia o dispositivo ser reconhecido a 480 \textit{Mb/s}; após a troca, o dispositivo passou a negociar 5000 \textit{Mb/s} com o \textit{driver UAS}, condição adotada como padrão.
 
+O protótipo foi acondicionado em gabinete impresso em 3D, com ventilação, identificação ``TCC'', acesso às portas da placa e gavetas para os \textit{SSDs} de 2,5 polegadas. As Figuras~\ref{fig:prototipo-interno} e~\ref{fig:prototipo-externo} documentam a montagem física e o aspecto final da caixa.
+
+\begin{figure}[H]
+    \centering
+    \legenda[fig:prototipo-interno]{PROTÓTIPO: PLACA NO GABINETE E GAVETA DE \textit{SSD}}
+    \lfig[fig:prototipo-placa]{width=0.42\linewidth}{prototipo/servidor-07}{placa com \textit{cooler}}
+    \hfill
+    \lfig[fig:prototipo-ssd]{width=0.42\linewidth}{prototipo/servidor-01}{gaveta com \textit{SSD}}
+    \fonteautoria
+\end{figure}
+
+\begin{figure}[H]
+    \centering
+    \legenda[fig:prototipo-externo]{PROTÓTIPO: VISTAS EXTERNA E TRASEIRA DO GABINETE}
+    \lfig[fig:prototipo-frente]{width=0.42\linewidth}{prototipo/servidor-06}{frente e laterais}
+    \hfill
+    \lfig[fig:prototipo-traseira]{width=0.42\linewidth}{prototipo/servidor-04}{acesso traseiro às portas}
+    \fonteautoria
+\end{figure}
+
 \section{ARQUITETURA FINAL DO PROTÓTIPO}
 
 A arquitetura final utiliza uma \textit{Radxa ROCK 4B+}, sistema base instalado em cartão \textit{microSD} e dois \textit{SSDs SATA}. Um dos \textit{SSDs} é utilizado principalmente pelo compartilhamento \textit{SMB} de dados. O segundo concentra os diretórios persistentes do \textit{Nextcloud}, do \textit{MariaDB} e do \textit{Redis}. O \textit{OpenMediaVault} permanece como camada principal de administração do \textit{NAS}. O Quadro~\ref{quad:arquitetura-final} resume a configuração final.
