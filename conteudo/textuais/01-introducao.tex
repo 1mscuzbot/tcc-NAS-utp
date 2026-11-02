@@ -7,7 +7,7 @@ A quantidade de dados produzidos em ambientes domésticos cresce continuamente. 
 
 Serviços de nuvem pública oferecem conveniência, sincronização automática e acesso remoto, mas também criam dependência da conectividade externa, da política comercial do fornecedor e da disponibilidade da infraestrutura de terceiros. O objetivo deste trabalho não é rejeitar a nuvem pública, mas investigar uma alternativa local, complementar e autoadministrada para armazenamento e sincronização de dados.
 
-O projeto consiste na construção e na análise de um servidor \textit{Network Attached Storage} (\textit{NAS}) doméstico baseado em uma \textit{Radxa ROCK 4B+}, com sistema operacional em cartão \textit{microSD} e dois \textit{Solid State Drives} (\textit{SSDs}) conectados por adaptadores \textit{USB-SATA}, além de \textit{OpenMediaVault}, \textit{Nextcloud} e \textit{Tailscale}. O \textit{OpenMediaVault} (\textit{OMV}) é utilizado como camada de administração do armazenamento em rede; o \textit{Server Message Block} (\textit{SMB}) fornece o compartilhamento local; o \textit{Nextcloud}, executado em \textit{Docker} juntamente com \textit{MariaDB} e \textit{Redis}, fornece recursos de nuvem privada; e o \textit{Tailscale}, instalado diretamente no \textit{host}, permite o acesso remoto seguro por meio de uma rede privada autenticada.
+O projeto consiste na construção e na análise de um servidor \textit{Network Attached Storage} (\textit{NAS}) doméstico baseado em uma \textit{Radxa ROCK 4B+}, com sistema operacional em cartão \textit{microSD} e dois \textit{Solid State Drives} (\textit{SSDs}) conectados por adaptadores \textit{Universal Serial Bus}--\textit{SATA} (\textit{USB-SATA}), além de \textit{OpenMediaVault}, \textit{Nextcloud} e \textit{Tailscale}. O \textit{OpenMediaVault} (\textit{OMV}) é utilizado como camada de administração do armazenamento em rede; o \textit{Server Message Block} (\textit{SMB}) fornece o compartilhamento local; o \textit{Nextcloud}, executado em \textit{Docker} juntamente com \textit{MariaDB} e \textit{Redis}, fornece recursos de nuvem privada; e o \textit{Tailscale}, instalado diretamente no \textit{host}, permite o acesso remoto seguro por meio de uma rede privada autenticada.
 
 A Figura~\ref{fig:arquitetura} apresenta a arquitetura lógica da solução implementada.
 
@@ -28,7 +28,7 @@ O objetivo geral desta pesquisa é analisar a viabilidade técnica de um servido
     \item instalar e configurar \textit{Armbian}/\textit{Debian} compatível com a plataforma escolhida;
     \item instalar e configurar o \textit{OpenMediaVault} como camada central de gerenciamento do \textit{NAS};
     \item integrar os dois \textit{SSDs}, padronizando nomenclatura, montagem e organização lógica;
-    \item implantar compartilhamento local por \textit{SMB}/\textit{CIFS};
+    \item implantar compartilhamento local por \textit{SMB}/\textit{Common Internet File System} (\textit{CIFS});
     \item implantar o \textit{Nextcloud}, com \textit{MariaDB} e \textit{Redis}, como camada de nuvem privada para sincronização e acesso \textit{web};
     \item implantar o \textit{Tailscale} no \textit{host} para acesso remoto seguro ao ambiente doméstico;
     \item executar testes locais e remotos de desempenho, estabilidade e usabilidade, analisando também a administrabilidade e a recuperação do ambiente;

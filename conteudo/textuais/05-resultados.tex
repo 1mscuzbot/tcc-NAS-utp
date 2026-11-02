@@ -41,7 +41,7 @@ Antes da fase consolidada e depois dela, foram realizadas três séries de medi�
         \hline
         Latência via \textit{Tailscale}, cliente em \textit{Wi-Fi} (mar/2026) & $\sim$2 \textit{ms} (1--3 \textit{ms}), 0\% de perda & 29 pacotes \\
         \hline
-        \texttt{tailscale ping} e \texttt{ping} (nov/2026) & Conexão direta pelo \textit{IP} da interface \textit{Ethernet} do \textit{NAS} (192.168.0.25); 2--3 \textit{ms}; média de 3 \textit{ms} (2--15 \textit{ms}), 0\% de perda em 30 pacotes & \textit{NAS} em \textit{Ethernet}; \textit{PC} em \textit{Wi-Fi} 802.11ac, enlace de 433 \textit{Mbps} \\
+        \texttt{tailscale ping} e \texttt{ping} (nov/2026) & Conexão direta pelo \textit{IP} da interface \textit{Ethernet} do \textit{NAS} (192.168.0.25); 2--3 \textit{ms}; média de 3 \textit{ms} (2--15 \textit{ms}), 0\% de perda em 30 pacotes & \textit{NAS} em \textit{Ethernet} (interface \textit{Wi-Fi} do \textit{NAS} também ativa, com rota de menor prioridade); \textit{PC} em \textit{Wi-Fi} 802.11ac, enlace de 433 \textit{Mbps} \\
         \hline
         \textit{SMB} via \textit{Tailscale}, \textit{PC Windows} em \textit{Wi-Fi} (nov/2026) & Escrita 15,4--16,3 \textit{MB/s} (média 15,9); leitura 30,1--32,3 \textit{MB/s} (média 31,4) & Arquivo de 2 \textit{GB}, 3 repetições, cópia com \texttt{Copy-Item} \\
         \hline
@@ -49,7 +49,7 @@ Antes da fase consolidada e depois dela, foram realizadas três séries de medi�
         \hline
     \end{tabularx}
     \vspace{0.2cm}
-    \fonte{Autoria própria, a partir dos relatórios de teste dos autores (out/2025 e mar/2026).}
+    \fonte{Autoria própria, a partir dos relatórios de teste dos autores (out/2025, mar/2026 e nov/2026).}
 \end{quadro}
 
 As três séries de \textit{SMB} via \textit{Tailscale} (outubro de 2025, março de 2026 e novembro de 2026) foram realizadas nas mesmas condições: \textit{NAS} em \textit{Ethernet}, cliente em \textit{Wi-Fi} e acesso pelo endereço do \textit{Tailscale}. Elas diferem apenas em cliente, sistema operacional e método de cópia (E/S direta em \textit{Debian} em outubro; \textit{Robocopy} e \texttt{Copy-Item} em \textit{Windows} em março e novembro). A variação entre elas (escrita de 9,5 a 64 \textit{MB/s} e leitura de 26 a 59 \textit{MB/s}) decorre das instabilidades da rede sem fio em cada data. Por essa razão, os valores são apresentados por série e não combinados em uma única média. Todas as séries superam o valor de referência de acesso remoto de 5 \textit{MB/s}. Os resultados com o cliente em \textit{Wi-Fi} 5 \textit{GHz} em outubro de 2025 são coerentes com o cenário híbrido da fase consolidada, o que reforça que a rede sem fio do cliente é o fator limitante nesses casos.
@@ -122,7 +122,7 @@ No cenário com ambos os equipamentos em \textit{Wi-Fi}, o \textit{SMB} apresent
 
 \section{\textit{NEXTCLOUD}}
 
-O \textit{Nextcloud} apresentou desempenho coerente com a topologia de rede. No cenário \textit{Wi-Fi}, o \textit{upload} ficou aproximadamente entre 6--7 \textit{MB/s} e o \textit{download} entre 10--13 \textit{MB/s}. No cenário híbrido, o \textit{download} permaneceu estável em aproximadamente 26--27 \textit{MB/s}; o \textit{upload} iniciou em taxa mais alta e se estabilizou em torno de 13--15 \textit{MB/s}, com uma pausa observada durante uma transferência. A análise dos \textit{logs} registrou conclusão \textit{HTTP} 201 do \textit{WebDAV}, sem erro 5xx, falha fatal ou evidência de problema de armazenamento.
+O \textit{Nextcloud} apresentou desempenho coerente com a topologia de rede. No cenário \textit{Wi-Fi}, o \textit{upload} ficou aproximadamente entre 6--7 \textit{MB/s} e o \textit{download} entre 10--13 \textit{MB/s}. No cenário híbrido, o \textit{download} permaneceu estável em aproximadamente 26--27 \textit{MB/s}; o \textit{upload} iniciou em taxa mais alta e se estabilizou em torno de 13--15 \textit{MB/s}, com uma pausa observada durante uma transferência. A análise dos \textit{logs} registrou conclusão \textit{Hypertext Transfer Protocol} (\textit{HTTP}) 201 do \textit{Web-based Distributed Authoring and Versioning} (\textit{WebDAV}), sem erro 5xx, falha fatal ou evidência de problema de armazenamento.
 
 No cenário remoto por \textit{Tailscale}, o \textit{upload} ficou em aproximadamente 6--7 \textit{MB/s} e o \textit{download} em torno de 18 \textit{MB/s} até a interrupção causada pelo limite de dados da rede móvel. Essa interrupção não foi atribuída ao \textit{NAS}.
 
@@ -156,7 +156,7 @@ No cenário remoto por \textit{Tailscale}, o \textit{upload} ficou em aproximada
 
 \section{ACESSO REMOTO POR \textit{TAILSCALE}}
 
-O acesso remoto foi validado utilizando rede móvel no cliente, com a rede \textit{Wi-Fi} local desconectada. O cliente alcançou o \textit{NAS} pelo endereço privado do \textit{Tailscale}, com \textit{SSH}, \textit{SMB} e \textit{Nextcloud} acessíveis. A latência média observada na rede móvel ficou próxima de 80 \textit{ms}, enquanto, com o \textit{PC} na rede local, a latência medida via \textit{Tailscale} foi de cerca de 3 \textit{ms}, com conexão direta pela interface \textit{Ethernet} do \textit{NAS}. O \texttt{tailscale ping} confirmou comunicação direta entre os pares nos cenários validados.
+O acesso remoto foi validado utilizando rede móvel no cliente, com a rede \textit{Wi-Fi} local desconectada. O cliente alcançou o \textit{NAS} pelo endereço privado do \textit{Tailscale}, com \textit{Secure Shell} (\textit{SSH}), \textit{SMB} e \textit{Nextcloud} acessíveis. A latência média observada na rede móvel ficou próxima de 80 \textit{ms}, enquanto, com o \textit{PC} na rede local, a latência medida via \textit{Tailscale} foi de cerca de 3 \textit{ms}, com conexão direta pela interface \textit{Ethernet} do \textit{NAS}. O \texttt{tailscale ping} confirmou comunicação direta entre os pares nos cenários validados.
 
 Durante a implantação, o \textit{Tailscale} apresentou incompatibilidade com regras \textit{MARK} do \textit{netfilter}/\textit{iptables} e comportamento inadequado com \textit{nftables}. A solução funcional foi manter o \textit{Tailscale} instalado no \textit{host} com \texttt{netfilter-mode=off}. Após essa alteração, o acesso remoto permaneceu operacional e persistiu após reinicialização.
 
@@ -191,6 +191,8 @@ A comparação econômica utiliza, para o protótipo, os valores efetivamente pa
         \textit{microSD} 32 \textit{GB} & 49,51 & valor efetivamente pago \\
         \hline
         carregador \textit{Motorola} 20 \textit{W} & 78,99 & valor efetivamente pago \\
+        \hline
+        Total & 625,48 & --- \\
         \hline
     \end{tabularx}
     \vspace{0.2cm}

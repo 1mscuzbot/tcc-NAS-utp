@@ -108,7 +108,7 @@ Os testes foram conduzidos em cenários de rede local (\textit{Ethernet} e \text
 
 O \textit{throughput} de rede, de disco e de acesso aos serviços foi medido com as seguintes ferramentas e procedimentos:
 \begin{itemize}
-    \item \texttt{iperf3}: medição de \textit{throughput} de rede \textit{TCP}, com o \textit{NAS} como servidor (\texttt{iperf3 -s}) e o cliente executando \texttt{iperf3 -c <ip>}, nos sentidos cliente-\textit{NAS} e \textit{NAS}-cliente (opção \texttt{-R});
+    \item \texttt{iperf3}: medição de \textit{throughput} de rede \textit{Transmission Control Protocol} (\textit{TCP}), com o \textit{NAS} como servidor (\texttt{iperf3 -s}) e o cliente executando \texttt{iperf3 -c <ip>}, nos sentidos cliente-\textit{NAS} e \textit{NAS}-cliente (opção \texttt{-R});
     \item \texttt{fio}: leitura e escrita sequenciais no próprio \textit{NAS}, com blocos de 1 \textit{MiB} e E/S direta (\texttt{--direct=1}), para verificar se o \textit{SSD} constitui gargalo;
     \item \texttt{dd}: escrita (\texttt{oflag=direct}, \texttt{conv=fdatasync}) e leitura (\texttt{iflag=direct}) de arquivo grande, evitando a influência de cache;
     \item \texttt{hdparm}: leitura de cache e de \textit{buffer} do disco (\texttt{hdparm -Tt});
