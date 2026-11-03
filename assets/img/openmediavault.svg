@@ -9,23 +9,23 @@
    xmlns="http://www.w3.org/2000/svg"
    xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-   width="93.242828mm"
-   height="11.853333mm"
-   viewBox="0 0 330.38798 42"
+   width="362.38798px"
+   height="66px"
+   viewBox="-16 -12 362.38798 66"
    id="svg4578"
    version="1.1"
    inkscape:version="0.91 r13725"
-   sodipodi:docname="header_logo.svg"
-   inkscape:export-filename="./header_logo.png"
-   inkscape:export-xdpi="90"
-   inkscape:export-ydpi="90">
+   sodipodi:docname="openmediavault.svg"
+   inkscape:export-filename="./omv-logo.png"
+   inkscape:export-xdpi="300"
+   inkscape:export-ydpi="300">
   <title
      id="title4144">OpenMediaVault logo</title>
   <defs
      id="defs4580" />
   <sodipodi:namedview
      id="base"
-     pagecolor="#98b7cf"
+     pagecolor="#0082c9"
      bordercolor="#666666"
      borderopacity="1.0"
      inkscape:pageopacity="0"
@@ -73,14 +73,14 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(-130.69566,-591.14819)">
-    <!-- Fundo azul institucional (logo branca); uso acadêmico no TCC -->
+    <!-- Fundo azul institucional OMV (#0082c9) sob a marca branca; uso acadêmico no TCC -->
     <rect
        id="omv-blue-bg"
-       x="130.69566"
-       y="591.14819"
-       width="330.38798"
-       height="42"
-       style="fill:#5aa8dc;fill-opacity:1;stroke:none" />
+       x="114.69566"
+       y="579.14819"
+       width="362.38798"
+       height="66"
+       style="fill:#0082c9;fill-opacity:1;stroke:none" />
     <g
        id="g4199">
       <g
