@@ -28,6 +28,12 @@ A \textit{Radxa ROCK 4B+} utilizada neste trabalho emprega processador da famíl
     \fonte{\citeonline{radxa2026}. Imagem oficial do produto, reproduzida para fins acadêmicos. Captura em 2 nov. 2026.}
 \end{figure}
 
+\section{STACK \textit{OPEN SOURCE} E DEFESA DE BAIXO CUSTO}
+
+A defesa principal do baixo custo deste \textit{NAS}, frente a equipamentos proprietários de entrada, não se limita à escolha da \textit{SBC}: apoia-se na stack de \textit{software open source} e livre já descrita neste capítulo. O sistema base \textit{Armbian}/\textit{Debian} dispensa licenciamento de sistema proprietário; o \textit{OpenMediaVault}, baseado em \textit{Debian} e distribuído sob GPL-3.0, oferece administração \textit{web} do \textit{NAS} sem custo de \textit{software} \cite{openmediavault2026,omvlicensing2026}; o \textit{Nextcloud} fornece nuvem privada \textit{self-hosted} como plataforma \textit{open source} \cite{nextcloud2026}; e o cliente \textit{Tailscale}, com código sob BSD-3-Clause, viabiliza acesso remoto privado sem abertura de portas nem assinatura de nuvem do fabricante do \textit{NAS} \cite{tailscalebsd2026,tailscale2026,tailscalehowworks}.
+
+Em contraste, \textit{NAS} comerciais de duas baias tipicamente acoplam o \textit{hardware} a ecossistemas fechados de sistema e serviços (por exemplo, \textit{DSM} e \textit{QTS} no Quadro de custos da introdução), com suporte e integração do fabricante, porém com custo de plataforma-base substancialmente maior. Assim, a viabilidade econômica argumentada neste trabalho depende, em primeiro lugar, de substituir esse pacote proprietário pela combinação \textit{Armbian}/\textit{Debian}, \textit{OMV}, \textit{Nextcloud} e \textit{Tailscale}, cujas funções e limitações técnicas são as já fundamentadas nas seções anteriores --- e não de inventar desempenho equivalente ao de controladores \textit{SATA} dedicados.
+
 \section{\textit{OPENMEDIAVAULT}}
 
 O \textit{OpenMediaVault} é apresentado em sua documentação oficial como uma solução completa de \textit{NAS} baseada em \textit{Debian Linux}, com interface \textit{web} de administração e suporte a protocolos como \textit{FTP}, \textit{SMB}/\textit{CIFS} e \textit{NFS} \cite{openmediavault2026}. No projeto, ele atua como camada de gerenciamento do \textit{NAS}, centralizando a montagem de discos, a criação de pastas compartilhadas, usuários, permissões e serviços de arquivo, o que reduz a necessidade de uso do terminal na rotina diária. A Figura~\ref{fig:omv-logo} apresenta a identidade visual do projeto, cuja documentação é licenciada em CC-BY-SA-3.0 e o \textit{software} sob GPL-3.0 \cite{omvlicensing2026}.
@@ -64,12 +70,6 @@ A exposição direta de serviços domésticos à \textit{internet} aumenta a sup
 \end{figure}
 
 No ambiente final, o \textit{Tailscale} é executado diretamente no \textit{host} e não em contêiner. Durante a implantação foi identificada incompatibilidade entre o mecanismo de marcação de pacotes do \textit{Tailscale} e o conjunto de regras \textit{netfilter}/\textit{nftables} do ambiente; a configuração funcional validada utiliza \texttt{netfilter-mode=off}, preservando a conectividade privada entre os dispositivos autorizados.
-
-\section{STACK \textit{OPEN SOURCE} E DEFESA DE BAIXO CUSTO}
-
-A defesa principal do baixo custo deste \textit{NAS}, frente a equipamentos proprietários de entrada, não se limita à escolha da \textit{SBC}: apoia-se na stack de \textit{software open source} e livre já descrita neste capítulo. O sistema base \textit{Armbian}/\textit{Debian} dispensa licenciamento de sistema proprietário; o \textit{OpenMediaVault}, baseado em \textit{Debian} e distribuído sob GPL-3.0, oferece administração \textit{web} do \textit{NAS} sem custo de \textit{software} \cite{openmediavault2026,omvlicensing2026}; o \textit{Nextcloud} fornece nuvem privada \textit{self-hosted} como plataforma \textit{open source} \cite{nextcloud2026}; e o cliente \textit{Tailscale}, com código sob BSD-3-Clause, viabiliza acesso remoto privado sem abertura de portas nem assinatura de nuvem do fabricante do \textit{NAS} \cite{tailscalebsd2026,tailscale2026,tailscalehowworks}.
-
-Em contraste, \textit{NAS} comerciais de duas baias tipicamente acoplam o \textit{hardware} a ecossistemas fechados de sistema e serviços (por exemplo, \textit{DSM} e \textit{QTS} no Quadro de custos da introdução), com suporte e integração do fabricante, porém com custo de plataforma-base substancialmente maior. Assim, a viabilidade econômica argumentada neste trabalho depende, em primeiro lugar, de substituir esse pacote proprietário pela combinação \textit{Armbian}/\textit{Debian}, \textit{OMV}, \textit{Nextcloud} e \textit{Tailscale}, cujas funções e limitações técnicas são as já fundamentadas nas seções anteriores --- e não de inventar desempenho equivalente ao de controladores \textit{SATA} dedicados.
 
 \section{PONTOS DE MEDIÇÃO E LIMITAÇÕES ESPERADAS}
 
