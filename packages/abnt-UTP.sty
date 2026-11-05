@@ -55,11 +55,18 @@
 \usepackage{times}
 \renewcommand*\familydefault{\sfdefault}
 
+% Justificação do corpo (padrão LaTeX) e tipografia (URLs/refs: xurl após hyperref).
+\usepackage{microtype}
+\usepackage{ragged2e}
+\AtBeginDocument{\justifying}
+
 \renewcommand{\arraystretch}{1.5}
 \setlength{\belowbottomsep}{0.2cm}
 
 \sloppy
-\tolerance=9999999
+\tolerance=9999
+\emergencystretch=3em
+\hbadness=10000
 
 \setlength{\parindent}{1.25cm}
 
@@ -462,10 +469,13 @@
     \addtocounter{anexoidx}{1}
 }
 
+% xurl depois do hyperref (abntex2) para quebrar URLs longas sem corte à direita.
+\usepackage{xurl}
 \makeatletter
 \@ifpackageloaded{url}{%
 \addtociteoptionlist{abnt-url-package=url}
 \def\UrlLeft{}
 \def\UrlRight{}
-\urlstyle{same}}
+\urlstyle{same}%
+}%
 \makeatother
