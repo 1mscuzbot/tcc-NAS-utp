@@ -429,8 +429,6 @@
 }
 \makeatother
 
-\makeatother
-
 \newcommand{\utpiflabel}[1]{\ifstrempty{#1}{}{\label{#1}}}
 
 \newcommand{\legenda}[2][]{%
@@ -473,9 +471,9 @@
 \usepackage{xurl}
 \makeatletter
 \@ifpackageloaded{url}{%
-\addtociteoptionlist{abnt-url-package=url}
-\def\UrlLeft{}
-\def\UrlRight{}
-\urlstyle{same}%
-}%
+  \addtociteoptionlist{abnt-url-package=url}%
+  \def\UrlLeft{}%
+  \def\UrlRight{}%
+  \urlstyle{same}%
+}{}%
 \makeatother
