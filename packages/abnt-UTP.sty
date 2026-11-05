@@ -467,7 +467,8 @@
     \addtocounter{anexoidx}{1}
 }
 
-% xurl depois do hyperref (abntex2) para quebrar URLs longas sem corte à direita.
+% xurl depois do hyperref (abntex2): quebra URL em qualquer caractere seguro
+% e preenche até a margem (evita “Disponível em:” com meia linha vazia).
 \usepackage{xurl}
 \makeatletter
 \@ifpackageloaded{url}{%
@@ -475,5 +476,10 @@
   \def\UrlLeft{}%
   \def\UrlRight{}%
   \urlstyle{same}%
+  % Quebra tão “barata” quanto espaço em branco; inclui hífen.
+  \mathchardef\UrlBreakPenalty=\z@
+  \mathchardef\UrlBigBreakPenalty=\z@
+  \g@addto@macro\UrlBreaks{\do\-}%
+  \Urlmuskip=0mu plus 1mu
 }{}%
 \makeatother
